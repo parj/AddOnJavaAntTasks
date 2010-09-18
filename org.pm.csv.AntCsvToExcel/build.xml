@@ -1,0 +1,21 @@
+<project name="CsvToExcel" default="csvToexcel" basedir=".">
+	
+    <description>
+        CsvToExcel
+    </description>
+	
+	<target name="declare-tasks">		
+		<!-- Dependency on JExcelApi - 
+		http://sourceforge.net/projects/jexcelapi/files/jexcelapi/2.6.12/jexcelapi_2_6_12.zip/download
+		-->
+		<taskdef name="csvToexcel" classname="org.pm.csv.AntCsvToExcel" />
+  	</target>
+
+	<!-- Example of combining csv files to an excel file -->
+	<target name="csvToexcel" depends="declare-tasks">
+		<csvToexcel outputFile="report.xls" separator=",">
+			<fileset dir="." includes="*.csv"/>
+		</csvToexcel>
+	</target>
+	
+</project>

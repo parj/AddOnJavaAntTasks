@@ -1,0 +1,20 @@
+<project name="MyProject" default="diff" basedir=".">
+	
+    <description>
+        simple example build file
+    </description>
+	
+	<target name="declare-tasks">
+		<taskdef name="diffxml" classname="org.pm.csv.AntCsvDiff"/>
+  	</target>
+	
+	<target name="diff" depends="jar, declare-tasks">
+		<diffxml testDirectory="2" resultDirectory="." verbose="True">
+			<fileset dir="1" includes="*.xml"/>
+		</diffxml>
+	</target>
+	
+	<target name="jar">
+		<jar destfile="xpath.jar" basedir="bin/" />
+	</target>
+</project>
