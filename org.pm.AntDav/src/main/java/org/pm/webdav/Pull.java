@@ -35,6 +35,10 @@ public class Pull extends Task {
 	
 	public void setFile(String file) {
 		this.file = file;
+		
+		//Issue 3 - outFile property now an optional element
+		if (this.outFile == null)
+			this.outFile = file;
 	}
 
 	public void setOutFile(String outFile) {
@@ -54,6 +58,7 @@ public class Pull extends Task {
     		HttpClient client = new HttpClient();
     		Credentials creds = new UsernamePasswordCredentials(user, password);
     		client.getState().setCredentials(AuthScope.ANY, creds);
+    		log("Outfile = " + outFile + ": file = " + file);
     		File f = new File(outFile);
     		long startTime = System.currentTimeMillis();
     		
