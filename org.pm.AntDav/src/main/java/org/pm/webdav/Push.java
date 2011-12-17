@@ -151,8 +151,14 @@ public class Push extends Task{
 				log("File already exists " + f.getAbsolutePath());
 			else if (method.getStatusCode() != 201)
     			log("ERR " + " " + method.getStatusCode() + " " + method.getStatusText() + " " + f.getAbsolutePath());
-    		else
+    		else {
     			log("Transferred " + f.getAbsolutePath());
+    			client.executeMethod(method);
+    			if (method.getStatusCode() == 204)
+    				log("Checked - File uploaded to server");
+    			else
+    				log("FAILED to upload - " + f.getAbsolutePath());
+    		}
 		 } catch (Exception e) {
 			 log("ERR " + f.getAbsolutePath());
 			 e.printStackTrace();
