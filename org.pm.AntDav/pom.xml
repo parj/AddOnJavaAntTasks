@@ -20,8 +20,8 @@
     </dependency>
   </dependencies>
   
-  <!-- Publish to archiva -->
-  <distributionManagement>
+  	<!-- Publish to archiva -->
+  	<distributionManagement>
       <repository>
         <id>archiva.internal</id>
         <name>Internal Release Repository</name>
