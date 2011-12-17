@@ -58,7 +58,6 @@ public class Pull extends Task {
     		HttpClient client = new HttpClient();
     		Credentials creds = new UsernamePasswordCredentials(user, password);
     		client.getState().setCredentials(AuthScope.ANY, creds);
-    		log("Outfile = " + outFile + ": file = " + file);
     		File f = new File(outFile);
     		long startTime = System.currentTimeMillis();
     		
