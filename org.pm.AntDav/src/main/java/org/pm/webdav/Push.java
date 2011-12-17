@@ -2,12 +2,16 @@ package org.pm.webdav;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Vector;
 
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.methods.HeadMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.jackrabbit.webdav.client.methods.MkColMethod;
@@ -141,27 +145,47 @@ public class Push extends Task{
 		 try {
 			 String uploadUrl = url + "/" + filename;
 			 
-			 PutMethod method = new PutMethod(uploadUrl);
-			 RequestEntity requestEntity = new InputStreamRequestEntity(new FileInputStream(f));
-			 method.setRequestEntity(requestEntity);
-			 client.executeMethod(method);
-    		
-    		//201 Created => No issues
-			if (method.getStatusCode() == 204)
-				log("File already exists " + f.getAbsolutePath());
-			else if (method.getStatusCode() != 201)
-    			log("ERR " + " " + method.getStatusCode() + " " + method.getStatusText() + " " + f.getAbsolutePath());
-    		else {
-    			log("Transferred " + f.getAbsolutePath());
-    			client.executeMethod(method);
-    			if (method.getStatusCode() == 204)
-    				log("Checked - File uploaded to server");
-    			else
-    				log("FAILED to upload - " + f.getAbsolutePath());
-    		}
+			 //Issue 5 - Check file exists before uploading
+			 //This will be faster than uploading the file and
+			 //then checking the status
+			 if (!fileExists(uploadUrl))  {
+				 PutMethod method = new PutMethod(uploadUrl);
+				 RequestEntity requestEntity = new InputStreamRequestEntity(new FileInputStream(f));
+				 method.setRequestEntity(requestEntity);
+				 client.executeMethod(method);
+	    		
+	    		//201 Created => No issues
+				if (method.getStatusCode() == 204)
+					log("IGNORE - File already exists " + f.getAbsolutePath());
+				else if (method.getStatusCode() != 201)
+	    			log("ERR " + " " + method.getStatusCode() + " " + method.getStatusText() + " " + f.getAbsolutePath());
+	    		else {
+	    			log("Transferred " + f.getAbsolutePath());
+	    			
+	    			if (fileExists(uploadUrl))
+	    				log("Checked - File uploaded to server");
+	    			else
+	    				log("FAILED to upload - " + f.getAbsolutePath());
+	    		}
+			 }
+			 else {
+				 log("IGNORE - File already exists " + f.getAbsolutePath());
+			 }
 		 } catch (Exception e) {
 			 log("ERR " + f.getAbsolutePath());
 			 e.printStackTrace();
 		 }
+	}
+	
+	private boolean fileExists(String url) {
+		try {
+			HeadMethod method = new HeadMethod(url);
+			client.executeMethod(method);
+		    return (method.getStatusCode() == HttpURLConnection.HTTP_OK);
+	    }
+	    catch (Exception e) {
+	    	e.printStackTrace();
+		    return false;
+	    }
 	}
 }
