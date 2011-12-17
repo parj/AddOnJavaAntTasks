@@ -55,7 +55,7 @@
                 	  user="admin"
                 	  password="admin"
                 	  verbose="true">
-                	 <fileset dir="/home/parj/Programming/" includes="*.zip"/>
+                	 <fileset dir="." includes="README"/>
                </push>
                 
                 <!-- Example of pulling files from webdav -->
