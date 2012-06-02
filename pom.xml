@@ -33,20 +33,19 @@
 		</plugin>
   	</plugins>
   </build>
-  
-  <!-- Publish to archiva -->
+
   <distributionManagement>
-      <repository>
-        <id>archiva.internal</id>
-        <name>Internal Release Repository</name>
-        <url>http://localhost:8080/archiva/repository/internal/</url>
-      </repository>
-      <snapshotRepository>
-        <id>archiva.snapshots</id>
-        <name>Internal Snapshot Repository</name>
-        <url>http://localhost:8080/archiva/repository/snapshots/</url>
+      	<repository>
+          <id>nexus</id>
+          <name>Internal Release Repository</name>
+          <url>http://localhost:8081/nexus/content/repositories/pm/release</url>
+        </repository>
+        <snapshotRepository>
+          <id>nexus</id>
+          <name>Internal Snapshot Repository</name>
+          <url>http://localhost:8081/nexus/content/repositories/pm/snapshots</url>
       </snapshotRepository>
-  </distributionManagement>
+  </distributionManagement> 
 
   <dependencies>
 	<dependency>
