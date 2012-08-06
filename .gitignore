@@ -3,4 +3,4 @@ build/
 *.class
 *.jar
 .DS_Store
-
+lib/
