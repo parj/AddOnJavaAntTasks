@@ -189,6 +189,26 @@ public class CsvDiff {
 				rowCount += 1;
 			}
 			
+			while((reached = fileR.readNext()) != null) {
+				keyReached = "";
+				
+				for (int i = 0; i < keyColumns.size(); ++i) {
+					//Lookup location of key column
+					int keyHeaderLocation = headers.get(keyColumns.get(i).getName()).intValue();
+					
+					if (keyReached.length() == 0) {
+						keyReached = reached[keyHeaderLocation];
+					} else {
+						keyReached = keyReached + "_" + reached[keyHeaderLocation];
+					}
+					
+					logger.debug("Reached key " + keyReached);
+					
+					logger.debug("Adding " + keyReached + " to missing reached keys");
+					this.missingReached.put(keyReached, reached);
+				}
+			}
+			
 			for (Iterator<String> i = this.missingExpected.keySet().iterator() ; i.hasNext();) {
 				Difference difference = new Difference(new Integer(rowCount), "Missing Expected", i.next(), null);
 				logger.info(difference.toString());

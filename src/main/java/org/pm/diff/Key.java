@@ -6,6 +6,10 @@ import org.apache.tools.ant.types.DataType;
 public class Key extends DataType {
 	String name;
 	
+	public Key(String name) {
+		this.name = name;
+	}
+
 	public void addText(String name) {
 		Project project = getProject();
 		this.name = project.replaceProperties(name);
