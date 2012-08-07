@@ -1,33 +1,39 @@
 package org.pm.webdav;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Vector;
-
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.HeadMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.jackrabbit.webdav.client.methods.MkColMethod;
 import org.apache.jackrabbit.webdav.client.methods.PutMethod;
+import org.apache.log4j.Logger;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.FileSet;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.HttpURLConnection;
+import java.util.Vector;
+
 public class Push extends Task{
+    private static Logger logger = Logger.getLogger(Push.class);
 	private String user;
 	private String password;
 	private String url;
-	private boolean verbose = false;
 	Vector<FileSet> fileSets = new Vector<FileSet>();
 	private HttpClient client;
-	
+
+    /**
+     * Empty Constructor
+     */
+    public Push() {
+        //Empty constructor
+    }
+
 	/**
 	 * Set webdav user name
 	 * @param user
@@ -62,10 +68,6 @@ public class Push extends Task{
 			fileSets.add(fileSet);
 		}
     }
-	
-	public void setVerbose(boolean verbose) {
-			this.verbose = verbose;
-	}
 
 	/**
 	 * The execute function is called by Ant. 
@@ -83,8 +85,7 @@ public class Push extends Task{
             	String[] filesInSet = ds.getIncludedFiles();
             	
             	 for (String filename : filesInSet) {
-            		 if (verbose)
-            			 log("Processing " + filename);
+            		 logger.debug("Processing " + filename);
             		 
             		 File f = new File(dir, filename);
             		 createDirectory(filename, f.getName());
@@ -122,16 +123,17 @@ public class Push extends Task{
 					if (status == 405)	
 						{/*Directory exists. Do Nothing*/}
 					else if (status != 201)
-		            	log("ERR " + " " + status + " " + uploadUrl);
+		            	logger.error("ERR " + " " + status + " " + uploadUrl);
 		            else
-		            	if (verbose) log("Directory " + uploadUrl + " created");
+		            	logger.debug("Directory " + uploadUrl + " created");
 				}
 			}
 		} catch(java.lang.ArrayIndexOutOfBoundsException e) {
 			//Ignore as there is no directory to be created
 		} catch (Exception e) {
-			 log("ERR creating " + path);
-			 e.printStackTrace();
+			logger.error("ERR creating " + path);
+            logger.error(e.getMessage());
+			e.printStackTrace();
 		 }
 	}
 	
@@ -156,23 +158,24 @@ public class Push extends Task{
 	    		
 	    		//201 Created => No issues
 				if (method.getStatusCode() == 204)
-					log("IGNORE - File already exists " + f.getAbsolutePath());
+					logger.info("IGNORE - File already exists " + f.getAbsolutePath());
 				else if (method.getStatusCode() != 201)
-	    			log("ERR " + " " + method.getStatusCode() + " " + method.getStatusText() + " " + f.getAbsolutePath());
+	    			logger.error("ERR " + " " + method.getStatusCode() + " " + method.getStatusText() + " " + f.getAbsolutePath());
 	    		else {
-	    			log("Transferred " + f.getAbsolutePath());
+	    			logger.info("Transferred " + f.getAbsolutePath());
 	    			
 	    			if (fileExists(uploadUrl))
-	    				log("Checked - File uploaded to server");
+	    				logger.info("Checked - File uploaded to server");
 	    			else
-	    				log("FAILED to upload - " + f.getAbsolutePath());
+	    			    logger.error("FAILED to upload - " + f.getAbsolutePath());
 	    		}
 			 }
 			 else {
-				 log("IGNORE - File already exists " + f.getAbsolutePath());
+				 logger.info("IGNORE - File already exists " + f.getAbsolutePath());
 			 }
 		 } catch (Exception e) {
-			 log("ERR " + f.getAbsolutePath());
+			 logger.error("ERR " + f.getAbsolutePath());
+             logger.error(e.getMessage());
 			 e.printStackTrace();
 		 }
 	}
@@ -185,6 +188,7 @@ public class Push extends Task{
 	    }
 	    catch (Exception e) {
 	    	e.printStackTrace();
+            logger.error(e.getMessage());
 		    return false;
 	    }
 	}

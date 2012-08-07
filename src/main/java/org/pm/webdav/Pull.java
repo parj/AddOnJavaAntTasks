@@ -20,7 +20,6 @@ public class Pull extends Task {
 	private String url;
 	private String file;
 	private String outFile;
-	private boolean verbose = false;
 	private boolean overwrite = false;
 
     public Pull() {
