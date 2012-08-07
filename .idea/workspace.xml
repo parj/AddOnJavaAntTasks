@@ -59,19 +59,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ModifyPath.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/ModifyPath.java">
+      <file leaf-file-name="AntXMLUnit.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXMLUnit.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="5" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AntXPathTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="33" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.0">
+            <state line="188" column="59" selection-start="5639" selection-end="6125" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,10 +70,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AntXPath.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java">
+      <file leaf-file-name="AntXMLUnitTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXMLUnitTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="230" column="40" selection-start="7009" selection-end="7009" vertical-scroll-proportion="5.064976">
+            <state line="31" column="59" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.8561151">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,21 +82,19 @@
         </entry>
       </file>
       <file leaf-file-name="controlFile.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/resources/xml/AntXPathTest/controlFile.xml">
+        <entry file="file://$PROJECT_DIR$/src/test/resources/xml/AntXMLUnitTest/controlFile.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="13" selection-start="1109" selection-end="1115" vertical-scroll-proportion="0.0">
+            <state line="14" column="28" selection-start="0" selection-end="4430" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CsvDiffTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java">
+      <file leaf-file-name="testFile.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/resources/xml/AntXMLUnitTest/testFile.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="0" selection-start="389" selection-end="389" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="48" column="58" selection-start="1773" selection-end="1773" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -125,9 +114,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/main/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/org/pm/webdav/Push.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/webdav/Pull.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -139,8 +125,11 @@
         <option value="$PROJECT_DIR$/src/main/java/org/pm/xml/ModifyPath.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java" />
         <option value="$PROJECT_DIR$/src/test/resources/xml/AntXPathTest/controlFile.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java" />
+        <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/pm/xml/AntXMLUnit.java" />
+        <option value="$PROJECT_DIR$/src/test/resources/xml/AntXMLUnitTest/testFile.xml" />
+        <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXMLUnitTest.java" />
       </list>
     </option>
   </component>
@@ -241,6 +230,36 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="AntXPathTest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AddOnJavaAntTasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AddOnJavaAntTasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="xml" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AntXMLUnitTest" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -589,30 +608,11 @@
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.pm.xml" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/test/resources/xml/AntXMLUnitTest" />
+    </key>
   </component>
-  <component name="RunManager" selected="JUnit.AntXPathTest">
-    <configuration default="false" name="All in Main" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="Main" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="JUnit.AntXMLUnitTest">
     <configuration default="false" name="TwoWayHashMapTest" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="Main" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -691,6 +691,28 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.pm.xml" />
       <option name="MAIN_CLASS_NAME" value="org.pm.xml.AntXPathTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="AntXMLUnitTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="Main" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.pm.xml" />
+      <option name="MAIN_CLASS_NAME" value="org.pm.xml.AntXMLUnitTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -828,11 +850,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.All in Main" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.TwoWayHashMapTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.ModifyPathTest" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.CsvToExcelTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.AntXPathTest" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.TwoWayHashMapTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.ModifyPathTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.CsvToExcelTest" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AntXPathTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.AntXMLUnitTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -881,9 +903,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24938875" sideWeight="0.67121214" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24938875" sideWeight="0.6757576" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287879" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3242424" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -937,43 +959,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/webdav/Push.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="556" selection-end="587" vertical-scroll-proportion="0.4114713">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/CsvReport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="78" selection-end="108" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/repository/net/sourceforge/jexcelapi/jxl/2.6.10/jxl-2.6.10.jar!/jxl/write/biff/WritableWorkbookImpl.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="0" selection-start="6511" selection-end="6511" vertical-scroll-proportion="0.8024316">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/TwoWayHashMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="4" selection-start="216" selection-end="216" vertical-scroll-proportion="0.32608697">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/diff/TwoWayHashMapTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="29" selection-start="369" selection-end="369" vertical-scroll-proportion="0.5329949">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/csv/AntCsvToExcel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="30" selection-start="433" selection-end="433" vertical-scroll-proportion="0.0">
@@ -1033,32 +1018,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/resources/xml/AntXPathTest/controlFile.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="13" selection-start="1109" selection-end="1115" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/ModifyPath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="5" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="33" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.0">
+        <state line="56" column="26" selection-start="1585" selection-end="1585" vertical-scroll-proportion="0.92868465">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java">
+    <entry file="file://$PROJECT_DIR$/src/test/resources/xml/AntXPathTest/controlFile.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="230" column="40" selection-start="7009" selection-end="7009" vertical-scroll-proportion="5.064976">
+        <state line="32" column="13" selection-start="1109" selection-end="1115" vertical-scroll-proportion="0.49920762">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/ModifyPath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="5" selection-start="408" selection-end="408" vertical-scroll-proportion="0.5942948">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home/../Classes/classes.jar!/javax/xml/parsers/DocumentBuilderFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="54" selection-start="925" selection-end="925" vertical-scroll-proportion="0.33333334">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="54" selection-start="2083" selection-end="2083" vertical-scroll-proportion="0.7622821">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXMLUnit.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="188" column="59" selection-start="5639" selection-end="6125" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/xml/AntXMLUnitTest/controlFile.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="28" selection-start="0" selection-end="4430" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/xml/AntXMLUnitTest/testFile.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="48" column="58" selection-start="1773" selection-end="1773" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXMLUnitTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="59" selection-start="1140" selection-end="1140" vertical-scroll-proportion="0.8561151">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
