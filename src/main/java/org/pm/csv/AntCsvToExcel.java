@@ -1,16 +1,17 @@
 package org.pm.csv;
 
-import java.util.Vector;
-
+import org.apache.log4j.Logger;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.FileSet;
 
+import java.util.Vector;
+
 public class AntCsvToExcel extends Task {
+    private static Logger logger = Logger.getLogger(AntCsvToExcel.class);
 	private Vector<FileSet> fileSets = new Vector<FileSet>();
 	private String outputFile;
 	private String separator = ",'";
-	private boolean verbose = false;
 	
 	public AntCsvToExcel() { }
 	
@@ -42,10 +43,6 @@ public class AntCsvToExcel extends Task {
 		this.outputFile = outputFile;
 	}
 
-	public void setVerbose(boolean verbose) {
-		this.verbose = verbose;
-	}
-
 	public void execute() {
 		DirectoryScanner ds;
 		
@@ -55,14 +52,14 @@ public class AntCsvToExcel extends Task {
         	String[] filesInSet = ds.getIncludedFiles();
     		
     		for (String filename : filesInSet) {
-    			if (verbose)
-    				log("Processing " + filename);
+                logger.debug("Processing " + filename);
     			
     			try {
     				CsvToExcel csv = new CsvToExcel(filename, this.outputFile ,this.separator);
         			csv.execute();
     			} catch (Exception e) {
-    				System.out.println("Unable to process " + filename);
+    				logger.error("Unable to process " + filename);
+                    logger.error(e.getMessage());
     				e.printStackTrace();
     			}
     		}
