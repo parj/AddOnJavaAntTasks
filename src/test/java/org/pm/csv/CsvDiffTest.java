@@ -1,14 +1,13 @@
 package org.pm.csv;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import junit.framework.TestCase;
 import org.pm.diff.Key;
 import org.pm.diff.MinimalReport;
 import org.pm.diff.exception.HeaderColumnsDoNotMatchException;
 import org.pm.diff.exception.KeyColumnsMissingException;
 
-import junit.framework.TestCase;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CsvDiffTest extends TestCase {
 	MinimalReport report;
@@ -30,7 +29,7 @@ public class CsvDiffTest extends TestCase {
 		keyColumns = null;
 		csv = null;
 	}
-	
+
 	public void testMissingKeyColumns() throws HeaderColumnsDoNotMatchException {
 		try {
 			csv.diff();
@@ -38,7 +37,7 @@ public class CsvDiffTest extends TestCase {
 			assertTrue(e instanceof org.pm.diff.exception.KeyColumnsMissingException);
 		}
 	}
-	
+
 	public void testDiff() throws KeyColumnsMissingException, HeaderColumnsDoNotMatchException {
 		csv.setKeyColumns(keyColumns);
 		csv.diff();

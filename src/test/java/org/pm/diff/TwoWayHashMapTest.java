@@ -37,7 +37,6 @@ public class TwoWayHashMapTest extends TestCase {
 		twoMap.remove(1234);
 		assertFalse(twoMap.containsKey("ABCD"));
 	}
-
 	public void testRemoveInteger() {
 		twoMap.remove("EFGH");
 		assertFalse(twoMap.containsKey(5678));

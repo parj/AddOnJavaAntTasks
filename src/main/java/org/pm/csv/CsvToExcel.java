@@ -1,21 +1,21 @@
 package org.pm.csv;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.util.StringTokenizer;
-
-import org.apache.log4j.Logger;
-
+import au.com.bytecode.opencsv.CSVReader;
 import jxl.Workbook;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class CsvToExcel {
 	private String outputFile;
 	private String inputFile;
-	private String separator = ",";
+	private char separator = ',';
 	
 	private static Logger logger = Logger.getLogger(CsvToExcel.class);
 	
@@ -24,7 +24,7 @@ public class CsvToExcel {
 		setOutputFile(outputFile);
 	}
 	
-	public CsvToExcel(String inputFile, String outputFile, String separator) { 
+	public CsvToExcel(String inputFile, String outputFile, char separator) {
 		setInputFile(inputFile);
 		setOutputFile(outputFile);
 		setSeparator(separator);
@@ -34,7 +34,7 @@ public class CsvToExcel {
 	 * CSV separator
 	 * @param separator
 	 */
-	public void setSeparator(String separator) {
+	public void setSeparator(char separator) {
 		logger.trace("Setting separator to " + separator);
 		this.separator = separator;
 	}
@@ -49,51 +49,49 @@ public class CsvToExcel {
 		this.outputFile = outputFile;
 	}
 
-	public void execute() {
-		try {
-			logger.trace("Getting name of " + this.inputFile);
-			String name = new File(this.inputFile).getName();
-			BufferedReader reader  = new BufferedReader(new FileReader(this.inputFile));
-			
-			logger.trace("Initialising oFile " + this.outputFile);
-			File oFile = new File(this.outputFile);
-    		
-			WritableWorkbook workbook = Workbook.createWorkbook(oFile);
-			WritableSheet s = workbook.createSheet(name, 0);
-			
-			String line; int row = 0; int count = 1;
-			
-			while ((line = reader.readLine()) != null) {
-				logger.trace("Line read " + line);
-				int column = 0;
-				
-				//Split the string
-				StringTokenizer st = new StringTokenizer(line, this.separator);
-				
-				//Add a cell on the same row
-				while (st.hasMoreTokens()) {
-					String token = st.nextToken();
-					
-					logger.trace("TOKEN - " + token);
-					
-					s.addCell(new Label(column++, row, token));
-				}
-				
-				//Next line
-				row++;
-				
-				if (row >= 64000) {
-					logger.trace("Moving to the next sheet " + name + "_sheet" + count);
-					s = workbook.createSheet(name + "_sheet" + count++, 0);
-				}
-				
-				workbook.write();
-        		workbook.close();
+	public void execute() throws IOException, WriteException {
+        //Input File
+		logger.trace("Getting name of " + this.inputFile);
+		String name = new File(this.inputFile).getName();
+        CSVReader reader = new CSVReader(new FileReader(this.inputFile), separator);
+
+        //Output file
+		logger.trace("Initialising oFile " + this.outputFile);
+		File oFile = new File(this.outputFile);
+
+        //Create Sheet
+		WritableWorkbook workbook = Workbook.createWorkbook(oFile);
+		WritableSheet s = workbook.createSheet(name, 0);
+
+        //Initialise variables
+		String[] line; int row = 0; int count = 1;
+
+        //Loop through file
+		while ((line = reader.readNext()) != null) {
+			logger.debug("Line read " + line);
+			int column = 0;
+
+			//Add a cell on the same row
+			while (column < line.length) {
+                String columnText = line[column];
+				logger.trace("TOKEN - " + columnText);
+
+                if (columnText.length() > 0)
+				    s.addCell(new Label(column, row, columnText));
+                
+                column++;
 			}
-		} catch (Exception e) {
-			System.out.println("Unable to process " + getInputFile());
-			e.printStackTrace();
+
+			//Next line
+			row++;
+
+			if (row >= 64000) {
+				logger.trace("Moving to the next sheet " + name + "_sheet" + count);
+				s = workbook.createSheet(name + "_sheet" + count++, 0);
+			}
 		}
+        workbook.write();
+        workbook.close();
 	}
 
 	public void setInputFile(String inputFile) {

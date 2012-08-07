@@ -11,7 +11,7 @@ public class AntCsvToExcel extends Task {
     private static Logger logger = Logger.getLogger(AntCsvToExcel.class);
 	private Vector<FileSet> fileSets = new Vector<FileSet>();
 	private String outputFile;
-	private String separator = ",'";
+	private char separator = ',';
 	
 	public AntCsvToExcel() { }
 	
@@ -30,7 +30,7 @@ public class AntCsvToExcel extends Task {
 	 * CSV separator
 	 * @param separator
 	 */
-	public void setSeparator(String separator) {
+	public void setSeparator(char separator) {
 		this.separator = separator;
 	}
 
@@ -55,7 +55,7 @@ public class AntCsvToExcel extends Task {
                 logger.debug("Processing " + filename);
     			
     			try {
-    				CsvToExcel csv = new CsvToExcel(filename, this.outputFile ,this.separator);
+    				CsvToExcel csv = new CsvToExcel(filename, this.outputFile, this.separator);
         			csv.execute();
     			} catch (Exception e) {
     				logger.error("Unable to process " + filename);
