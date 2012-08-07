@@ -68,10 +68,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AntXPathTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="AntXPathTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="58" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.43719807">
+            <state line="45" column="33" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -79,10 +79,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AntXPath.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="AntXPath.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="195" column="39" selection-start="5544" selection-end="5544" vertical-scroll-proportion="0.0">
+            <state line="230" column="40" selection-start="7009" selection-end="7009" vertical-scroll-proportion="5.064976">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -883,7 +883,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24938875" sideWeight="0.67121214" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3287879" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287879" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1040,15 +1040,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="39" selection-start="5544" selection-end="5544" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/ModifyPath.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="5" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0">
@@ -1058,7 +1049,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="58" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.43719807">
+        <state line="45" column="33" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="230" column="40" selection-start="7009" selection-end="7009" vertical-scroll-proportion="5.064976">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
