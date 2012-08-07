@@ -17,7 +17,7 @@ public class CsvDiffTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		report = new MinimalReport();
-		csv = new CsvDiff("src/test/resources/controlFile.csv", "src/test/resources/testFile.csv", ',');
+		csv = new CsvDiff("src/test/resources/csv/CsvDiff/controlFile.csv", "src/test/resources/csv/CsvDiff/testFile.csv", ',');
 		csv.setReport(report);
 		keyColumns = new ArrayList<Key>();
 		keyColumns.add(new Key("Header_1"));

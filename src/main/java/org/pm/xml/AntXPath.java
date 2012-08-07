@@ -1,10 +1,12 @@
 package org.pm.xml;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import org.apache.log4j.Logger;
+import org.apache.tools.ant.DirectoryScanner;
+import org.apache.tools.ant.Task;
+import org.apache.tools.ant.types.FileSet;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,22 +17,18 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
-import org.apache.tools.ant.DirectoryScanner;
-import org.apache.tools.ant.Task;
-import org.apache.tools.ant.types.FileSet;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
+import javax.xml.xpath.*;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 public class AntXPath extends Task {
+    Logger logger = Logger.getLogger(AntXPath.class);
+    
 	private Vector<FileSet> fileSets = new Vector<FileSet>();
 	private List/*<Property>*/ modifyPaths = new ArrayList();
-	private boolean verbose = false;
 	private String outputDirectory;
 	private String renamePattern;
 	private String patternSplitter = "#";
@@ -40,6 +38,10 @@ public class AntXPath extends Task {
 	private XPathFactory xPathFactory;
 	private XPath xpath;
 	private Transformer xformer;
+
+    public AntXPath() {
+        
+    }
 	
 	public void addFileSet(FileSet fileset) {
 		if (!fileSets.contains(fileset)) {
@@ -68,14 +70,6 @@ public class AntXPath extends Task {
 		this.renamePattern = renamePattern;
 	}
 
-	/**
-	 * For enabling verbose logging
-	 * @param verbose
-	 */
-	public void setVerbose(boolean verbose) {
-			this.verbose = verbose;
-	}
-	
 	public void execute() {
 		DirectoryScanner ds;
 		preSetup();
@@ -86,8 +80,7 @@ public class AntXPath extends Task {
         	String[] filesInSet = ds.getIncludedFiles();
         	
         	 for (String filename : filesInSet) {
-        		 if (verbose)
-        			 log("Processing " + filename);
+                 logger.trace("Processing " + filename);
         		 File f = new File(dir, filename);
         		 processFile(f);
         	 }
@@ -114,7 +107,7 @@ public class AntXPath extends Task {
 		try {
 			Document doc = builder.parse(iFile);
 			
-			if (verbose)	log("Parsed " + iFile.getAbsolutePath());
+			logger.trace("Parsed " + iFile.getAbsolutePath());
 			
 			for (Iterator paths = modifyPaths.iterator(); paths.hasNext(); ) {
 				ModifyPath path = (ModifyPath)paths.next();
@@ -127,16 +120,19 @@ public class AntXPath extends Task {
 			Result result = new StreamResult(oFile);
 			xformer.transform(source, result); 
 			
-			if (verbose)	log("Written to file " + oFile.getAbsolutePath());
+			logger.debug("Written to file " + oFile.getAbsolutePath());
 		} catch (Exception e) {
 			System.out.println("Unable to process " + iFile.toString());
 			e.printStackTrace();
 		}
 	}
 	
-	private Document processNode(ModifyPath path, Document doc) throws Exception {
+	public Document processNode(ModifyPath path, Document doc) throws XPathExpressionException {
+        XPathFactory xPathFactory = XPathFactory.newInstance();
+        XPath xPath = xPathFactory.newXPath();
+
 		//Evaluate XPaths
-		XPathExpression expr = xpath.compile(path.getPath());
+		XPathExpression expr = xPath.compile(path.getPath());
 		Object xPathResult = expr.evaluate(doc, XPathConstants.NODESET);
 		NodeList nodes = (NodeList) xPathResult;
 		
@@ -144,28 +140,27 @@ public class AntXPath extends Task {
 		for (int index = 0; index < nodes.getLength(); index++) {
 			if (path.isDelete()) {
 				delete(nodes.item(index));
-				if (verbose)	log("Removed node - " + path.getPath());
+				logger.trace("Removed node - " + path.getPath());
 			}
 			else {
 				nodes.item(index).setTextContent(path.getValue());
-				if (verbose)	
-					log("Modified node - " + path.getPath() + " with Value - " + path.getValue());
+				logger.trace("Modified node - " + path.getPath() + " with Value - " + path.getValue());
 			}
 		}
 		
 		return doc;
 	}
 	
-	private void delete(org.w3c.dom.Node node) throws Exception {
+	private void delete(org.w3c.dom.Node node) {
 		if(node != null) {
 			if(node.getNodeType() == Node.ELEMENT_NODE) {
 				node.getParentNode().removeChild(node);
-				System.out.println("Removed Element - " + node.toString());
+				logger.trace("Removed Element - " + node.toString());
 			}
 			else {
 				Attr a = (Attr)node;
 				a.getOwnerElement().removeAttributeNode(a);
-				System.out.println("Removed Attribute - " + node.toString());
+				logger.trace("Removed Attribute - " + node.toString());
 			}
 		}
 	}
@@ -197,7 +192,8 @@ public class AntXPath extends Task {
 			else
 				return fileName;
 		} catch (Exception e) {
-			System.err.println("Error evaluating filename");
+			logger.error("Error evaluating filename");
+            logger.error(e.getMessage());
 			e.printStackTrace();
 			return fileName;
 		}
