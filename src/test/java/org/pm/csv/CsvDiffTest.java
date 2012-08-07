@@ -26,6 +26,9 @@ public class CsvDiffTest extends TestCase {
 
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		report = null;
+		keyColumns = null;
+		csv = null;
 	}
 	
 	public void testMissingKeyColumns() throws HeaderColumnsDoNotMatchException {
@@ -42,4 +45,6 @@ public class CsvDiffTest extends TestCase {
 		assertEquals(report.getNumberOfDifferences(), 3);
 	}
 
+	//TODO: ADD Mismatched header test
+	//TODO: Add listener tests
 }
