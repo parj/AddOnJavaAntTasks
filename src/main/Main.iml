@@ -9,9 +9,9 @@
       <sourceFolder url="file://$MODULE_DIR$/../test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/../../.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/../../.idea" />
-      <excludeFolder url="file://$MODULE_DIR$/../../build" />
       <excludeFolder url="file://$MODULE_DIR$/../../out" />
       <excludeFolder url="file://$MODULE_DIR$/../bin" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
       <excludeFolder url="file://$MODULE_DIR$/../../target" />
     </content>
     <orderEntry type="inheritedJdk" />

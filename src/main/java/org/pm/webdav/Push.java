@@ -2,11 +2,13 @@ package org.pm.webdav;
 
 import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.HeadMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.jackrabbit.webdav.client.methods.DeleteMethod;
 import org.apache.jackrabbit.webdav.client.methods.MkColMethod;
 import org.apache.jackrabbit.webdav.client.methods.PutMethod;
 import org.apache.log4j.Logger;
@@ -16,6 +18,8 @@ import org.apache.tools.ant.types.FileSet;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.util.Vector;
 
@@ -26,12 +30,26 @@ public class Push extends Task{
 	private String url;
 	Vector<FileSet> fileSets = new Vector<FileSet>();
 	private HttpClient client;
+    private boolean overwrite;
 
     /**
      * Empty Constructor
      */
     public Push() {
         //Empty constructor
+    }
+
+    public Push(String user, String password, String url) {
+        setUser(user);
+        setPassword(password);
+        setUrl(url);
+        setUp();
+    }
+
+    public void setUp() {
+        client = new HttpClient();
+        Credentials creds = new UsernamePasswordCredentials(user, password);
+        client.getState().setCredentials(AuthScope.ANY, creds);
     }
 
 	/**
@@ -58,6 +76,10 @@ public class Push extends Task{
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+    public void setOverwrite(boolean overwrite) {
+        this.overwrite = overwrite;
+    }
 	
 	/**
 	 * For providing a set of input files using Ant's fileset
@@ -74,10 +96,8 @@ public class Push extends Task{
 	 */
 	public void execute() {
 		try {
-			DirectoryScanner ds;
-    		client = new HttpClient();
-    		Credentials creds = new UsernamePasswordCredentials(user, password);
-    		client.getState().setCredentials(AuthScope.ANY, creds);
+			setUp();
+            DirectoryScanner ds;
             
             for (FileSet fileset : fileSets) {
             	ds = fileset.getDirectoryScanner(getProject());
@@ -93,9 +113,13 @@ public class Push extends Task{
             	 }
             }
     		
-    	} catch (Exception e) {
-	    	e.printStackTrace();
-	    } 
+    	} catch(HttpException e) {
+            logger.error(e.getMessage());
+        } catch(FileNotFoundException e) {
+            logger.error(e.getMessage());
+        } catch(IOException e) {
+            logger.error(e.getMessage());
+	    }
 	}
 	
 	/**
@@ -136,6 +160,10 @@ public class Push extends Task{
 			e.printStackTrace();
 		 }
 	}
+
+    public void uploadFile(File f) throws IOException {
+        uploadFile(f, f.getName());
+    }
 	
 	/**
 	 * Uploads the file. The File object (f) is used for creating a FileInputStream for uploading
@@ -143,53 +171,75 @@ public class Push extends Task{
 	 * @param f	The File object of the file to be uploaded
 	 * @param filename	The relatvie path of the file
 	 */
-	private void uploadFile(File f, String filename) {
-		 try {
-			 String uploadUrl = url + "/" + filename;
-			 
-			 //Issue 5 - Check file exists before uploading
-			 //This will be faster than uploading the file and
-			 //then checking the status
-			 if (!fileExists(uploadUrl))  {
-				 PutMethod method = new PutMethod(uploadUrl);
-				 RequestEntity requestEntity = new InputStreamRequestEntity(new FileInputStream(f));
-				 method.setRequestEntity(requestEntity);
-				 client.executeMethod(method);
-	    		
-	    		//201 Created => No issues
-				if (method.getStatusCode() == 204)
-					logger.info("IGNORE - File already exists " + f.getAbsolutePath());
-				else if (method.getStatusCode() != 201)
-	    			logger.error("ERR " + " " + method.getStatusCode() + " " + method.getStatusText() + " " + f.getAbsolutePath());
-	    		else {
-	    			logger.info("Transferred " + f.getAbsolutePath());
-	    			
-	    			if (fileExists(uploadUrl))
-	    				logger.info("Checked - File uploaded to server");
-	    			else
-	    			    logger.error("FAILED to upload - " + f.getAbsolutePath());
-	    		}
-			 }
-			 else {
-				 logger.info("IGNORE - File already exists " + f.getAbsolutePath());
-			 }
-		 } catch (Exception e) {
-			 logger.error("ERR " + f.getAbsolutePath());
-             logger.error(e.getMessage());
-			 e.printStackTrace();
-		 }
+	public void uploadFile(File f, String filename) throws IOException {
+        String uploadUrl = url + "/" + filename;
+
+        deleteFile(uploadUrl);
+        PutMethod putMethod = new PutMethod(uploadUrl);
+
+        if (!fileExists(uploadUrl))  {
+            RequestEntity requestEntity = new InputStreamRequestEntity(new FileInputStream(f));
+
+            putMethod.setRequestEntity(requestEntity);
+            client.executeMethod(putMethod);
+
+            logger.trace("uploadFile - statusCode - " + putMethod.getStatusCode());
+
+            switch (putMethod.getStatusCode()) {
+                case HttpURLConnection.HTTP_NO_CONTENT:
+                    logger.info("IGNORE - File already exists " + f.getAbsolutePath());
+                    break;
+                case HttpURLConnection.HTTP_OK:
+                    logger.info("Transferred " + f.getAbsolutePath());
+                    break;
+                case HttpURLConnection.HTTP_CREATED: //201 Created => No issues
+                    logger.info("Transferred " + f.getAbsolutePath());
+                    break;
+                default:
+                    logger.error("ERR " + " " + putMethod.getStatusCode() + " " + putMethod.getStatusText() + " " + f.getAbsolutePath());
+                    break;
+            }
+         }
+         else {
+             logger.info("IGNORE - File already exists " + f.getAbsolutePath());
+         }
 	}
-	
-	private boolean fileExists(String url) {
-		try {
-			HeadMethod method = new HeadMethod(url);
-			client.executeMethod(method);
-		    return (method.getStatusCode() == HttpURLConnection.HTTP_OK);
-	    }
-	    catch (Exception e) {
-	    	e.printStackTrace();
+
+	public boolean fileExists(String url) throws HttpException, IOException {
+        HeadMethod headMethod = new HeadMethod(url);
+        client.executeMethod(headMethod);
+        int statusCode = headMethod.getStatusCode();
+        logger.trace("fileExists - statusCode - " + statusCode);
+
+        boolean exists = headMethod.getStatusCode() == HttpURLConnection.HTTP_OK;
+        logger.debug("fileExists - " + exists);
+
+        return exists;
+	}
+
+    public boolean deleteFile(String url) {
+        DeleteMethod deleteMethod = new DeleteMethod(url);
+        boolean deleted = true;
+
+        try {
+            if (fileExists(url) && overwrite) {
+                client.executeMethod(deleteMethod);
+                int statusCode = deleteMethod.getStatusCode();
+                logger.trace("deleteFile - statusCode - " + statusCode);
+
+                deleted = deleteMethod.getStatusCode() == HttpURLConnection.HTTP_OK;
+                logger.debug("deleteFile - " + deleted);
+            }
+        } catch (HttpException e) {
+            logger.error("Could not delete " + url);
             logger.error(e.getMessage());
-		    return false;
-	    }
-	}
+            deleted = false;
+        } catch (IOException e) {
+            logger.error("Could not delete " + url);
+            logger.error(e.getMessage());
+            deleted = false;
+        }
+
+        return deleted;
+    }
 }

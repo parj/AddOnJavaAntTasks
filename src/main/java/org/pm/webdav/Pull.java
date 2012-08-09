@@ -8,10 +8,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.Task;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class Pull extends Task {
 	private static Logger logger = Logger.getLogger(Pull.class);
@@ -24,6 +21,21 @@ public class Pull extends Task {
 
     public Pull() {
 
+    }
+
+    public Pull(String user, String password, String url, String fileToDownload) {
+        setUser(user);
+        setPassword(password);
+        setUrl(url);
+        setFile(fileToDownload);
+    }
+
+    public Pull(String user, String password, String url, String fileToDownload, String outputFile) {
+        setUser(user);
+        setPassword(password);
+        setUrl(url);
+        setFile(fileToDownload);
+        setOutFile(outputFile);
     }
 	
 	public void setUser(String user) {
@@ -62,61 +74,62 @@ public class Pull extends Task {
         logger.trace("overwrite is " + overwrite);
 	}
 
-    public boolean download() {
+    public boolean download() throws IOException {
         boolean completed = false;
-        
-        try {
-    		//Setup
-            HttpClient client = new HttpClient();
-    		Credentials creds = new UsernamePasswordCredentials(user, password);
-    		client.getState().setCredentials(AuthScope.ANY, creds);
-    		File f = new File(outFile);
 
-            //Start timing
-    		long startTime = System.currentTimeMillis();
-            logger.trace("Started time - startTime - " + startTime);
+        //Setup
+        HttpClient client = new HttpClient();
+        Credentials creds = new UsernamePasswordCredentials(user, password);
+        client.getState().setCredentials(AuthScope.ANY, creds);
+        File f = new File(outFile);
 
-    		if (this.overwrite || !f.exists()) {
-                if (f.exists()) logger.debug("Overwriting " + f.getAbsolutePath());
-                logger.debug("Downloading " + url + "/" + file + " to " + f.getAbsolutePath());
+        //Start timing
+        long startTime = System.currentTimeMillis();
+        logger.trace("Started time - startTime - " + startTime);
 
-    			//Download the file
-    			GetMethod method = new GetMethod(url + "/" + file);
-        		client.executeMethod(method);
+        if (this.overwrite || !f.exists()) {
+            if (f.exists()) logger.debug("Overwriting " + f.getAbsolutePath());
+            logger.debug("Downloading " + url + "/" + file + " to " + f.getAbsolutePath());
 
-        		//200 OK => No issues
-        		if (method.getStatusCode() != 200)
-        			throw new Exception(method.getStatusCode() + " " + method.getStatusText());
+            //Download the file
+            GetMethod method = new GetMethod(url + "/" + file);
+            client.executeMethod(method);
 
-	    		InputStream is = method.getResponseBodyAsStream();
-	    		OutputStream out = new FileOutputStream(f);
-	    		byte buf[] = new byte[1024];
-	    		int len;
+            //200 OK => No issues
+            if (method.getStatusCode() != 200)
+                throw new IOException(method.getStatusCode() + " " + method.getStatusText());
 
-	    		while((len = is.read(buf))>0) {
-	    		    out.write(buf,0,len);
-	    			out.flush();
-	    		}
-	    		out.close();
+            InputStream is = method.getResponseBodyAsStream();
+            OutputStream out = new FileOutputStream(f);
+            byte buf[] = new byte[1024];
+            int len;
 
-                long elapsed = ((System.currentTimeMillis() - startTime) / 1000);
-                logger.debug(file + " took " + elapsed + " seconds to complete");
-
-                completed = true;
-    		} else {
-    			logger.debug("Skipping - overwrite not allowed for " + file);
+            while((len = is.read(buf))>0) {
+                out.write(buf,0,len);
+                out.flush();
             }
-    	} catch (Exception e) {
-	    	e.printStackTrace();
-            logger.error(e.getMessage());
-	    }
+            out.close();
+
+            long elapsed = ((System.currentTimeMillis() - startTime) / 1000);
+            logger.debug(file + " took " + elapsed + " seconds to complete");
+
+            completed = true;
+        } else {
+            logger.debug("Skipping - overwrite not allowed for " + file);
+        }
 
         return completed;
     }
 
 	public void execute() {
 		Pull pull = new Pull();
-        boolean status = pull.download();
+        boolean status = false;
+
+        try {
+            status = pull.download();
+        } catch(IOException e) {
+            logger.error(e.getMessage());
+        }
 
         String message = status ? "Download successful" : "Download failed";
         logger.info(message);
