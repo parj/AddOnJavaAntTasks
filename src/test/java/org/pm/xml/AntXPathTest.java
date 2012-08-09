@@ -1,6 +1,7 @@
 package org.pm.xml;
 
-import junit.framework.TestCase;
+import org.junit.Before;
+import org.junit.Test;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -12,20 +13,22 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
+import static junit.framework.Assert.assertEquals;
 
-
-public class AntXPathTest extends TestCase {
+public class AntXPathTest {
     private String iFile = "src/test/resources/xml/AntXPathTest/controlFile.xml";
     private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
     private AntXPath antXPath = new AntXPath();
 
-    protected void setUp() throws ParserConfigurationException, TransformerConfigurationException {
+    @Before
+    public void setUp() throws ParserConfigurationException, TransformerConfigurationException {
         factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         builder = factory.newDocumentBuilder();
     }
 
+    @Test
 	public void testModifyXPath() throws IOException, SAXException, XPathExpressionException {
         String path = "//book[@id = 'bk102']/title";
         Document document = builder.parse(iFile);
@@ -39,6 +42,7 @@ public class AntXPathTest extends TestCase {
         assertEquals(xPath.evaluate(path, document), "FOO");
     }
 
+    @Test
     public void testDeleteXPath() throws IOException, SAXException, XPathExpressionException {
         String path = "//book[@id = 'bk104']/author";
         Document document = builder.parse(iFile);

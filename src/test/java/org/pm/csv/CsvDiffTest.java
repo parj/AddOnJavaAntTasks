@@ -1,6 +1,8 @@
 package org.pm.csv;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import org.pm.diff.Key;
 import org.pm.diff.MinimalReport;
 import org.pm.diff.exception.HeaderColumnsDoNotMatchException;
@@ -8,14 +10,17 @@ import org.pm.diff.exception.KeyColumnsMissingException;
 
 import java.util.ArrayList;
 import java.util.List;
+import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.assertEquals;
 
-public class CsvDiffTest extends TestCase {
+
+public class CsvDiffTest {
 	MinimalReport report;
 	CsvDiff csv;
 	List<Key> keyColumns;
 
-	protected void setUp() throws Exception {
-		super.setUp();
+    @Before
+	public void setUp() throws Exception {
 		report = new MinimalReport();
 		csv = new CsvDiff("src/test/resources/csv/CsvDiff/controlFile.csv", "src/test/resources/csv/CsvDiff/testFile.csv", ',');
 		csv.setReport(report);
@@ -23,13 +28,14 @@ public class CsvDiffTest extends TestCase {
 		keyColumns.add(new Key("Header_1"));
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+    @After
+    public void tearDown() throws Exception {
 		report = null;
 		keyColumns = null;
 		csv = null;
 	}
 
+    @Test
 	public void testMissingKeyColumns() throws HeaderColumnsDoNotMatchException {
 		try {
 			csv.diff();
@@ -38,6 +44,7 @@ public class CsvDiffTest extends TestCase {
 		}
 	}
 
+    @Test
 	public void testDiff() throws KeyColumnsMissingException, HeaderColumnsDoNotMatchException {
 		csv.setKeyColumns(keyColumns);
 		csv.diff();

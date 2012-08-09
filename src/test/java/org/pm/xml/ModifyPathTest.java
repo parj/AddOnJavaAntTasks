@@ -1,12 +1,12 @@
 package org.pm.xml;
 
-import org.pm.xml.ModifyPath;
+import org.junit.Test;
 
-import junit.framework.TestCase;
+import static junit.framework.Assert.assertEquals;
 
-public class ModifyPathTest extends TestCase {
+public class ModifyPathTest {
 
-	
+	@Test
 	public void testGetSetPath() {
 		ModifyPath path = new ModifyPath();
 		path.setPath("/root");
@@ -14,13 +14,15 @@ public class ModifyPathTest extends TestCase {
 		path = null;
 	}
 
+    @Test
 	public void testGetSetValue() {
 		ModifyPath path = new ModifyPath();
 		path.setValue("foo");
 		assertEquals(path.getValue(), "foo");
 		path = null;
 	}
-	
+
+    @Test
 	public void testGetSetDelete() {
 		ModifyPath path = new ModifyPath();
 		path.setDelete(false);

@@ -1,12 +1,17 @@
 package org.pm.diff;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-public class TwoWayHashMapTest extends TestCase {
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+
+public class TwoWayHashMapTest {
 	private TwoWayHashMap twoMap;
-	
-	protected void setUp() throws Exception {
-		super.setUp();
+
+    @Before
+	public void setUp()  {
 		twoMap = new TwoWayHashMap();
 		twoMap.put("luhIUHi", 99000);
 		twoMap.put(298, "KLUHa");
@@ -18,16 +23,18 @@ public class TwoWayHashMapTest extends TestCase {
 		twoMap.put(28723, "�^wh");
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+    @After
+	public void tearDown() throws Exception {
 		twoMap = null;
 	}
 
+    @Test
 	public void testPutStringInteger() {
 		twoMap.put("ABCD", 1234);
 		assertEquals(twoMap.get(1234), "ABCD");
 	}
 
+    @Test
 	public void testPutIntegerString() {
 		twoMap.put(5678, "EFGH");
 		assertEquals((Integer)twoMap.get("EFGH"), new Integer(5678));
