@@ -1,13 +1,16 @@
 package org.pm.webdav;
 
-import junit.framework.TestCase;
 import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
 
+import static junit.framework.Assert.assertTrue;
 
-public class PushTest extends TestCase {
+public class PushTest {
     private Logger logger = Logger.getLogger(PushTest.class);
     private String _iFile = "src/test/resources/webdav/output.csv";
     private String url = "http://localhost:8080/repository/default";
@@ -15,7 +18,8 @@ public class PushTest extends TestCase {
     private String fullUrl;
     private Push push;
 
-    protected void setUp() throws IOException {
+    @Before
+    public void setUp() throws IOException {
         push = new Push("admin", "admin", "http://localhost:8080/repository/default");
         push.setOverwrite(true);
 
@@ -25,6 +29,7 @@ public class PushTest extends TestCase {
         logger.debug("fullUrl - " + fullUrl);
     }
 
+    @Test
 	public void testDownload() throws IOException {
         push.uploadFile(iFile, "output.csv");
         boolean status = push.fileExists(fullUrl);
@@ -33,7 +38,8 @@ public class PushTest extends TestCase {
         assertTrue(status);
     }
 
-    protected void tearDown() {
+    @After
+    public void tearDown() {
         push = null;
         iFile = null;
     }
