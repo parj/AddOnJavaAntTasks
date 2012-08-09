@@ -12,8 +12,9 @@ import java.io.IOException;
 import static junit.framework.Assert.assertEquals;
 
 
-public class PullTest {
-    private Logger logger = Logger.getLogger(PullTest.class);
+/** Force this to run after WebDav_1_PushTest - The file needs to be pushed before being downloaded **/
+public class WebDav_2_PullTest {
+    private Logger logger = Logger.getLogger(WebDav_2_PullTest.class);
     private String oFile = "src/test/resources/webdav/output.csv";
     private String url = "http://localhost:8080/repository/default";
     private String fileName = "output.csv";

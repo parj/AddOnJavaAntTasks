@@ -59,24 +59,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TwoWayHashMapTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/diff/TwoWayHashMapTest.java">
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="10" selection-start="600" selection-end="600" vertical-scroll-proportion="-0.07913669">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="115" column="24" selection-start="3652" selection-end="3657" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ModifyPathTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/ModifyPathTest.java">
+      <file leaf-file-name="build.gradle" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="9" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="9" column="74" selection-start="367" selection-end="367" vertical-scroll-proportion="0.20579268">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -96,22 +92,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/test/resources/xml/AntXMLUnitTest/testFile.xml" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXMLUnitTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavServer.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/webdav/Pull.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/webdav/Push.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/PushTest.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/PullTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTestRunner.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvToExcelTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/ModifyPathTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/diff/TwoWayHashMapTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTestRunner.java" />
+        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -681,12 +677,12 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="PullTest" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="WebDav_2_PullTest" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="Main" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.pm.webdav" />
-      <option name="MAIN_CLASS_NAME" value="org.pm.webdav.PullTest" />
+      <option name="MAIN_CLASS_NAME" value="org.pm.webdav.WebDav_2_PullTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -851,12 +847,12 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="false" name="PushTest" type="JUnit" factoryName="JUnit">
+    <configuration default="false" name="WebDav_1_PushTest" type="JUnit" factoryName="JUnit">
       <module name="Main" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="org.pm.webdav" />
-      <option name="MAIN_CLASS_NAME" value="org.pm.webdav.PushTest" />
+      <option name="MAIN_CLASS_NAME" value="org.pm.webdav.WebDav_1_PushTest" />
       <option name="METHOD_NAME" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" />
@@ -936,7 +932,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23981191" sideWeight="0.6520468" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34795323" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34795323" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1036,48 +1032,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="143" selection-start="483" selection-end="483" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="45" selection-start="1033" selection-end="1057" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/PullTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="54" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/PushTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="179" selection-end="227" vertical-scroll-proportion="0.35971224">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="5" selection-start="1383" selection-end="1383" vertical-scroll-proportion="0.5859375">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTestRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="31" selection-start="339" selection-end="339" vertical-scroll-proportion="0.50359714">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1102,7 +1059,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/ModifyPathTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="9" selection-start="477" selection-end="477" vertical-scroll-proportion="0.0">
+        <state line="24" column="9" selection-start="477" selection-end="477" vertical-scroll-proportion="0.50359714">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1111,10 +1068,49 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/diff/TwoWayHashMapTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="10" selection-start="600" selection-end="600" vertical-scroll-proportion="-0.07913669">
+        <state line="26" column="10" selection-start="600" selection-end="600" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="179" selection-end="227" vertical-scroll-proportion="0.35971224">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTestRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="349" selection-end="349" vertical-scroll-proportion="0.53956836">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="103" selection-start="383" selection-end="383" vertical-scroll-proportion="0.50359714">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="115" column="24" selection-start="3652" selection-end="3657" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="74" selection-start="367" selection-end="367" vertical-scroll-proportion="0.20579268">
+          <folding />
         </state>
       </provider>
     </entry>

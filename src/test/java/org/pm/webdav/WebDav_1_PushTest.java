@@ -10,8 +10,8 @@ import java.io.IOException;
 
 import static junit.framework.Assert.assertTrue;
 
-public class PushTest {
-    private Logger logger = Logger.getLogger(PushTest.class);
+public class WebDav_1_PushTest {
+    private Logger logger = Logger.getLogger(WebDav_1_PushTest.class);
     private String _iFile = "src/test/resources/webdav/output.csv";
     private String url = "http://localhost:8080/repository/default";
     private File iFile;
