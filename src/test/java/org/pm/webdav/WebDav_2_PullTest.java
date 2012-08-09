@@ -6,8 +6,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -21,8 +23,10 @@ public class WebDav_2_PullTest {
     private Pull pull;
 
     @Before
-    public void setUp() {
+    public void setUp() throws MalformedURLException {
         pull = new Pull("admin", "admin", url, fileName, oFile);
+        File oFile_delete = new File(oFile);
+        oFile_delete.delete();
     }
 
     @Test
@@ -36,11 +40,11 @@ public class WebDav_2_PullTest {
             switch (count) {
                 case 0:
                     logger.trace("Read - " + line[0]);
-                    assertEquals(line[0], "Header_1");
+                    assertEquals("Header_1", line[0]);
                     break;
                 case 2:
                     logger.trace("Read - " + line[2]);
-                    assertEquals(new String(line[2].getBytes(), "UTF8"), "˚∆∫å∂¬ß^∆");
+                    assertEquals("˚∆∫å∂¬ß^∆", new String(line[2].getBytes(), "UTF8"));
                     break;
             }
 

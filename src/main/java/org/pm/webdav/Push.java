@@ -1,10 +1,7 @@
 package org.pm.webdav;
 
-import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.HeadMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.RequestEntity;
@@ -21,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.util.Vector;
 
 public class Push extends Task{
@@ -29,8 +27,12 @@ public class Push extends Task{
 	private String password;
 	private String url;
 	Vector<FileSet> fileSets = new Vector<FileSet>();
-	private HttpClient client;
     private boolean overwrite;
+    private String proxyUser;
+    private String proxyPassword;
+    private String proxyHost;
+    private int proxyPort = Integer.MIN_VALUE;
+    private HttpClient httpClient;
 
     /**
      * Empty Constructor
@@ -39,17 +41,31 @@ public class Push extends Task{
         //Empty constructor
     }
 
-    public Push(String user, String password, String url) {
+    public Push(String user, String password, String url) throws MalformedURLException {
         setUser(user);
         setPassword(password);
         setUrl(url);
         setUp();
     }
 
-    public void setUp() {
-        client = new HttpClient();
-        Credentials creds = new UsernamePasswordCredentials(user, password);
-        client.getState().setCredentials(AuthScope.ANY, creds);
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+        logger.trace("proxyHost is " + proxyHost);
+    }
+
+    public void setProxyPort(int proxyPort) {
+        this.proxyPort = proxyPort;
+        logger.trace("proxyHost is " + proxyPort);
+    }
+
+    public void setProxyUser(String proxyUser) {
+        this.proxyUser = proxyUser;
+        logger.trace("proxyHost is " + proxyUser);
+    }
+
+    public void setProxyPassword(String proxyPassword) {
+        this.proxyPassword = proxyPassword;
+        logger.trace("proxyHost is " + proxyPassword);
     }
 
 	/**
@@ -89,6 +105,17 @@ public class Push extends Task{
 		if (!fileSets.contains(fileSet)) {
 			fileSets.add(fileSet);
 		}
+    }
+
+    /**
+     * Setups credentials and proxies
+     * @throws MalformedURLException
+     */
+    public void setUp() throws MalformedURLException {
+        //Setup
+        httpClient = new HttpClient();
+        httpClient = Common.setProxy(httpClient, proxyHost, proxyPort, proxyUser, proxyPassword);
+        httpClient = Common.setCredentials(httpClient, url, user, password);
     }
 
 	/**
@@ -142,7 +169,7 @@ public class Push extends Task{
 					uploadUrl = uploadUrl + "/" + directoryName;
 					
 					MkColMethod mkdir = new MkColMethod(uploadUrl);
-					int status = client.executeMethod(mkdir);
+					int status = httpClient.executeMethod(mkdir);
 					
 					if (status == 405)	
 						{/*Directory exists. Do Nothing*/}
@@ -181,7 +208,7 @@ public class Push extends Task{
             RequestEntity requestEntity = new InputStreamRequestEntity(new FileInputStream(f));
 
             putMethod.setRequestEntity(requestEntity);
-            client.executeMethod(putMethod);
+            httpClient.executeMethod(putMethod);
 
             logger.trace("uploadFile - statusCode - " + putMethod.getStatusCode());
 
@@ -206,29 +233,15 @@ public class Push extends Task{
 	}
 
 	public boolean fileExists(String url) throws HttpException, IOException {
-        HeadMethod headMethod = new HeadMethod(url);
-        client.executeMethod(headMethod);
-        int statusCode = headMethod.getStatusCode();
-        logger.trace("fileExists - statusCode - " + statusCode);
-
-        boolean exists = headMethod.getStatusCode() == HttpURLConnection.HTTP_OK;
-        logger.debug("fileExists - " + exists);
-
-        return exists;
+        return Common.executeMethod(httpClient, new HeadMethod(url));
 	}
 
     public boolean deleteFile(String url) {
-        DeleteMethod deleteMethod = new DeleteMethod(url);
         boolean deleted = true;
 
         try {
             if (fileExists(url) && overwrite) {
-                client.executeMethod(deleteMethod);
-                int statusCode = deleteMethod.getStatusCode();
-                logger.trace("deleteFile - statusCode - " + statusCode);
-
-                deleted = deleteMethod.getStatusCode() == HttpURLConnection.HTTP_OK;
-                logger.debug("deleteFile - " + deleted);
+                deleted = Common.executeMethod(httpClient, new DeleteMethod(url));
             }
         } catch (HttpException e) {
             logger.error("Could not delete " + url);

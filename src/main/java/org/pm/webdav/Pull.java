@@ -1,14 +1,13 @@
 package org.pm.webdav;
 
-import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.UsernamePasswordCredentials;
-import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.Task;
 
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 
 public class Pull extends Task {
 	private static Logger logger = Logger.getLogger(Pull.class);
@@ -17,7 +16,12 @@ public class Pull extends Task {
 	private String url;
 	private String file;
 	private String outFile;
+    private String proxyUser;
+    private String proxyPassword;
+    private String proxyHost;
+    private int proxyPort = Integer.MIN_VALUE;
 	private boolean overwrite = false;
+    private HttpClient httpClient;
 
     public Pull() {
 
@@ -30,12 +34,13 @@ public class Pull extends Task {
         setFile(fileToDownload);
     }
 
-    public Pull(String user, String password, String url, String fileToDownload, String outputFile) {
+    public Pull(String user, String password, String url, String fileToDownload, String outputFile) throws MalformedURLException{
         setUser(user);
         setPassword(password);
         setUrl(url);
         setFile(fileToDownload);
         setOutFile(outputFile);
+        setUp();
     }
 	
 	public void setUser(String user) {
@@ -74,41 +79,58 @@ public class Pull extends Task {
         logger.trace("overwrite is " + overwrite);
 	}
 
-    public boolean download() throws IOException {
-        boolean completed = false;
+    public void setProxyHost(String proxyHost) {
+        this.proxyHost = proxyHost;
+        logger.trace("proxyHost is " + proxyHost);
+    }
 
+    public void setProxyPort(int proxyPort) {
+        this.proxyPort = proxyPort;
+        logger.trace("proxyHost is " + proxyPort);
+    }
+
+    public void setProxyUser(String proxyUser) {
+        this.proxyUser = proxyUser;
+        logger.trace("proxyHost is " + proxyUser);
+    }
+
+    public void setProxyPassword(String proxyPassword) {
+        this.proxyPassword = proxyPassword;
+        logger.trace("proxyHost is " + proxyPassword);
+    }
+
+    public void setUp() throws MalformedURLException {
         //Setup
-        HttpClient client = new HttpClient();
-        Credentials creds = new UsernamePasswordCredentials(user, password);
-        client.getState().setCredentials(AuthScope.ANY, creds);
-        File f = new File(outFile);
+        httpClient = new HttpClient();
+        httpClient = Common.setProxy(httpClient, proxyHost, proxyPort, proxyUser, proxyPassword);
+        httpClient = Common.setCredentials(httpClient, url, user, password);
+    }
+
+    public boolean download() throws IOException {
+        setUp();
+
+        File oFile = new File(outFile);
 
         //Start timing
         long startTime = System.currentTimeMillis();
         logger.trace("Started time - startTime - " + startTime);
+        boolean completed = false;
 
-        if (this.overwrite || !f.exists()) {
-            if (f.exists()) logger.debug("Overwriting " + f.getAbsolutePath());
-            logger.debug("Downloading " + url + "/" + file + " to " + f.getAbsolutePath());
+        if (this.overwrite || !oFile.exists()) {
+            if (oFile.exists())
+                logger.debug("Overwriting " + oFile.getAbsolutePath());
+
+            logger.debug("Downloading " + url + "/" + file + " to " + oFile.getAbsolutePath());
 
             //Download the file
             GetMethod method = new GetMethod(url + "/" + file);
-            client.executeMethod(method);
+            httpClient.executeMethod(method);
 
             //200 OK => No issues
-            if (method.getStatusCode() != 200)
+            if (method.getStatusCode() != HttpURLConnection.HTTP_OK)
                 throw new IOException(method.getStatusCode() + " " + method.getStatusText());
 
-            InputStream is = method.getResponseBodyAsStream();
-            OutputStream out = new FileOutputStream(f);
-            byte buf[] = new byte[1024];
-            int len;
-
-            while((len = is.read(buf))>0) {
-                out.write(buf,0,len);
-                out.flush();
-            }
-            out.close();
+            writeFile(method.getResponseBodyAsStream(), oFile);
 
             long elapsed = ((System.currentTimeMillis() - startTime) / 1000);
             logger.debug(file + " took " + elapsed + " seconds to complete");
@@ -137,5 +159,17 @@ public class Pull extends Task {
         if (status) System.exit(0);
         else        System.exit(1);
 	}
+
+    public void writeFile(InputStream inputStream, File outFile) throws IOException {
+        OutputStream out = new FileOutputStream(outFile);
+        byte buf[] = new byte[1024];
+        int len;
+
+        while((len = inputStream.read(buf))>0) {
+            out.write(buf,0,len);
+            out.flush();
+        }
+        out.close();
+    }
 
 }
