@@ -114,14 +114,17 @@ public class AntXMLUnit extends Task {
                     writeReport(differences, controlFile);
                 } catch(ParserConfigurationException e) {
                     logger.error("Unable setup dependencies");
-                    logger.error(e.getMessage());
+                    logger.error(e);
+                    e.printStackTrace();
                 }
                 catch(IOException e) {
                     logger.error("Unable to process - " + fileName);
-                    logger.error(e.getMessage());
+                    logger.error(e);
+                    e.printStackTrace();
                 } catch(SAXException e) {
                     logger.error("Unable to read either control/test file " + fileName);
-                    logger.error(e.getMessage());
+                    logger.error(e);
+                    e.printStackTrace();
                 }
         	}
 			 

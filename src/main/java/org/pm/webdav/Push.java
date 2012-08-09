@@ -141,11 +141,14 @@ public class Push extends Task{
             }
     		
     	} catch(HttpException e) {
-            logger.error(e.getMessage());
+            logger.error(e);
+            e.printStackTrace();
         } catch(FileNotFoundException e) {
-            logger.error(e.getMessage());
+            logger.error(e);
+            e.printStackTrace();
         } catch(IOException e) {
-            logger.error(e.getMessage());
+            logger.error(e);
+            e.printStackTrace();
 	    }
 	}
 	
@@ -183,7 +186,7 @@ public class Push extends Task{
 			//Ignore as there is no directory to be created
 		} catch (Exception e) {
 			logger.error("ERR creating " + path);
-            logger.error(e.getMessage());
+            logger.error(e);
 			e.printStackTrace();
 		 }
 	}
@@ -245,11 +248,11 @@ public class Push extends Task{
             }
         } catch (HttpException e) {
             logger.error("Could not delete " + url);
-            logger.error(e.getMessage());
+            logger.error(e);
             deleted = false;
         } catch (IOException e) {
             logger.error("Could not delete " + url);
-            logger.error(e.getMessage());
+            logger.error(e);
             deleted = false;
         }
 

@@ -59,7 +59,7 @@ public class AntCsvToExcel extends Task {
         			csv.execute();
     			} catch (Exception e) {
     				logger.error("Unable to process " + filename);
-                    logger.error(e.getMessage());
+                    logger.error(e);
     				e.printStackTrace();
     			}
     		}

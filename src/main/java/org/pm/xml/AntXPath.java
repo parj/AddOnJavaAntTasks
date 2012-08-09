@@ -80,11 +80,13 @@ public class AntXPath extends Task {
 		    preSetup();
         } catch(ParserConfigurationException e) {
             logger.error("Unable to run preSetup() to setup dependencies");
-            logger.error(e.getMessage());
+            logger.error(e);
+                e.printStackTrace();
             System.exit(1);
         } catch(TransformerConfigurationException e) {
             logger.error("Unable to run preSetup() to setup dependencies");
-            logger.error(e.getMessage());
+            logger.error(e);
+            e.printStackTrace();
             System.exit(1);
         }
         
@@ -128,16 +130,20 @@ public class AntXPath extends Task {
 
 		} catch (XPathExpressionException e) {
             logger.error("Unable to evaluate xPath");
-            logger.error(e.getMessage());
+            logger.error(e);
+            e.printStackTrace();
         } catch (TransformerException e) {
             logger.error("Unable to run write output xml file");
-			logger.error(e.getMessage());
+			logger.error(e);
+            e.printStackTrace();
 		} catch (IOException e) {
             logger.error("Unable to read input file");
-			logger.error(e.getMessage());
+			logger.error(e);
+            e.printStackTrace();
         } catch (SAXException e) {
             logger.error("Unable to read input file");
-			logger.error(e.getMessage());
+			logger.error(e);
+            e.printStackTrace();
         }
 	}
 	
@@ -214,7 +220,7 @@ public class AntXPath extends Task {
 				return fileName;
 		} catch (Exception e) {
 			logger.error("Error evaluating filename");
-            logger.error(e.getMessage());
+            logger.error(e);
 			e.printStackTrace();
 			return fileName;
 		}

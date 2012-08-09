@@ -154,6 +154,7 @@ public class Pull extends Task {
             status = download();
         } catch(IOException e) {
             logger.error(e);
+            e.printStackTrace();
         }
 
         String message = status ? "Download successful" : "Download failed";
