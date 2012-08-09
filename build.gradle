@@ -1,4 +1,9 @@
 apply plugin: 'java'
+apply plugin:'application'
+apply plugin: 'maven'
+
+// -- For application plugin
+mainClassName = 'org.pm.webdav.Push'
 
 repositories {
     mavenCentral()
@@ -17,8 +22,40 @@ List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:
 				   ]
 dependencies {
     compile compileAll
+    runtime fileTree(dir: 'build/libs', include: '*.jar')
+}
+
+configurations {
+    runtime {
+        //extendsFrom compile
+        fileTree(dir: 'build/libs', include: '*.jar')
+    }
 }
 
 tasks.withType(Compile) {
     options.encoding = 'UTF-8'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.version = '2.0-SNAPSHOT'
+            pom.groupId = 'org.pm'
+            pom.artifactId = 'anttasks'
+        }
+    }
+}
+task push << {
+    ant.taskdef(name: 'push', classname: 'org.pm.webdav.Push', classpath: configurations.runtime.asPath)
+    ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
+        fileset(dir: 'src/test/resources/webdav', includes: '*.csv')
+    }
+}
+
+task pull << {
+    ant.taskdef(name: 'pull', classname: 'org.pm.webdav.Pull', classpath: configurations.runtime.asPath)
+    ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
+            file: "output.csv",
+            outFile: "src/test/resources/webdav/output.csv",
+            overwrite: true)
 }

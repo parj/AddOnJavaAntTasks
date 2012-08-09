@@ -132,7 +132,7 @@ public class Push extends Task{
             	String[] filesInSet = ds.getIncludedFiles();
             	
             	 for (String filename : filesInSet) {
-            		 logger.debug("Processing " + filename);
+            		 logger.info("Uploading " + filename);
             		 
             		 File f = new File(dir, filename);
             		 createDirectory(filename, f.getName());

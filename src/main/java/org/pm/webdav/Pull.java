@@ -45,23 +45,23 @@ public class Pull extends Task {
 	
 	public void setUser(String user) {
 		this.user = user;
-        logger.trace("User is " + user);
+        logger.trace("User is " + this.user);
 	}
 	
 	public void setPassword(String password) {
 		this.password = password;
-        logger.trace("password is " + password);
+        logger.trace("password is " + this.password);
 	}
 	
 	public void setUrl(String url) {
 		this.url = url;
-        logger.trace("url is " + url);
+        logger.trace("url is " + this.url);
 	}
 	
 	public void setFile(String file) {
 		this.file = file;
 
-        logger.trace("file is " + file);
+        logger.trace("file is " + this.file);
 		
 		//Issue 3 - outFile property now an optional element
 		if (this.outFile == null)
@@ -71,39 +71,43 @@ public class Pull extends Task {
 	public void setOutFile(String outFile) {
 		this.outFile = outFile;
 
-        logger.trace("outFile is " + outFile);
+        logger.trace("outFile is " + this.outFile);
 	}
 
 	public void setOverwrite(boolean overwrite) {
 		this.overwrite = overwrite;
-        logger.trace("overwrite is " + overwrite);
+        logger.trace("overwrite is " + this.overwrite);
 	}
 
     public void setProxyHost(String proxyHost) {
         this.proxyHost = proxyHost;
-        logger.trace("proxyHost is " + proxyHost);
+        logger.trace("proxyHost is " + this.proxyHost);
     }
 
     public void setProxyPort(int proxyPort) {
         this.proxyPort = proxyPort;
-        logger.trace("proxyHost is " + proxyPort);
+        logger.trace("proxyHost is " + this.proxyPort);
     }
 
     public void setProxyUser(String proxyUser) {
         this.proxyUser = proxyUser;
-        logger.trace("proxyHost is " + proxyUser);
+        logger.trace("proxyHost is " + this.proxyUser);
     }
 
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
-        logger.trace("proxyHost is " + proxyPassword);
+        logger.trace("proxyHost is " + this.proxyPassword);
     }
 
     public void setUp() throws MalformedURLException {
+        logger.trace("Setting up setUp");
+
         //Setup
         httpClient = new HttpClient();
         httpClient = Common.setProxy(httpClient, proxyHost, proxyPort, proxyUser, proxyPassword);
-        httpClient = Common.setCredentials(httpClient, url, user, password);
+        httpClient = Common.setCredentials(httpClient, this.url, this.user, this.password);
+
+        logger.trace("Completed setup");
     }
 
     public boolean download() throws IOException {
@@ -144,13 +148,12 @@ public class Pull extends Task {
     }
 
 	public void execute() {
-		Pull pull = new Pull();
         boolean status = false;
 
         try {
-            status = pull.download();
+            status = download();
         } catch(IOException e) {
-            logger.error(e.getMessage());
+            logger.error(e);
         }
 
         String message = status ? "Download successful" : "Download failed";

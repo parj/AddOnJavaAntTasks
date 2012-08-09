@@ -1,0 +1,6 @@
+<project name="MyProject" default="dist" basedir=".">
+    <taskdef name="pull" classname="org.pm.webdav.Pull" />
+    <taskdef name="push" classname="org.pm.webdav.Push" />
+
+
+</project>
