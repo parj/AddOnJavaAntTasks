@@ -1,8 +1,7 @@
 .gradle/
+build/
 *.class
 *.jar
-build/
-*.iml
-*.ipl
-*.iws
-*.ipr
+.DS_Store
+lib/
+target/
