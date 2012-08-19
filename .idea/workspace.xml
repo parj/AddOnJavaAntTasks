@@ -109,10 +109,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="WebDav_1_PushTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="WebDav_1_PushTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="51" column="13" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.4512195">
+            <state line="51" column="13" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="75" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -142,7 +151,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/org/pm/webdav/Common.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/xml/AntXMLUnit.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/xml/AntXPath.java" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/xml/ModifyPath.java" />
@@ -158,6 +166,7 @@
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -795,13 +804,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/webdav/Pull.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.02332815">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/xml/AntXMLUnit.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="0" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.466563">
@@ -908,7 +910,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="13" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.4512195">
+        <state line="51" column="13" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="75" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
