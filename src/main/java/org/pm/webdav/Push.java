@@ -1,3 +1,24 @@
+/*
+Copyright (c) 2011, 2012 Parjanya Mudunuri
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+associated documentation files (the "Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+http://opensource.org/licenses/mit-license.php
+ */
+
 package org.pm.webdav;
 
 import org.apache.commons.httpclient.HttpClient;
@@ -136,7 +157,8 @@ public class Push extends Task{
             		 
             		 File f = new File(dir, filename);
             		 createDirectory(filename, f.getName());
-            		 uploadFile(f, filename);
+            		 boolean result = uploadFile(f, filename);
+                     logger.info("Upload status of " + filename + " - " + result);
             	 }
             }
     		
@@ -201,8 +223,9 @@ public class Push extends Task{
 	 * @param f	The File object of the file to be uploaded
 	 * @param filename	The relatvie path of the file
 	 */
-	public void uploadFile(File f, String filename) throws IOException {
+	public boolean uploadFile(File f, String filename) throws IOException {
         String uploadUrl = url + "/" + filename;
+        boolean uploaded = false;
 
         deleteFile(uploadUrl);
         PutMethod putMethod = new PutMethod(uploadUrl);
@@ -220,9 +243,11 @@ public class Push extends Task{
                     logger.info("IGNORE - File already exists " + f.getAbsolutePath());
                     break;
                 case HttpURLConnection.HTTP_OK:
+                    uploaded = true;
                     logger.info("Transferred " + f.getAbsolutePath());
                     break;
                 case HttpURLConnection.HTTP_CREATED: //201 Created => No issues
+                    uploaded = true;
                     logger.info("Transferred " + f.getAbsolutePath());
                     break;
                 default:
@@ -233,10 +258,11 @@ public class Push extends Task{
          else {
              logger.info("IGNORE - File already exists " + f.getAbsolutePath());
          }
+        return uploaded;
 	}
 
 	public boolean fileExists(String url) throws HttpException, IOException {
-        return Common.executeMethod(httpClient, new HeadMethod(url));
+        return Common.executeMethod(httpClient, new HeadMethod(url), true);
 	}
 
     public boolean deleteFile(String url) {
