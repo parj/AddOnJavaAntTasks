@@ -21,11 +21,19 @@ http://opensource.org/licenses/mit-license.php
 
 package org.pm.xml;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
 public class ModifyPathTest {
+    ModifyPath path;
+
+    @Before
+    public void setUp() {
+        path = new ModifyPath();
+    }
 
 	@Test
 	public void testGetSetPath() {
@@ -50,5 +58,10 @@ public class ModifyPathTest {
 		assertEquals(path.isDelete(), false);
 		path = null;
 	}
+
+    @After
+    public void tearDown() {
+        path = null;
+    }
 
 }

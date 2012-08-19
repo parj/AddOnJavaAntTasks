@@ -61,10 +61,13 @@ public class TwoWayHashMapTest {
 		assertEquals((Integer)twoMap.get("EFGH"), new Integer(5678));
 	}
 
+    @Test
 	public void testRemoveString() {
 		twoMap.remove(1234);
 		assertFalse(twoMap.containsKey("ABCD"));
 	}
+
+    @Test
 	public void testRemoveInteger() {
 		twoMap.remove("EFGH");
 		assertFalse(twoMap.containsKey(5678));

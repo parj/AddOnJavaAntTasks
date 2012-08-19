@@ -21,6 +21,7 @@ http://opensource.org/licenses/mit-license.php
 
 package org.pm.xml;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -34,6 +35,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
+
 import static junit.framework.Assert.assertEquals;
 
 public class AntXPathTest {
@@ -77,4 +79,10 @@ public class AntXPathTest {
         assertEquals(xPath.evaluate(path, document), "");
     }
 
+    @After
+    public void tearDown() {
+        factory = null;
+        builder = null;
+        antXPath = null;
+    }
 }
