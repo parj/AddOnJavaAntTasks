@@ -24,7 +24,6 @@ package org.pm.webdav;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +49,7 @@ public class WebDav_1_PushTest {
         logger.debug("fullUrl - " + fullUrl);
     }
 
-    @Test
+    /*@Test*/
 	public void testDownload() throws IOException {
         boolean upload = push.uploadFile(iFile, "output.csv");
         logger.debug("upload - " + upload);

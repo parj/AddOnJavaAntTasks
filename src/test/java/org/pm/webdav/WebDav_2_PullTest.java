@@ -25,7 +25,6 @@ import au.com.bytecode.opencsv.CSVReader;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.io.File;
 import java.io.FileReader;
@@ -50,7 +49,7 @@ public class WebDav_2_PullTest {
         oFile_delete.delete();
     }
 
-    @Test
+    /*@Test*/
 	public void testDownload() throws IOException {
         pull.download();
         CSVReader fileE = new CSVReader(new FileReader(oFile), ',');

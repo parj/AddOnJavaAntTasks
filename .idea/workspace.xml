@@ -100,10 +100,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name=".travis.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name=".travis.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.travis.yml">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebDav_1_PushTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="13" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.4512195">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WebDav_2_PullTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="13" selection-start="2080" selection-end="2080" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -130,8 +148,6 @@
         <option value="$PROJECT_DIR$/src/main/java/org/pm/xml/ModifyPath.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvToExcelTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTestRunner.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -140,6 +156,8 @@
         <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXMLUnitTest.java" />
         <option value="$PROJECT_DIR$/.travis.yml" />
+        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java" />
       </list>
     </option>
   </component>
@@ -856,26 +874,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="1122" selection-end="1122" vertical-scroll-proportion="-0.6513761">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXMLUnitTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="0" selection-start="1749" selection-end="1749" vertical-scroll-proportion="0.19969513">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="1" selection-start="2532" selection-end="2537" vertical-scroll-proportion="0.47408536">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -891,6 +895,20 @@
     <entry file="file://$PROJECT_DIR$/.travis.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="13" selection-start="2080" selection-end="2080" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="13" selection-start="1972" selection-end="1972" vertical-scroll-proportion="0.4512195">
           <folding />
         </state>
       </provider>
