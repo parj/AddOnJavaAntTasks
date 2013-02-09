@@ -22,6 +22,7 @@ http://opensource.org/licenses/mit-license.php
 apply plugin: 'java'
 apply plugin:'application'
 apply plugin: 'maven'
+apply plugin: 'eclipse'
 
 // -- For application plugin
 mainClassName = 'org.pm.webdav.Push'

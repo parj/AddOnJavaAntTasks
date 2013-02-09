@@ -1,4 +1,4 @@
-![TravisCI Status](https://secure.travis-ci.org/parj/AddOnJavaAntTasks.png)
+![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
 # The addon Ant Tasks
 * AntDav - To upload and download from WebDav Servers
 * AntCsvtoExcel - To convert a set of csv files into 1 Excel file. Each csv file is a sheet within

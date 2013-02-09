@@ -2,19 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="33665f5b-cf75-4ab9-9bad-e23bba39790d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/pm/csv/AntCsvDiff.java" afterPath="$PROJECT_DIR$/src/main/java/org/pm/csv/AntCsvDiff.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java" afterPath="$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/pm/diff/CsvReport.java" afterPath="$PROJECT_DIR$/src/main/java/org/pm/diff/CsvReport.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/org/pm/diff/Difference.java" afterPath="$PROJECT_DIR$/src/main/java/org/pm/diff/Difference.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/Main.iml" afterPath="$PROJECT_DIR$/src/main/Main.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java" afterPath="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build.gradle" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/resources/csv/CsvDiff/controlFile.csv" afterPath="$PROJECT_DIR$/src/test/resources/csv/CsvDiff/controlFile.csv" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/resources/csv/CsvDiff/testFile.csv" afterPath="$PROJECT_DIR$/src/test/resources/csv/CsvDiff/testFile.csv" />
     </list>
     <ignored path="AddOnJavaAntTasks.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360419624128" ignored="false" />
-    <file path="/CsvDiff.java" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360417158209" ignored="false" />
+    <file path="/CsvDiff.java" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360421602995" ignored="false" />
     <file path="/Difference.java" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360418145945" ignored="false" />
     <file path="/fragment.java" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360419624128" ignored="false" />
     <file path="/a.java" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360420290541" ignored="false" />
     <file path="/CsvReport.java" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360420140606" ignored="false" />
+    <file path="/CsvDiffTest.java" changelist="33665f5b-cf75-4ab9-9bad-e23bba39790d" time="1360421851865" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,34 +76,6 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java" line="147" class="org.pm.csv.CsvDiff" package="org.pm.csv">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java" line="157" class="org.pm.csv.CsvDiff" package="org.pm.csv">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
     </line_breakpoints>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
@@ -145,29 +121,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CsvDiff.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="CsvDiff.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="147" column="56" selection-start="4724" selection-end="4724" vertical-scroll-proportion="0.0">
+            <state line="161" column="76" selection-start="5209" selection-end="5209" vertical-scroll-proportion="0.21696573">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CsvReport.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/CsvReport.java">
+      <file leaf-file-name="AntCsvDiff.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/csv/AntCsvDiff.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="57" selection-start="2442" selection-end="2442" vertical-scroll-proportion="0.6363636">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WebDav_1_PushTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="16" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="66" column="7" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1360421687000" expanded="true" signature="2163:2314" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -175,19 +144,46 @@
       <file leaf-file-name="CsvDiffTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="14" selection-start="1623" selection-end="1623" vertical-scroll-proportion="0.0">
+            <state line="70" column="57" selection-start="2466" selection-end="2466" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#2574#0" expanded="true" />
+                <element signature="e#0#2537#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Difference.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/Difference.java">
+      <file leaf-file-name="MinimalReport.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/MinimalReport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="78" selection-start="1412" selection-end="1412" vertical-scroll-proportion="0.0">
+            <state line="25" column="13" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="controlFile.csv" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/resources/csv/CsvDiff/controlFile.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="8" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="testFile.csv" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/resources/csv/CsvDiff/testFile.csv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="17" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CsvReport.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/CsvReport.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="73" column="53" selection-start="2481" selection-end="2481" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -211,11 +207,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvToExcelTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTestRunner.java" />
-        <option value="$PROJECT_DIR$/build.gradle" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/diff/TwoWayHashMapTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/ModifyPathTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java" />
@@ -223,10 +214,15 @@
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/diff/Difference.java" />
-        <option value="$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java" />
+        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/main/java/org/pm/diff/CsvReport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java" />
+        <option value="$PROJECT_DIR$/src/main/java/org/pm/csv/AntCsvDiff.java" />
+        <option value="$PROJECT_DIR$/src/test/resources/csv/CsvDiff/controlFile.csv" />
+        <option value="$PROJECT_DIR$/src/test/resources/csv/CsvDiff/testFile.csv" />
+        <option value="$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java" />
+        <option value="$PROJECT_DIR$/build.gradle" />
       </list>
     </option>
   </component>
@@ -354,6 +350,66 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AddOnJavaAntTasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AddOnJavaAntTasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="csv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AddOnJavaAntTasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AddOnJavaAntTasks" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="csv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CsvDiff" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -568,6 +624,7 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLanguage" value="Java" />
+    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
@@ -880,9 +937,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22764228" sideWeight="0.6819572" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22764228" sideWeight="0.6727829" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2495935" sideWeight="0.6520468" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3180428" sideWeight="0.49674797" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3180428" sideWeight="0.49674797" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32748538" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -951,36 +1008,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="1122" selection-end="1122" vertical-scroll-proportion="0.45731708" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/ModifyPathTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="13" selection-start="1282" selection-end="1282" vertical-scroll-proportion="0.022865854" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDavTestRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="1212" selection-end="1212" vertical-scroll-proportion="0.11432927" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/csv/CsvToExcelTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="0" selection-start="2414" selection-end="2414" vertical-scroll-proportion="0.47408536" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/diff/TwoWayHashMapTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="9" selection-start="2169" selection-end="2169" vertical-scroll-proportion="0.5527523" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXMLUnitTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1749" selection-end="1749" vertical-scroll-proportion="0.19969513" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/xml/AntXPathTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="13" selection-start="1697" selection-end="1697" vertical-scroll-proportion="0.022865854" />
@@ -991,11 +1018,6 @@
         <state line="0" column="14" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="75" selection-start="75" selection-end="75" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_2_PullTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="0" selection-start="1851" selection-end="1851" vertical-scroll-proportion="0.02388535">
@@ -1003,33 +1025,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="56" selection-start="4724" selection-end="4724" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/Difference.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="78" selection-start="1412" selection-end="1412" vertical-scroll-proportion="0.0">
+        <state line="31" column="78" selection-start="1412" selection-end="1412" vertical-scroll-proportion="0.21696573">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="14" selection-start="1623" selection-end="1623" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#2574#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/webdav/WebDav_1_PushTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="16" selection-start="1195" selection-end="1195" vertical-scroll-proportion="0.0">
+        <state line="24" column="16" selection-start="1195" selection-end="1195" vertical-scroll-proportion="-0.22204472">
           <folding />
         </state>
       </provider>
@@ -1041,9 +1046,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="64" selection-start="16" selection-end="64" vertical-scroll-proportion="-1.0032626">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/csv/CsvToExcel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="13" selection-start="1454" selection-end="1454" vertical-scroll-proportion="0.11980831">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/csv/AntCsvDiff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="7" selection-start="2316" selection-end="2316" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1360421687000" expanded="true" signature="2163:2314" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/CsvReport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="57" selection-start="2442" selection-end="2442" vertical-scroll-proportion="0.6363636">
+        <state line="73" column="53" selection-start="2481" selection-end="2481" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/csv/CsvDiff/testFile.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="17" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/resources/csv/CsvDiff/controlFile.csv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="8" selection-start="52" selection-end="52" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/diff/MinimalReport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="13" selection-start="1187" selection-end="1187" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/org/pm/csv/CsvDiffTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="57" selection-start="2466" selection-end="2466" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#2537#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="23" selection-start="1216" selection-end="1216" vertical-scroll-proportion="0.12437811">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/org/pm/csv/CsvDiff.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="161" column="76" selection-start="5209" selection-end="5209" vertical-scroll-proportion="0.21696573">
           <folding />
         </state>
       </provider>

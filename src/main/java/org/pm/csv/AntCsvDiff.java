@@ -37,7 +37,7 @@ import java.util.Vector;
 
 public class AntCsvDiff extends Task {
 	private Vector<FileSet> fileSets = new Vector<FileSet>();
-	private List<Key> keyColumns = new ArrayList<Key>();
+	private String keyColumns;
 	private String testDirectory;
 	private String resultDirectory;
 	private char separator = ',';
@@ -59,12 +59,12 @@ public class AntCsvDiff extends Task {
 		this.testDirectory = testDirectory;
 	}
 	
-	public void addKeyColumns(KeyColumns keyColumns) {
+	/*public void addKeyColumns(KeyColumns keyColumns) {
 		for(Key key : keyColumns.getKeyColumns()) {
 			logger.trace("Adding key via addKeyColumns - " + key.getName());
 			this.keyColumns.add(key);
 		}
-	}
+	}*/
 
 	/**
 	 * Input file set

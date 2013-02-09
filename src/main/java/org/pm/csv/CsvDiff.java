@@ -39,7 +39,8 @@ public class CsvDiff {
 	private String expectedFile;
 	private String reachedFile;
 	private List<DiffListener> listeners;
-	private List<Key> keyColumns;
+	private String keyColumns;
+    private String[] keyColumnsToArray;
 	private Report report;
 	
 	private HashMap<String, String[]> missingExpected;
@@ -110,12 +111,13 @@ public class CsvDiff {
 		return listeners;
 	}
 
-	public void setKeyColumns(List<Key> keyColumns) {
-		logger.trace("Setting number of keyColumns to " + keyColumns.size());
-		this.keyColumns = keyColumns;	
+	public void setKeyColumns(String keyColumns) {
+		logger.trace("Setting number of keyColumns to " + keyColumns.length());
+		this.keyColumns = keyColumns;
+        keyColumnsToArray = keyColumns.split(";");
 	}
 
-	public List<Key> getKeyColumns() {
+	public String getKeyColumns() {
 		return keyColumns;
 	}
 
@@ -128,7 +130,7 @@ public class CsvDiff {
 		int rowCount = 0;
 		int totalMismatches = 0;
 		
-		if (keyColumns == null || keyColumns.size() == 0)
+		if (keyColumns == null || keyColumnsToArray.length == 0)
 			throw new KeyColumnsMissingException("Missing key columns");
 		
 		try {
@@ -155,9 +157,9 @@ public class CsvDiff {
 				keyReached = "";
 				
 				//Combine the key columns for each row
-				for (int i = 0; i < keyColumns.size(); ++i) {
+				for (int i = 0; i < keyColumnsToArray.length; ++i) {
 					//Lookup location of key column
-					int keyHeaderLocation = headers.get(keyColumns.get(i).getName()).intValue();
+					int keyHeaderLocation = headers.get(keyColumnsToArray[i]).intValue();
 
                     if (expected != null) {
                         if (keyExpected.length() == 0 )
