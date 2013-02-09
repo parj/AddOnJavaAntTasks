@@ -140,10 +140,12 @@ public class CsvDiff {
 		
 			logger.trace("Determining Headers");
 			determineHeaders(fileE, fileR);
+
+            expected = fileE.readNext();
+            reached = fileR.readNext();
 			
 			//Loop through the files
-			while((expected = fileE.readNext()) != null) {
-				reached = fileR.readNext();
+			while(!(expected == null && reached == null)) {
 				boolean keysMatched = false;
 				
 				logger.trace("Read from expected " + expected);
@@ -156,77 +158,86 @@ public class CsvDiff {
 				for (int i = 0; i < keyColumns.size(); ++i) {
 					//Lookup location of key column
 					int keyHeaderLocation = headers.get(keyColumns.get(i).getName()).intValue();
+
+                    if (expected != null) {
+                        if (keyExpected.length() == 0 )
+                            keyExpected = expected[keyHeaderLocation];
+                        else
+                            keyExpected = keyExpected + "_" + expected[keyHeaderLocation];
+                    }
+
+                    if (reached != null) {
+                        if (keyReached.length() == 0)
+                            keyReached = reached[keyHeaderLocation];
+                        else
+                            keyReached = keyReached + "_" + reached[keyHeaderLocation];
+                    }
 					
-					if (keyExpected.length() == 0) {
-						keyExpected = expected[keyHeaderLocation];
-						keyReached = reached[keyHeaderLocation];
-					} else {
-						keyExpected = keyExpected + "_" + expected[keyHeaderLocation];
-						keyReached = keyReached + "_" + reached[keyHeaderLocation];
-					}
-					
-					logger.debug("Expected key " + keyExpected);
-					logger.debug("Reached key " + keyReached);
+					logger.trace("Building Expected key " + keyExpected);
+					logger.trace("Building Reached key " + keyReached);
 				}
+
+                logger.debug("Expected key " + keyExpected);
+                logger.debug("Reached key " + keyReached);
 				
 				//Keys have matched from both files
 				if (keyExpected.compareTo(keyReached) == 0) {
 					logger.debug("KEYS " + keyExpected + " " + keyExpected + " MATCHED");
-					keysMatched = true;
-				}
+                    totalMismatches += diffColumns(expected, reached, keyExpected, rowCount);
+				} else {
+                    if (expected != null && keyExpected != "")
+                        this.missingExpected.put(keyExpected, expected);
+
+                    if (reached != null && keyReached != "")
+                        this.missingReached.put(keyReached, reached);
+                }
 				
 				//Check if the key from reached file is in the missing set of expected
-				else if (this.missingExpected.containsKey(keyReached)) {
+				if (this.missingExpected.containsKey(keyReached)) {
 					logger.debug("FOUND REACHED KEY " + keyReached + " in missingExpected");
-					expected = this.missingExpected.get(keyReached);
+
+                    String[] localExpected, localReached;
+                    String localKeyExpected;
+
+					localExpected = this.missingExpected.get(keyReached);
+                    localReached = reached;
+                    localKeyExpected = keyReached;
+
 					this.missingExpected.remove(keyReached);
-					keysMatched = true;
+                    this.missingReached.remove(keyReached);
+
+					totalMismatches += diffColumns(localExpected, localReached, localKeyExpected, rowCount);
 				}
 				
 				//Check if the key from expected file is in the missing set of reached
-				else if (this.missingReached.containsKey(keyExpected)) {
+				if (this.missingReached.containsKey(keyExpected)) {
 					logger.debug("FOUND EXPECTED KEY " + keyExpected + " in missingReached");
-					reached = this.missingReached.get(keyExpected);
+
+                    String[] localExpected, localReached;
+                    String localKeyReached;
+
+					localReached = this.missingReached.get(keyExpected);
+                    localExpected = expected;
+                    localKeyReached = keyExpected;
+
 					this.missingReached.remove(keyExpected);
-					keysMatched = true;
+                    this.missingExpected.remove(keyExpected);
+
+                    totalMismatches += diffColumns(localExpected, localReached, localKeyReached, rowCount);
 				}
-				
-				if (keysMatched)
-					totalMismatches += diffColumns(expected, reached, keyExpected, rowCount);
-				else {
-					//Add them to the set of missing keys
-					
-					logger.debug("Adding " + keyExpected + " to missing expected keys");
-					this.missingExpected.put(keyExpected, expected);
-					
-					logger.debug("Adding " + keyReached + " to missing reached keys");
-					this.missingReached.put(keyReached, reached);
-				}
+
+
+                expected = null;
+                reached = null;
+
+                expected = fileE.readNext();
+                reached = fileR.readNext();
+
 				rowCount += 1;
 			}
 			
-			while((reached = fileR.readNext()) != null) {
-				keyReached = "";
-				
-				for (int i = 0; i < keyColumns.size(); ++i) {
-					//Lookup location of key column
-					int keyHeaderLocation = headers.get(keyColumns.get(i).getName()).intValue();
-					
-					if (keyReached.length() == 0) {
-						keyReached = reached[keyHeaderLocation];
-					} else {
-						keyReached = keyReached + "_" + reached[keyHeaderLocation];
-					}
-					
-					logger.debug("Reached key " + keyReached);
-					
-					logger.debug("Adding " + keyReached + " to missing reached keys");
-					this.missingReached.put(keyReached, reached);
-				}
-			}
-			
 			for (Iterator<String> i = this.missingExpected.keySet().iterator() ; i.hasNext();) {
-				Difference difference = new Difference(new Integer(rowCount), "Missing Expected", i.next(), null);
+				Difference difference = new Difference(new Integer(rowCount), null, "Missing Expected", i.next(), null, null);
 				logger.info(difference.toString());
 				
 				if (report != null) report.write(difference);
@@ -234,7 +245,7 @@ public class CsvDiff {
 			}
 			
 			for (Iterator<String> i = this.missingReached.keySet().iterator() ; i.hasNext();) {
-				Difference difference = new Difference(new Integer(rowCount), "Missing Reached", null,  i.next());
+				Difference difference = new Difference(new Integer(rowCount), null, "Missing Reached", null,  i.next(), null);
 				logger.info(difference.toString());
 				
 				if (report != null) report.write(difference);
@@ -272,7 +283,7 @@ public class CsvDiff {
 						DiffListener listener = iterator.next();
 						
 						boolean iteratorIgnore = listener.ignore(headers.get(i), control, test);
-						
+
 						//If any of the listener comes back true mark ignore True
 						if (iteratorIgnore)	
 							ignore = iteratorIgnore;
@@ -285,7 +296,7 @@ public class CsvDiff {
 			if (!ignore) {
 				totalMismatches += 1;
 				try {	
-					Difference difference = new Difference(new Integer(rowCount), "MISMATCH", control, test);
+					Difference difference = new Difference(new Integer(rowCount), headers.get(i), "MISMATCH", control, test, keyExpected);
 					logger.info(difference.toString());
 					report.write(difference);
 				} catch (IOException e) {

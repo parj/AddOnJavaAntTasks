@@ -23,30 +23,34 @@ package org.pm.diff;
 
 public class Difference {
 	private Integer lineNumber;
-	private Object expected;
-	private Object reached;
+    private String expected;
+	private String reached;
+    private String key;
 	private String mismatchType;
+    private String column;
 	
-	public Difference(Integer lineNumber, String mismatchType, Object expected, Object reached) {
+	public Difference(Integer lineNumber, String column, String mismatchType, String expected, String reached, String key) {
 		this.setLineNumber(lineNumber);
 		this.setMismatchType(mismatchType);
 		this.setExpected(expected);
 		this.setReached(reached);
+        this.setKey(key);
+        this.setColumn(column);
 	}
 
-	public void setExpected(Object expected) {
+	public void setExpected(String expected) {
 		this.expected = expected;
 	}
 
-	public Object getExpected() {
+	public String getExpected() {
 		return expected;
 	}
 
-	public void setReached(Object reached) {
+	public void setReached(String reached) {
 		this.reached = reached;
 	}
 
-	public Object getReached() {
+	public String getReached() {
 		return reached;
 	}
 
@@ -65,6 +69,22 @@ public class Difference {
 	public String getMismatchType() {
 		return mismatchType;
 	}
+
+    public String getColumn() {
+        return column;
+    }
+
+    public void setColumn(String column) {
+        this.column = column;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
 	
 	public String toString() {
 		return "Line - " + lineNumber + 

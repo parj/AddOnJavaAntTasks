@@ -41,7 +41,9 @@ public class CsvReport implements Report {
 	
 	public void writeHeader() {
 		String[] result = {
-			"Line Number", 
+			"Line Number",
+            "Key",
+            "Column",
 			"Mismatch Type",
 			"Expected", 
 			"Reached", 
@@ -53,30 +55,26 @@ public class CsvReport implements Report {
 	public void write(Difference difference) throws IOException {
 		float expected;
 		float reached;
-		float diff;
+		String diff;
 		
 		try {
 			expected = new Float((String)difference.getExpected()).floatValue();
 			reached = new Float((String)difference.getExpected()).floatValue();
-			diff = expected - reached;
-			
-			String[] result = {
-					difference.getLineNumber().toString(), 
-					(String)difference.getExpected(),
-					(String)difference.getReached(),
-					new Float(diff).toString()
-			};
-			writer.writeNext(result);
+			diff = Float.toString(expected - reached);
 		}	catch (Exception e) {
-			//If the above is not a number
-			String[] result = {
-					difference.getLineNumber().toString(),
-					difference.getMismatchType(),
-					(String)difference.getExpected(),
-					(String)difference.getReached()
-			};
-			writer.writeNext(result);
+            //If the above is not a number
+            diff = "";
 		}
+
+        String[] result = {
+        					difference.getLineNumber().toString(),
+                            difference.getKey(),
+                            difference.getColumn(),
+                            difference.getMismatchType(),
+        					difference.getExpected(),
+        					difference.getReached(),
+        					diff
+        			};
 		writer.flush();
 	}
 	
