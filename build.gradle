@@ -83,3 +83,11 @@ task pull << {
             outFile: "src/test/resources/webdav/output.csv",
             overwrite: true)
 }
+
+task csvToExcel << {
+    ant.taskdef(name: 'csvToExcel', classname: 'org.pm.csv.AntCsvToExcel', classpath: configurations.runtime.asPath)
+
+    ant.csvToExcel(outputFile: "report.xls", separator: "^") {
+        fileset(dir: "src/test/resources/csv/CsvToExcel", includes: "*.csv")
+    }
+}

@@ -26,6 +26,7 @@ import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.FileSet;
 
+import java.io.File;
 import java.util.Vector;
 
 public class AntCsvToExcel extends Task {
@@ -76,7 +77,7 @@ public class AntCsvToExcel extends Task {
                 logger.debug("Processing " + filename);
     			
     			try {
-    				CsvToExcel csv = new CsvToExcel(filename, this.outputFile, this.separator);
+    				CsvToExcel csv = new CsvToEx˚cel(ds.getBasedir() +  File.separator + filename, this.outputFile, this.separator);
         			csv.execute();
     			} catch (Exception e) {
     				logger.error("Unable to process " + filename);

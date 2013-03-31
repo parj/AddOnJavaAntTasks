@@ -26,3 +26,5 @@ src/test/resources/csv/CsvToExcel/Excel.xls
 #Idea
 .idea/
 *.iml
+*.ipr
+*.iws
