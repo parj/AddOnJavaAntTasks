@@ -23,6 +23,7 @@ apply plugin: 'java'
 apply plugin:'application'
 apply plugin: 'maven'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 // -- For application plugin
 mainClassName = 'org.pm.webdav.Push'
@@ -67,6 +68,7 @@ uploadArchives {
         }
     }
 }
+
 task push << {
     ant.taskdef(name: 'push', classname: 'org.pm.webdav.Push', classpath: configurations.runtime.asPath)
     ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
