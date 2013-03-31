@@ -77,7 +77,7 @@ public class AntCsvToExcel extends Task {
                 logger.debug("Processing " + filename);
     			
     			try {
-    				CsvToExcel csv = new CsvToEx˚cel(ds.getBasedir() +  File.separator + filename, this.outputFile, this.separator);
+    				CsvToExcel csv = new CsvToExcel(ds.getBasedir() +  File.separator + filename, this.outputFile, this.separator);
         			csv.execute();
     			} catch (Exception e) {
     				logger.error("Unable to process " + filename);
