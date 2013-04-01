@@ -69,6 +69,7 @@ uploadArchives {
     }
 }
 
+// Push file to a WebDav Server
 task push << {
     ant.taskdef(name: 'push', classname: 'org.pm.webdav.Push', classpath: configurations.runtime.asPath)
     ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
@@ -76,6 +77,7 @@ task push << {
     }
 }
 
+// Pull file from a webdav server
 task pull << {
     ant.taskdef(name: 'pull', classname: 'org.pm.webdav.Pull', classpath: configurations.runtime.asPath)
     ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
@@ -84,10 +86,31 @@ task pull << {
             overwrite: true)
 }
 
+// Converts csv to Excel
 task csvToExcel << {
     ant.taskdef(name: 'csvToExcel', classname: 'org.pm.csv.AntCsvToExcel', classpath: configurations.runtime.asPath)
 
-    ant.csvToExcel(outputFile: "report.xls", separator: "^") {
+    ant.csvToExcel(outputFile: "out/report.xls", separator: "^") {
         fileset(dir: "src/test/resources/csv/CsvToExcel", includes: "*.csv")
+    }
+}
+
+task diffxml << {
+    ant.taskdef(name: 'diffxml', classname: 'org.pm.xml.AntXMLUnit', classpath: configurations.runtime.asPath)
+
+    ant.diffxml(testDirectory: "src/test/resources/xml/AntXMLUnitTest/test", resultDirectory: "out") {
+        fileset(dir: "src/test/resources/xml/AntXMLUnitTest/control", includes: "*.xml")
+    }
+}
+
+task modifyPath << {
+    ant.taskdef(name: 'xPath', classname: 'org.pm.xml.AntXPath', classpath: configurations.runtime.asPath)
+    ant.taskdef(name: 'modifyPath', classname: 'org.pm.xml.ModifyPath', classpath: configurations.runtime.asPath)
+
+    //Rename Pattern is the file rename pattern, takes as input as xpaths separated by #
+    ant.xPath(outputDirectory: "out", renamePattern: "//publish_date[position() = 1]#_#//price[position() = 1]" ) {
+        fileset(dir: "src/test/resources/xml/AntXPathTest", includes: "*.xml")
+        modifyPath(path: "//title", delete:"True")
+        modifyPath(path: "//author", value:"ToDo")
     }
 }

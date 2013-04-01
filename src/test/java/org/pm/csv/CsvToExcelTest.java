@@ -32,17 +32,11 @@ import java.io.File;
 import java.io.IOException;
 import static junit.framework.Assert.assertEquals;
 
-/**
- * Created by IntelliJ IDEA.
- * User: parj
- * Date: 07/08/2012
- * Time: 15:58
- * To change this template use File | Settings | File Templates.
- */
 public class CsvToExcelTest {
-    private String iFile = "src/test/resources/csv/CsvToExcel/output.csv";
-    private String iFileSeparator = "src/test/resources/csv/CsvToExcel/outputSeparator.csv";
-    private String oFile = "src/test/resources/csv/CsvToExcel/Excel.xls";
+    private String baseDir = "src/test/resources/csv/CsvToExcel";
+    private String[] iFile = {"output.csv"};
+    private String[] iFileSeparator = {"outputSeparator.csv"};
+    private String oFile = baseDir + File.separator + "Excel.xls";
     
     private CsvToExcel csvExcel;
 
@@ -53,14 +47,15 @@ public class CsvToExcelTest {
 
     @Test
     public void testConversion() throws IOException, WriteException, BiffException {
-        csvExcel = new CsvToExcel(iFile, oFile);
+
+        csvExcel = new CsvToExcel(iFile, oFile, baseDir);
         csvExcel.execute();
         assertEquals(countCells(oFile), 20);
     }
 
     @Test()
     public void testSeparator() throws IOException, WriteException, BiffException {
-        csvExcel = new CsvToExcel(iFileSeparator, oFile, '^');
+        csvExcel = new CsvToExcel(iFileSeparator, oFile, baseDir, '^');
         csvExcel.execute();
         assertEquals(countCells(oFile), 24);
     }

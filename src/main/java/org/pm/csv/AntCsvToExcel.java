@@ -21,12 +21,16 @@ http://opensource.org/licenses/mit-license.php
 
 package org.pm.csv;
 
+import jxl.Workbook;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.FileSet;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Vector;
 
 public class AntCsvToExcel extends Task {
@@ -65,26 +69,31 @@ public class AntCsvToExcel extends Task {
 		this.outputFile = outputFile;
 	}
 
-	public void execute() {
+
+
+	public void execute()  {
 		DirectoryScanner ds;
-		
+        int count = 0;
+
 		for (FileSet fileset : fileSets) {
 			//Read in the control files
 			ds = fileset.getDirectoryScanner(getProject());
         	String[] filesInSet = ds.getIncludedFiles();
-    		
-    		for (String filename : filesInSet) {
-                logger.debug("Processing " + filename);
-    			
-    			try {
-    				CsvToExcel csv = new CsvToExcel(ds.getBasedir() +  File.separator + filename, this.outputFile, this.separator);
-        			csv.execute();
-    			} catch (Exception e) {
-    				logger.error("Unable to process " + filename);
-                    logger.error(e);
-    				e.printStackTrace();
-    			}
-    		}
+            String oFile = this.outputFile;
+
+            if (count > 1)
+                oFile = new File(this.outputFile).getName() + "_" + count + ".xls";
+
+            try {
+                CsvToExcel csv = new CsvToExcel(filesInSet, oFile, ds.getBasedir().toString(), this.separator);
+                csv.execute();
+            } catch (Exception e) {
+                logger.error("Unable to process ");
+                logger.error(e);
+                e.printStackTrace();
+            }
+
+            ++count;
 		}
 	}
 }

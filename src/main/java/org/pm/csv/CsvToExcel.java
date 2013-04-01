@@ -35,19 +35,22 @@ import java.io.IOException;
 
 public class CsvToExcel {
 	private String outputFile;
-	private String inputFile;
+	private String[] inputFile;
+    private String baseDir;
 	private char separator = ',';
 	
 	private static Logger logger = Logger.getLogger(CsvToExcel.class);
 	
-	public CsvToExcel(String inputFile, String outputFile) { 
+	public CsvToExcel(String[] inputFile, String outputFile, String baseDir) {
 		setInputFile(inputFile);
 		setOutputFile(outputFile);
+        setBaseDir(baseDir);
 	}
 	
-	public CsvToExcel(String inputFile, String outputFile, char separator) {
+	public CsvToExcel(String[] inputFile, String outputFile, String baseDir, char separator) {
 		setInputFile(inputFile);
 		setOutputFile(outputFile);
+        setBaseDir(baseDir);
 		setSeparator(separator);
 	}
 
@@ -60,6 +63,11 @@ public class CsvToExcel {
 		this.separator = separator;
 	}
 
+    public void setBaseDir(String baseDir) {
+        logger.trace("Setting basedir to " + baseDir);
+        this.baseDir = baseDir;
+    }
+
 
 	/**
 	 * Set the output excel file
@@ -70,57 +78,65 @@ public class CsvToExcel {
 		this.outputFile = outputFile;
 	}
 
-	public void execute() throws IOException, WriteException {
-        //Input File
-		logger.trace("Getting name of " + this.inputFile);
-		String name = new File(this.inputFile).getName();
-        CSVReader reader = new CSVReader(new FileReader(this.inputFile), separator);
+    public void setInputFile(String[] inputFile) {
+        logger.trace("Setting inputFile to " + inputFile);
+        this.inputFile = inputFile;
+    }
 
+    public static WritableWorkbook createWorkbook(String outputFile) throws IOException {
         //Output file
-		logger.trace("Initialising oFile " + this.outputFile);
-		File oFile = new File(this.outputFile);
+        logger.trace("Initialising oFile " + outputFile);
+        File oFile = new File(outputFile);
 
-        //Create Sheet
-		WritableWorkbook workbook = Workbook.createWorkbook(oFile);
-		WritableSheet s = workbook.createSheet(name, 0);
+        return Workbook.createWorkbook(oFile);
+    }
 
-        //Initialise variables
-		String[] line; int row = 0; int count = 1;
+	public void execute() throws IOException, WriteException {
 
-        //Loop through file
-		while ((line = reader.readNext()) != null) {
-			logger.debug("Line read " + line);
-			int column = 0;
+        WritableWorkbook workbook = createWorkbook(outputFile);
 
-			//Add a cell on the same row
-			while (column < line.length) {
-                String columnText = line[column];
-				logger.trace("TOKEN - " + columnText);
+        for (int i = 0; i < inputFile.length; ++i) {
+            String filename = inputFile[i];
+            logger.debug("Processing " + filename);
 
-                if (columnText.length() > 0)
-				    s.addCell(new Label(column, row, columnText));
-                
-                column++;
-			}
+            String name = filename;
 
-			//Next line
-			row++;
+            if (name.length() > 12)
+                name = name.substring(0, 12);
 
-			if (row >= 64000) {
-				logger.trace("Moving to the next sheet " + name + "_sheet" + count);
-				s = workbook.createSheet(name + "_sheet" + count++, 0);
-			}
-		}
+            CSVReader reader = new CSVReader(new FileReader(this.baseDir + File.separator + filename), separator);
+
+            WritableSheet s = workbook.createSheet(name, 0);
+
+            //Initialise variables
+            String[] line; int row = 0; int count = 1;
+
+            //Loop through file
+            while ((line = reader.readNext()) != null) {
+                logger.debug("Line read " + line);
+                int column = 0;
+
+                //Add a cell on the same row
+                while (column < line.length) {
+                    String columnText = line[column];
+                    logger.trace("TOKEN - " + columnText);
+
+                    if (columnText.length() > 0)
+                        s.addCell(new Label(column, row, columnText));
+
+                    column++;
+                }
+
+                //Next line
+                row++;
+
+                if (row >= 64000) {
+                    logger.trace("Moving to the next sheet " + name + "_sheet" + count);
+                    s = workbook.createSheet(name + "_sheet" + count++, 0);
+                }
+            }
+        }
         workbook.write();
         workbook.close();
-	}
-
-	public void setInputFile(String inputFile) {
-		this.inputFile = inputFile;
-	}
-
-
-	public String getInputFile() {
-		return inputFile;
 	}
 }
