@@ -95,6 +95,7 @@ task csvToExcel << {
     }
 }
 
+// Diffs two directories containing xml files with the same name
 task diffxml << {
     ant.taskdef(name: 'diffxml', classname: 'org.pm.xml.AntXMLUnit', classpath: configurations.runtime.asPath)
 
@@ -103,6 +104,7 @@ task diffxml << {
     }
 }
 
+// Strips out and modifies tags in xmls and renames them using a naming convention
 task modifyPath << {
     ant.taskdef(name: 'xPath', classname: 'org.pm.xml.AntXPath', classpath: configurations.runtime.asPath)
     ant.taskdef(name: 'modifyPath', classname: 'org.pm.xml.ModifyPath', classpath: configurations.runtime.asPath)
