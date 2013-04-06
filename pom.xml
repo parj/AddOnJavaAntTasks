@@ -5,7 +5,7 @@
 
     <groupId>org.pm</groupId>
     <artifactId>anttasks</artifactId>
-    <version>2.0-SNAPSHOT</version>
+    <version>2.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>AntTasks</name>
@@ -13,9 +13,9 @@
     <url>https://github.com/parj/AddOnJavaAntTasks</url>
 
     <scm>
-        <url>https://github.com/parj/AddOnJavaAntTasks</url>
-        <connection>scm:git:git://github.com/parj/AddOnJavaAntTasks.git</connection>
+        <connection>scm:git:git@github.com:parj/AddOnJavaAntTasks.git</connection>
         <developerConnection>scm:git:git@github.com:parj/AddOnJavaAntTasks.git</developerConnection>
+        <url>git@github.com:parj/AddOnJavaAntTasks</url>
     </scm>
 
     <developers>
@@ -34,6 +34,12 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
