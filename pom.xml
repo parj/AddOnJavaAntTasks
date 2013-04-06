@@ -1,167 +1,239 @@
-<!--
-Copyright (c) 2011, 2012 Parjanya Mudunuri
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
-associated documentation files (the "Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
+    <groupId>org.pm</groupId>
+    <artifactId>anttasks</artifactId>
+    <version>2.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-The above copyright notice and this permission notice shall be included in all copies or substantial
-portions of the Software.
+    <name>AntTasks</name>
+    <description>Addon Ant Tasks</description>
+    <url>https://github.com/parj/AddOnJavaAntTasks</url>
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
-LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    <scm>
+        <url>https://github.com/parj/AddOnJavaAntTasks</url>
+        <connection>scm:git:git://github.com/parj/AddOnJavaAntTasks.git</connection>
+        <developerConnection>scm:git:git@github.com:parj/AddOnJavaAntTasks.git</developerConnection>
+    </scm>
 
-http://opensource.org/licenses/mit-license.php -->
+    <developers>
+        <developer>
+            <email>parjanya@gmail.com</email>
+            <url>https://github.com/parj/AddOnJavaAntTasks</url>
+            <name>Parj M</name>
+            <id>parj</id>
+        </developer>
+    </developers>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.pm</groupId>
-  <artifactId>anttasks</artifactId>
-  <name>AntTasks</name>
-  <version>2.0-SNAPSHOT</version>
-  <url>http://github.com/parj</url>
-  <packaging>jar</packaging>
-  
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-  
-  <build> 
-	<sourceDirectory>src/main</sourceDirectory> 
-    <testSourceDirectory>src/test</testSourceDirectory> 
-  	<plugins> 
-  		<plugin> 
-    		<groupId>org.apache.maven.plugins</groupId> 
-        	<artifactId>maven-compiler-plugin</artifactId>
-        	<version>2.5.1</version> 
-        	<configuration> 
-        		<source>1.6</source> 
-            	<target>1.6</target> 
-            	<encoding>UTF-8</encoding>
-        	</configuration> 
-		</plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-site-plugin</artifactId>
-            <version>2.3</version>
-            <configuration>
-            <outputEncoding>UTF-8</outputEncoding>
-            </configuration>
-        </plugin>
-  	</plugins>
-  </build>
+    <licenses>
+        <license>
+            <name>MIT Licence</name>
+            <url>http://opensource.org/licenses/mit-license.php</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
-  <distributionManagement>
-      	<repository>
-          <id>nexus</id>
-          <name>Internal Release Repository</name>
-          <url>http://localhost:8081/nexus/content/repositories/pm/release</url>
-        </repository>
-        <snapshotRepository>
-          <id>nexus</id>
-          <name>Internal Snapshot Repository</name>
-          <url>http://localhost:8081/nexus/content/repositories/pm/snapshots</url>
-      </snapshotRepository>
-  </distributionManagement> 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
-	<dependencies>
-		<!-- All -->
-		<dependency>
-    		<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>1.8.1</version>
-		</dependency>
-		<!-- AntDav -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>downloads-maven-plugin</artifactId>
+                <version>0.6</version>
+                <configuration>
+                    <description>Official ${project.name} build of the ${project.version} release</description>
+                    <override>true</override>
+                    <includeAttached>true</includeAttached>
+                    <server>github</server>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>upload</goal>
+                        </goals>
+                        <phase>install</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.github.github</groupId>
+                <artifactId>site-maven-plugin</artifactId>
+                <version>0.7</version>
+                <configuration>
+                    <message>Building site for ${project.version}</message>
+                    <server>github</server>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>site</goal>
+                        </goals>
+                        <phase>site</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <reportPlugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-project-info-reports-plugin</artifactId>
+                            <version>2.2</version>
+                            <configuration>
+                                <dependencyDetailsEnabled>true</dependencyDetailsEnabled>
+                                <dependencyLocationsEnabled>true</dependencyLocationsEnabled>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-javadoc-plugin</artifactId>
+                            <version>2.7</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-report-plugin</artifactId>
+                            <version>2.6</version>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-checkstyle-plugin</artifactId>
+                            <version>2.6</version>
+                        </plugin>
+                    </reportPlugins>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.8</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>2.0</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>commons-codec</groupId>
             <artifactId>commons-codec</artifactId>
             <version>1.6</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.8.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6.10</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>xmlunit</groupId>
+            <artifactId>xmlunit</artifactId>
+            <version>1.3</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.jackrabbit</groupId>
+            <artifactId>jackrabbit-webdav</artifactId>
+            <version>2.1.1</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
             <version>3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-		<dependency>
-			<groupId>org.apache.jackrabbit</groupId>
-			<artifactId>jackrabbit-webdav</artifactId>
-			<version>2.1.1</version>
-		</dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.5.8</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.5.2</version>
+            <scope>compile</scope>
         </dependency>
-		<!-- AntCsvToExcel-->
-		<dependency>
-	    	<groupId>net.sourceforge.jexcelapi</groupId>
-	    	<artifactId>jxl</artifactId>
-	    	<version>2.6.12</version>
-		</dependency>
-		<!-- Diff -->
-		<dependency>
-    		<groupId>log4j</groupId>
-    		<artifactId>log4j</artifactId>
-   			<version>1.2.16</version>
-		</dependency>
-		<dependency>
-	    	<groupId>net.sf.opencsv</groupId>
-	    	<artifactId>opencsv</artifactId>
-	    	<version>2.0</version>
-		</dependency>
-		<!-- AntXMLUnit -->
-		<dependency>
-	    	<groupId>xmlunit</groupId>
-    		<artifactId>xmlunit</artifactId>
-    		<version>1.3</version>
-		</dependency>
-        
         <dependency>
-          <groupId>junit</groupId>
-          <artifactId>junit</artifactId>
-          <version>4.0</version>
-          <type>jar</type>
-          <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.0</version>
+            <scope>compile</scope>
         </dependency>
-	</dependencies>
-	
-	<profiles>
-        <profile>
-            <id>qa</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-dependency-plugin</artifactId>
-                            <executions>
-                                <execution>
-                                    <phase>install</phase>
-                                    <goals>
-                                        <goal>copy-dependencies</goal>
-                                    </goals>
-                                    <configuration>
-                                        <outputDirectory>${project.build.directory}/lib</outputDirectory>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-	</profiles>
+        <dependency>
+            <groupId>net.sourceforge.jexcelapi</groupId>
+            <artifactId>jxl</artifactId>
+            <version>2.6.12</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>

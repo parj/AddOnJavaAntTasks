@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2011, 2012 Parjanya Mudunuri
+Copyright (c) 2011-2013 Parjanya Mudunuri
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -20,13 +20,9 @@ http://opensource.org/licenses/mit-license.php
  */
 
 apply plugin: 'java'
-apply plugin:'application'
 apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-
-// -- For application plugin
-mainClassName = 'org.pm.webdav.Push'
 
 repositories {
     mavenCentral()
@@ -115,4 +111,22 @@ task modifyPath << {
         modifyPath(path: "//title", delete:"True")
         modifyPath(path: "//author", value:"ToDo")
     }
+}
+
+task writePom << {
+    pom {
+        project {
+            licenses {
+                license {
+                    name 'MIT Licence'
+                    url 'http://opensource.org/licenses/mit-license.php'
+                    distribution 'repo'
+                }
+            }
+        }
+        version = '2.0-SNAPSHOT'
+        groupId = 'org.pm'
+        artifactId = 'anttasks'
+        packaging = 'jar'
+    }.writeTo("pom.xml")
 }
