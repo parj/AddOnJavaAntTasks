@@ -113,6 +113,17 @@ task modifyPath << {
     }
 }
 
+// Reads blob data from the database
+task readBlob << {
+    ant.taskdef(name: 'readBlob', classname: 'org.pm.sql.AntReadBlob', classpath: configurations.runtime.asPath)
+
+    //SQL should contain a string name and then blob - example
+    //SELECT name, blob_data from test_db where condition_1=1234
+    ant.readBlob(className: "oracle.jdbc.driver.OracleDriver", jdbcUrl: "jdbc:oracle:thin:@localhost:1521:xe",
+                 user: "user", password: "password", extension: ".zip",
+                 sql: "SELECT name, blob_data from test_db where condition_1=1234")
+}
+
 task writePom << {
     pom {
         project {
