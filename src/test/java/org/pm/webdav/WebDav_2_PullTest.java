@@ -25,6 +25,7 @@ import au.com.bytecode.opencsv.CSVReader;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 
 import java.io.File;
 import java.io.FileReader;
@@ -35,6 +36,7 @@ import static junit.framework.Assert.assertEquals;
 
 
 /** Force this to run after WebDav_1_PushTest - The file needs to be pushed before being downloaded **/
+
 public class WebDav_2_PullTest {
     private Logger logger = Logger.getLogger(WebDav_2_PullTest.class);
     private String oFile = "src/test/resources/webdav/output.csv";
@@ -49,7 +51,7 @@ public class WebDav_2_PullTest {
         oFile_delete.delete();
     }
 
-    /*@Test*/
+    @Ignore
 	public void testDownload() throws IOException {
         pull.download();
         CSVReader fileE = new CSVReader(new FileReader(oFile), ',');
