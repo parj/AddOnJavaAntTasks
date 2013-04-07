@@ -17,7 +17,7 @@ import static junit.framework.Assert.assertEquals;
 
 public class AntCsvToExcelTest {
     private static Logger logger = Logger.getLogger(AntCsvToExcel.class);
-    private final String OUT_FILE = System.getProperty("user.dir") + File.separator + "out/report.xls";
+    private final String OUT_FILE = System.getProperty("user.dir") + File.separator + "build/tmp/report.xls";
     private Workbook workbook;
 
     AntCsvToExcel antCsvToExcel;

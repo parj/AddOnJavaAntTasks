@@ -86,7 +86,7 @@ task pull << {
 task csvToExcel << {
     ant.taskdef(name: 'csvToExcel', classname: 'org.pm.csv.AntCsvToExcel', classpath: configurations.runtime.asPath)
 
-    ant.csvToExcel(outputFile: "out/report.xls", separator: "^") {
+    ant.csvToExcel(outputFile: "build/tmp/report.xls", separator: "^") {
         fileset(dir: "src/test/resources/csv/CsvToExcel", includes: "*.csv")
     }
 }
