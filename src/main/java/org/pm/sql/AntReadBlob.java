@@ -32,6 +32,8 @@ import org.pm.diff.Report;
 import java.io.*;
 import java.sql.*;
 import java.util.Vector;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class AntReadBlob extends Task {
 	private String className;
@@ -40,6 +42,11 @@ public class AntReadBlob extends Task {
     private String password;
     private String extension;
     private String sql;
+    private String outputDirectory;
+    private boolean unzip;
+    private final int NAME = 1;
+    private final int BLOB = 2;
+
 
 	private static Logger logger = Logger.getLogger(AntReadBlob.class);
 
@@ -144,30 +151,89 @@ public class AntReadBlob extends Task {
         this.sql = sql;
     }
 
+
+    /**
+     * The output directory to output the zip files
+     * @return The output directory to output the zip files
+     */
+    public String getOutputDirectory() {
+        return outputDirectory;
+    }
+
+    /**
+     * The output directory to output the zip files
+     * @param outputDirectory
+     */
+    public void setOutputDirectory(String outputDirectory) {
+        this.outputDirectory = outputDirectory;
+    }
+
+    /**
+     * Unzip the input stream
+     * @return True or False to unzip the input stream
+     */
+    public boolean isUnzip() {
+        return unzip;
+    }
+
+    /**
+     * Unzip the input stream
+     * @param unzip
+     */
+    public void setUnzip(boolean unzip) {
+        this.unzip = unzip;
+    }
+
 	public void execute() {
         Connection conn = null;
         try {
+            logger.debug("Trying to load " + getClassName());
             Class.forName(getClassName());
+
+            logger.trace("Trying to connect using + " + getJdbcUrl());
             conn = DriverManager.getConnection(getJdbcUrl(), getUser(), getPassword());
 
+            logger.trace("Trying to run + " + getSql());
             String sql = getSql();
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet resultSet = stmt.executeQuery();
 
+            logger.debug("Extracting resultset. Number of records - " + resultSet.getFetchSize());
             while (resultSet.next()) {
+                logger.trace("Name - " + resultSet.getString(NAME));
                 String name = resultSet.getString(1);
 
-                File image = new File(name + File.separator + getExtension());
-                FileOutputStream fos = new FileOutputStream(image);
+                String fileName = getOutputDirectory() + File.separator + name + getExtension();
+                logger.debug("Filename outputing to - " + fileName);
 
-                byte[] buffer = new byte[256];
+                File file = new File(fileName);
+                FileOutputStream fos = new FileOutputStream(file);
 
-                //
-                // Get the binary stream of our BLOB data
-                //
-                InputStream is = resultSet.getBinaryStream(3);
-                while (is.read(buffer) > 0) {
-                    fos.write(buffer);
+                byte[] buffer = new byte[1024];
+
+                logger.debug("Unzip is " + isUnzip());
+                if (isUnzip()) {
+                    logger.trace("Trying to extract blob");
+                    ZipInputStream zis = new ZipInputStream(resultSet.getBinaryStream(BLOB));
+                    ZipEntry ze = zis.getNextEntry();
+
+                    //Extract the first file
+                    if( ze!=null ) {
+                        logger.trace("Extracting zip");
+                        int len;
+
+                        logger.trace("Writing out file");
+                        while ((len = zis.read(buffer)) > 0) {
+                            fos.write(buffer, 0, len);
+                        }
+
+                        fos.close();
+                    }
+                } else {
+                    InputStream is = resultSet.getBinaryStream(BLOB);
+                    while (is.read(buffer) > 0) {
+                        fos.write(buffer);
+                    }
                 }
 
                 fos.close();
