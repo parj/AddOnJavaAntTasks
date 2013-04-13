@@ -53,8 +53,6 @@ public class AntXPath extends Task {
 	private String outputDirectory;
 	private String renamePattern;
 	private String patternSplitter = "#";
-
-	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private Transformer xFormer;
     private XPathFactory xPathFactory;
@@ -102,12 +100,12 @@ public class AntXPath extends Task {
         } catch(ParserConfigurationException e) {
             logger.error("Unable to run preSetup() to setup dependencies");
             logger.error(e);
-                e.printStackTrace();
+
             System.exit(1);
         } catch(TransformerConfigurationException e) {
             logger.error("Unable to run preSetup() to setup dependencies");
             logger.error(e);
-            e.printStackTrace();
+
             System.exit(1);
         }
         
@@ -128,7 +126,7 @@ public class AntXPath extends Task {
 	}
 	
 	private void preSetup() throws ParserConfigurationException, TransformerConfigurationException {
-        factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         builder = factory.newDocumentBuilder();
         xFormer = TransformerFactory.newInstance().newTransformer();
@@ -152,19 +150,19 @@ public class AntXPath extends Task {
 		} catch (XPathExpressionException e) {
             logger.error("Unable to evaluate xPath");
             logger.error(e);
-            e.printStackTrace();
+
         } catch (TransformerException e) {
             logger.error("Unable to run write output xml file");
 			logger.error(e);
-            e.printStackTrace();
+
 		} catch (IOException e) {
             logger.error("Unable to read input file");
 			logger.error(e);
-            e.printStackTrace();
+
         } catch (SAXException e) {
             logger.error("Unable to read input file");
 			logger.error(e);
-            e.printStackTrace();
+
         }
 	}
 	
@@ -242,7 +240,7 @@ public class AntXPath extends Task {
 		} catch (Exception e) {
 			logger.error("Error evaluating filename");
             logger.error(e);
-			e.printStackTrace();
+
 			return fileName;
 		}
 	}

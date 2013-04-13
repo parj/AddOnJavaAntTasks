@@ -23,7 +23,10 @@ package org.pm.csv;
 
 import au.com.bytecode.opencsv.CSVReader;
 import org.apache.log4j.Logger;
-import org.pm.diff.*;
+import org.pm.diff.DiffListener;
+import org.pm.diff.Difference;
+import org.pm.diff.Report;
+import org.pm.diff.TwoWayHashMap;
 import org.pm.diff.exception.HeaderColumnsDoNotMatchException;
 import org.pm.diff.exception.KeyColumnsMissingException;
 
@@ -76,7 +79,7 @@ public class CsvDiff {
 			this.numberOfHeaders = numberOfHeaders;
 		} catch (Exception e) {
 			System.out.println("Unable to convert to integer");
-			e.printStackTrace();
+
 		}
 	}
 
@@ -148,7 +151,6 @@ public class CsvDiff {
 			
 			//Loop through the files
 			while(!(expected == null && reached == null)) {
-				boolean keysMatched = false;
 				
 				logger.trace("Read from expected " + expected);
 				logger.trace("Read from reached " + reached);
@@ -259,7 +261,7 @@ public class CsvDiff {
 			
 		} catch(java.io.IOException e) {
 			System.out.println("Unable to read expected or reached file");
-			e.printStackTrace();
+
 		}
 	}
 	
@@ -351,7 +353,7 @@ public class CsvDiff {
 			}
 		} catch(java.io.IOException e) {
 			System.out.println("Unable to read files");
-			e.printStackTrace();
+
 		}
 		
 		logger.trace("STOP determineHeaders");

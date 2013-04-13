@@ -38,6 +38,8 @@ public class CsvToExcel {
 	private String[] inputFile;
     private String baseDir;
 	private char separator = ',';
+    private static final int MAX_FILE_LENGTH = 12;
+    private static final int MAX_EXCEL_ROW = 64000;
 	
 	private static Logger logger = Logger.getLogger(CsvToExcel.class);
 	
@@ -80,7 +82,7 @@ public class CsvToExcel {
 
     public void setInputFile(String[] inputFile) {
         logger.trace("Setting inputFile to " + inputFile);
-        this.inputFile = inputFile;
+        this.inputFile = inputFile.clone();
     }
 
     public static WritableWorkbook createWorkbook(String outputFile) throws IOException {
@@ -101,8 +103,8 @@ public class CsvToExcel {
 
             String name = filename;
 
-            if (name.length() > 12)
-                name = name.substring(0, 12);
+            if (name.length() > MAX_FILE_LENGTH)
+                name = name.substring(0, MAX_FILE_LENGTH);
 
             CSVReader reader = new CSVReader(new FileReader(this.baseDir + File.separator + filename), separator);
 
@@ -130,7 +132,7 @@ public class CsvToExcel {
                 //Next line
                 row++;
 
-                if (row >= 64000) {
+                if (row >= MAX_EXCEL_ROW) {
                     logger.trace("Moving to the next sheet " + name + "_sheet" + count);
                     s = workbook.createSheet(name + "_sheet" + count++, 0);
                 }

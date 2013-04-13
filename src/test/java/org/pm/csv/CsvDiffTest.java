@@ -28,8 +28,8 @@ import org.pm.diff.MinimalReport;
 import org.pm.diff.exception.HeaderColumnsDoNotMatchException;
 import org.pm.diff.exception.KeyColumnsMissingException;
 
-import static junit.framework.Assert.assertTrue;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 
 
 public class CsvDiffTest {

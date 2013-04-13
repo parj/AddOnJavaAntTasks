@@ -22,16 +22,10 @@ http://opensource.org/licenses/mit-license.php
 package org.pm.sql;
 
 import org.apache.log4j.Logger;
-import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Task;
-import org.apache.tools.ant.types.FileSet;
-import org.pm.csv.CsvDiff;
-import org.pm.diff.CsvReport;
-import org.pm.diff.Report;
 
 import java.io.*;
 import java.sql.*;
-import java.util.Vector;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -44,8 +38,9 @@ public class AntReadBlob extends Task {
     private String sql;
     private String outputDirectory;
     private boolean unzip;
-    private final int NAME = 1;
-    private final int BLOB = 2;
+    private static final int NAME = 1;
+    private static final int BLOB = 2;
+    private static final int KBYTES = 1024;
 
 
 	private static Logger logger = Logger.getLogger(AntReadBlob.class);
@@ -194,14 +189,13 @@ public class AntReadBlob extends Task {
             conn = DriverManager.getConnection(getJdbcUrl(), getUser(), getPassword());
 
             logger.trace("Trying to run + " + getSql());
-            String sql = getSql();
-            PreparedStatement stmt = conn.prepareStatement(sql);
+            PreparedStatement stmt = conn.prepareStatement(getSql());
             ResultSet resultSet = stmt.executeQuery();
 
             logger.debug("Extracting resultset. Number of records - " + resultSet.getFetchSize());
             while (resultSet.next()) {
                 logger.trace("Name - " + resultSet.getString(NAME));
-                String name = resultSet.getString(1);
+                String name = resultSet.getString(NAME);
 
                 String fileName = getOutputDirectory() + File.separator + name + getExtension();
                 logger.debug("Filename outputing to - " + fileName);
@@ -209,7 +203,7 @@ public class AntReadBlob extends Task {
                 File file = new File(fileName);
                 FileOutputStream fos = new FileOutputStream(file);
 
-                byte[] buffer = new byte[1024];
+                byte[] buffer = new byte[KBYTES];
 
                 logger.debug("Unzip is " + isUnzip());
                 if (isUnzip()) {
@@ -226,8 +220,6 @@ public class AntReadBlob extends Task {
                         while ((len = zis.read(buffer)) > 0) {
                             fos.write(buffer, 0, len);
                         }
-
-                        fos.close();
                     }
                 } else {
                     InputStream is = resultSet.getBinaryStream(BLOB);
@@ -238,21 +230,25 @@ public class AntReadBlob extends Task {
 
                 fos.close();
             }
+
+            resultSet.close();
+            stmt.close();
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 if (conn != null && !conn.isClosed()) {
                     conn.close();
                 }
             } catch(SQLException e){
-                e.printStackTrace();
+
             }
         }
     }

@@ -22,5 +22,5 @@ http://opensource.org/licenses/mit-license.php
 package org.pm.diff;
 
 public interface DiffListener {
-	public boolean ignore(String column, String expected, String reached);
+	boolean ignore(String column, String expected, String reached);
 }

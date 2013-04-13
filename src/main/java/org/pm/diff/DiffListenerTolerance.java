@@ -22,7 +22,6 @@ http://opensource.org/licenses/mit-license.php
 package org.pm.diff;
 
 import java.util.HashMap;
-import java.lang.Math;
 
 public class DiffListenerTolerance implements DiffListener {
 	HashMap<String, Float> tolerances;

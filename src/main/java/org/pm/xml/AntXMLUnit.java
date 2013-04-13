@@ -136,16 +136,16 @@ public class AntXMLUnit extends Task {
                 } catch(ParserConfigurationException e) {
                     logger.error("Unable setup dependencies");
                     logger.error(e);
-                    e.printStackTrace();
+
                 }
                 catch(IOException e) {
                     logger.error("Unable to process - " + fileName);
                     logger.error(e);
-                    e.printStackTrace();
+
                 } catch(SAXException e) {
                     logger.error("Unable to read either control/test file " + fileName);
                     logger.error(e);
-                    e.printStackTrace();
+
                 }
         	}
 			 
@@ -192,8 +192,8 @@ public class AntXMLUnit extends Task {
 
         report.write(header);
 
-        for (Object difference_ : differences) {
-            Difference difference = (Difference)difference_;
+        for (Object differenceObject : differences) {
+            Difference difference = (Difference)differenceObject;
 
             if (ignoreIds.contains(difference.getId())) {
                 logger.trace("SKIP - "

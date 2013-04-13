@@ -44,6 +44,7 @@ public class Pull extends Task {
     private int proxyPort = Integer.MIN_VALUE;
 	private boolean overwrite = false;
     private HttpClient httpClient;
+    private static final int MILLISECONDS_TO_SECONDS = 1000;
 
     public Pull() {
 
@@ -64,21 +65,37 @@ public class Pull extends Task {
         setOutFile(outputFile);
         setUp();
     }
-	
+
+    public String getUser() {
+        return this.user;
+    }
+
 	public void setUser(String user) {
 		this.user = user;
         logger.trace("User is " + this.user);
 	}
-	
+
+    public String getPassword() {
+        return this.password;
+    }
+
 	public void setPassword(String password) {
 		this.password = password;
         logger.trace("password is " + this.password);
 	}
+
+    public String getUrl() {
+        return this.url;
+    }
 	
 	public void setUrl(String url) {
 		this.url = url;
         logger.trace("url is " + this.url);
 	}
+
+    public String getFile() {
+        return this.file;
+    }
 	
 	public void setFile(String file) {
 		this.file = file;
@@ -90,20 +107,36 @@ public class Pull extends Task {
 			this.outFile = file;
 	}
 
+    public String getOutFile() {
+        return this.outFile;
+    }
+
 	public void setOutFile(String outFile) {
 		this.outFile = outFile;
 
         logger.trace("outFile is " + this.outFile);
 	}
 
+    public boolean getOverwrite() {
+        return this.overwrite;
+    }
+
 	public void setOverwrite(boolean overwrite) {
 		this.overwrite = overwrite;
         logger.trace("overwrite is " + this.overwrite);
 	}
 
+    public String getProyHost() {
+        return this.proxyHost;
+    }
+
     public void setProxyHost(String proxyHost) {
         this.proxyHost = proxyHost;
         logger.trace("proxyHost is " + this.proxyHost);
+    }
+
+    public int getProxyPort() {
+        return this.proxyPort;
     }
 
     public void setProxyPort(int proxyPort) {
@@ -111,9 +144,17 @@ public class Pull extends Task {
         logger.trace("proxyHost is " + this.proxyPort);
     }
 
+    public String getProxyUser() {
+        return this.proxyUser;
+    }
+
     public void setProxyUser(String proxyUser) {
         this.proxyUser = proxyUser;
         logger.trace("proxyHost is " + this.proxyUser);
+    }
+
+    public String getProxyPassword() {
+        return this.proxyPassword;
     }
 
     public void setProxyPassword(String proxyPassword) {
@@ -126,8 +167,8 @@ public class Pull extends Task {
 
         //Setup
         httpClient = new HttpClient();
-        httpClient = Common.setProxy(httpClient, proxyHost, proxyPort, proxyUser, proxyPassword);
-        httpClient = Common.setCredentials(httpClient, this.url, this.user, this.password);
+        httpClient = Common.setProxy(httpClient, getProyHost(), getProxyPort(), getProxyUser(), getProxyPassword());
+        httpClient = Common.setCredentials(httpClient, getUrl(), getUser(), getPassword());
 
         logger.trace("Completed setup");
     }
@@ -135,21 +176,21 @@ public class Pull extends Task {
     public boolean download() throws IOException {
         setUp();
 
-        File oFile = new File(outFile);
+        File oFile = new File(getOutFile());
 
         //Start timing
         long startTime = System.currentTimeMillis();
         logger.trace("Started time - startTime - " + startTime);
         boolean completed = false;
 
-        if (this.overwrite || !oFile.exists()) {
+        if (this.getOverwrite() || !oFile.exists()) {
             if (oFile.exists())
                 logger.debug("Overwriting " + oFile.getAbsolutePath());
 
-            logger.debug("Downloading " + url + "/" + file + " to " + oFile.getAbsolutePath());
+            logger.debug("Downloading " + getUrl() + "/" + getFile() + " to " + oFile.getAbsolutePath());
 
             //Download the file
-            GetMethod method = new GetMethod(url + "/" + file);
+            GetMethod method = new GetMethod(url + "/" + getFile());
             httpClient.executeMethod(method);
 
             //200 OK => No issues
@@ -158,12 +199,12 @@ public class Pull extends Task {
 
             writeFile(method.getResponseBodyAsStream(), oFile);
 
-            long elapsed = ((System.currentTimeMillis() - startTime) / 1000);
-            logger.debug(file + " took " + elapsed + " seconds to complete");
+            long elapsed = ((System.currentTimeMillis() - startTime) / MILLISECONDS_TO_SECONDS);
+            logger.debug(getFile() + " took " + elapsed + " seconds to complete");
 
             completed = true;
         } else {
-            logger.debug("Skipping - overwrite not allowed for " + file);
+            logger.debug("Skipping - overwrite not allowed for " + getFile());
         }
 
         return completed;
@@ -176,7 +217,7 @@ public class Pull extends Task {
             status = download();
         } catch(IOException e) {
             logger.error(e);
-            e.printStackTrace();
+
         }
 
         String message = status ? "Download successful" : "Download failed";

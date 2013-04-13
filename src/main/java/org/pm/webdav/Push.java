@@ -23,6 +23,7 @@ package org.pm.webdav;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.httpclient.methods.HeadMethod;
 import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
 import org.apache.commons.httpclient.methods.RequestEntity;
@@ -54,13 +55,6 @@ public class Push extends Task{
     private String proxyHost;
     private int proxyPort = Integer.MIN_VALUE;
     private HttpClient httpClient;
-
-    /**
-     * Empty Constructor
-     */
-    public Push() {
-        //Empty constructor
-    }
 
     public Push(String user, String password, String url) throws MalformedURLException {
         setUser(user);
@@ -164,13 +158,13 @@ public class Push extends Task{
     		
     	} catch(HttpException e) {
             logger.error(e);
-            e.printStackTrace();
+
         } catch(FileNotFoundException e) {
             logger.error(e);
-            e.printStackTrace();
+
         } catch(IOException e) {
             logger.error(e);
-            e.printStackTrace();
+
 	    }
 	}
 	
@@ -196,12 +190,14 @@ public class Push extends Task{
 					MkColMethod mkdir = new MkColMethod(uploadUrl);
 					int status = httpClient.executeMethod(mkdir);
 					
-					if (status == 405)	
-						{/*Directory exists. Do Nothing*/}
-					else if (status != 201)
+					if (status == HttpStatus.SC_METHOD_NOT_ALLOWED)	{
+                        // Directory exists. Do Nothing
+                        logger.trace("Directory exists");
+                    } else if (status != HttpStatus.SC_CREATED) {
 		            	logger.error("ERR " + " " + status + " " + uploadUrl);
-		            else
+                    } else {
 		            	logger.debug("Directory " + uploadUrl + " created");
+                    }
 				}
 			}
 		} catch(java.lang.ArrayIndexOutOfBoundsException e) {
@@ -209,7 +205,7 @@ public class Push extends Task{
 		} catch (Exception e) {
 			logger.error("ERR creating " + path);
             logger.error(e);
-			e.printStackTrace();
+
 		 }
 	}
 
@@ -261,7 +257,7 @@ public class Push extends Task{
         return uploaded;
 	}
 
-	public boolean fileExists(String url) throws HttpException, IOException {
+	public boolean fileExists(String url) throws IOException {
         return Common.executeMethod(httpClient, new HeadMethod(url), true);
 	}
 

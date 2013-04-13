@@ -26,13 +26,9 @@ import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.FileSet;
 import org.pm.diff.CsvReport;
-import org.pm.diff.Key;
-import org.pm.diff.KeyColumns;
 import org.pm.diff.Report;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 public class AntCsvDiff extends Task {
@@ -58,13 +54,6 @@ public class AntCsvDiff extends Task {
 	public void setTestDirectory(String testDirectory) {
 		this.testDirectory = testDirectory;
 	}
-	
-	/*public void addKeyColumns(KeyColumns keyColumns) {
-		for(Key key : keyColumns.getKeyColumns()) {
-			logger.trace("Adding key via addKeyColumns - " + key.getName());
-			this.keyColumns.add(key);
-		}
-	}*/
 
 	/**
 	 * Input file set
@@ -133,7 +122,7 @@ public class AntCsvDiff extends Task {
     				csv.diff();
     			} catch (Exception e) {
     				System.out.println("Unable to process " + filename);
-    				e.printStackTrace();
+
     			}
     		}
 		}

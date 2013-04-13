@@ -34,7 +34,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
-public class Common {
+class Common {
     private static Logger logger = Logger.getLogger(Common.class);
 
     public static HttpClient setProxy(HttpClient httpClient, String proxyHost, int proxyPort, String proxyUser, String proxyPassword) {
@@ -99,7 +99,7 @@ public class Common {
      * @return  Returns if the execution has been successful
      * @throws IOException
      */
-    public static boolean executeMethod(HttpClient client, HttpMethod method, boolean ignoreHTTP_NOT_FOUND) throws IOException {
+    public static boolean executeMethod(HttpClient client, HttpMethod method, boolean ignoreHTTPNOTFOUND) throws IOException {
         try {
             client.executeMethod(method);
         } catch(IOException e) {
