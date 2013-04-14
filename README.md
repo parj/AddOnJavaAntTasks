@@ -12,8 +12,8 @@ Requires JackRabbit Stand Alone jar - http://jackrabbit.apache.org/downloads.htm
 
 In your ant build.xml declare the custom tasks:
 
-    <taskdef name="pull" classname="org.pm.webdav.Pull" />
-    <taskdef name="push" classname="org.pm.webdav.Push" />
+    <taskdef name="pull" classname="uk.co.firstzero.webdav.Pull" />
+    <taskdef name="push" classname="uk.co.firstzero.webdav.Push" />
 
 To use:
 
@@ -39,15 +39,15 @@ If you prefer to use gradle so that dependencies are setup - clone my repository
 
 
     List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:1.2.16", //All
-				    "xmlunit:xmlunit:1.3", "net.sourceforge.jexcelapi:jxl:2.6.12", //org.pm.xml.AntXMLUnit
-				    "net.sf.opencsv:opencsv:2.0", //org.pm.csv.diff
-				    "net.sourceforge.jexcelapi:jxl:2.6.10", //org.pm.csv.AntCsvToExcel
+				    "xmlunit:xmlunit:1.3", "net.sourceforge.jexcelapi:jxl:2.6.12", //uk.co.firstzero.xml.AntXMLUnit
+				    "net.sf.opencsv:opencsv:2.0", //uk.co.firstzero.csv.diff
+				    "net.sourceforge.jexcelapi:jxl:2.6.10", //uk.co.firstzero.csv.AntCsvToExcel
                     "commons-codec:commons-codec:1.6",
                     "commons-httpclient:commons-httpclient:3.0",
                     "commons-logging:commons-logging:1.1.1",
                     "org.apache.jackrabbit:jackrabbit-webdav:2.1.1",
                     "org.slf4j:slf4j-api:1.5.8",
-                    "org.slf4j:slf4j-log4j12:1.5.2"  //org.pm.AntDav
+                    "org.slf4j:slf4j-log4j12:1.5.2"  //uk.co.firstzero.AntDav
 				   ]
      dependencies {
         compile compileAll
@@ -55,14 +55,14 @@ If you prefer to use gradle so that dependencies are setup - clone my repository
      }
 
      task push << {
-        ant.taskdef(name: 'push', classname: 'org.pm.webdav.Push', classpath: configurations.runtime.asPath)
+        ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: configurations.runtime.asPath)
         ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
         fileset(dir: 'src/test/resources/webdav', includes: '*.csv')
         }
      }
 
      task pull << {
-          ant.taskdef(name: 'pull', classname: 'org.pm.webdav.Pull', classpath: configurations.runtime.asPath)
+          ant.taskdef(name: 'pull', classname: 'uk.co.firstzero.webdav.Pull', classpath: configurations.runtime.asPath)
           ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
             file: "output.csv",
             outFile: "src/test/resources/webdav/output.csv",
@@ -79,7 +79,7 @@ Requires JExcelApi - http://sourceforge.net/projects/jexcelapi/files/jexcelapi/2
         <!-- Dependency on JExcelApi - 
          http://sourceforge.net/projects/jexcelapi/files/jexcelapi/2.6.12/jexcelapi_2_6_12.zip/download
 	-->
-		<taskdef name="csvToexcel" classname="org.pm.csv.AntCsvToExcel" />
+		<taskdef name="csvToexcel" classname="uk.co.firstzero.csv.AntCsvToExcel" />
     </target>
 
 To use:
@@ -98,7 +98,7 @@ Ensure you have downloaded the *AntCsvToExcel jar* and placed that in your $ANT_
 Requires XMLUnit (xmlunit-bin) - http://sourceforge.net/projects/xmlunit/files/xmlunit%20for%20Java/XMLUnit%20for%20Java%201.3/
 
     <target name="declare-tasks">
-        <taskdef name="diffxml" classname="org.pm.xml.AntXMLUnit"/>
+        <taskdef name="diffxml" classname="uk.co.firstzero.xml.AntXMLUnit"/>
     </target>
 
 To use: 
@@ -116,8 +116,8 @@ Ensure you have downloaded the *AntXPath jar* and placed that in your $ANT_HOME/
 Requires XALAN (for JAVA 1.4 and below, JAVA 1.5 and above nothing is required) - http://xml.apache.org/xalan-j/downloads.html#latest-release
 
     <target name="declare-tasks">
-        <taskdef name="xpath" classname="org.pm.xml.AntXPath"/>
-        <taskdef name="modifyPath" classname="org.pm.xml.ModifyPath"/>
+        <taskdef name="xpath" classname="uk.co.firstzero.xml.AntXPath"/>
+        <taskdef name="modifyPath" classname="uk.co.firstzero.xml.ModifyPath"/>
     </target>
 
 To use: 
