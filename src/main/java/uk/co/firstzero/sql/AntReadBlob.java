@@ -236,19 +236,23 @@ public class AntReadBlob extends Task {
 
         } catch (SQLException e) {
             logger.error(e.getMessage());
+            e.printStackTrace();
         } catch (ClassNotFoundException e) {
             logger.error(e.getMessage());
+            e.printStackTrace();
         } catch (FileNotFoundException e) {
             logger.error(e.getMessage());
+            e.printStackTrace();
         } catch (IOException e) {
             logger.error(e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 if (conn != null && !conn.isClosed()) {
                     conn.close();
                 }
             } catch(SQLException e){
-
+                e.printStackTrace();
             }
         }
     }

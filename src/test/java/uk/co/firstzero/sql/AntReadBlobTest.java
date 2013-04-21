@@ -17,7 +17,7 @@ public class AntReadBlobTest {
     Connection conn;
     private static final Logger logger = Logger.getLogger(AntReadBlob.class);
 
-    private final String JDBC_URL = "jdbc:h2:~/test";
+    private final String JDBC_URL = "jdbc:h2:" + System.getProperty("user.dir") + "/src/test/resources/sql/temp";
     private final String USER = "sa";
     private final String PASSWORD = "";
     private final String CLASS_NAME = "org.h2.Driver";
