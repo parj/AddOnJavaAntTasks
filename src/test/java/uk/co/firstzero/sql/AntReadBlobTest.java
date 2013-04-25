@@ -26,7 +26,7 @@ public class AntReadBlobTest {
     private final String SQL_INSERT_TABLE = "INSERT INTO TEST(name, blob) VALUES(?, ?)";
     private final String SQL_DROP_TABLE = "DROP ALL OBJECTS";
     private final String FILE_ZIP = "src/test/resources/sql/blob.zip";
-    private final String DIRECTORY_OUTPUT = "build/tmp";
+    private final String DIRECTORY_OUTPUT = "src/test/resources/sql";
     private final int COLUMN_NAME = 1;
     private final int COLUMN_BLOB = 2;
 

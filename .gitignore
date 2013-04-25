@@ -34,3 +34,6 @@ src/test/resources/csv/CsvToExcel/Excel.xls
 src/test/resources/csv/CsvToExcel/Excel.xls
 src/test/resources/sql/temp.h2.db
 src/test/resources/sql/temp.trace.db
+src/test/resources/report.xls
+src/test/resources/sql/blob.zip.jpg
+
