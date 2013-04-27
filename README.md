@@ -1,10 +1,17 @@
 ![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
-# The addon Ant Tasks
+
+# Addon Ant Tasks
 * AntDav - To upload and download from WebDav Servers
 * AntCsvtoExcel - To convert a set of csv files into 1 Excel file. Each csv file is a sheet within
 * AntXMLUnit - To compare two directory of xml files using XMLUnit and produce a csv file report for each
 * AntXPath - For modifying xml files using xpaths, sometimes for comparison you want to physically strip out timestamp elements, etc. AntXPath is capable of doing that.
+* AntReadBlob - For bulk reading and downloading files from the database
 
+## Easy way using gradle
+
+Sample gradle build script can be viewed here - 
+https://gist.github.com/parj/5474558
+ 
 ## AntDav
 Ensure you have downloaded the *AntDav jar* and placed that in your $ANT_HOME/lib
 
