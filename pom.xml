@@ -4,7 +4,7 @@
 
     <groupId>uk.co.firstzero</groupId>
     <artifactId>anttasks</artifactId>
-    <version>2.3-SNAPSHOT</version>
+    <version>2.3</version>
     <packaging>jar</packaging>
 
     <name>AntTasks</name>
