@@ -60,14 +60,18 @@ tasks.withType(Compile) {
 
 uploadArchives {
     repositories {
-        mavenDeployer {
-            repository(url: nexusUrlSnapshot) {
-             authentication(userName: nexusUsername, password: nexusPassword)
-			}
-			pom.version = '2.1-SNAPSHOT'
-        	pom.groupId = 'uk.co.firstzero'
-        	pom.artifactId = 'anttasks'
+        if (hasProperty('nexusUrlSnapshot')) {
+            mavenDeployer {
+                repository(url: nexusUrlSnapshot) {
+                    authentication(userName: nexusUsername, password: nexusPassword)
+                }
+
+			    pom.version = '2.5-SNAPSHOT'
+        	    pom.groupId = 'uk.co.firstzero'
+        	    pom.artifactId = 'anttasks'
+            }
         }
+
     }
 }
 
