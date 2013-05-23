@@ -75,6 +75,10 @@ uploadArchives {
     }
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}
+
 // Push file to a WebDav Server
 task push << {
     ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: configurations.runtime.asPath)
