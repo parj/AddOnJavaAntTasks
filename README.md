@@ -11,19 +11,21 @@
 
 Sample gradle build script can be viewed here - 
 https://gist.github.com/parj/5474558
- 
-## AntDav
+
+# Using AddOnJavaAntTasks on ANT
 Ensure you have downloaded the *AntDav jar* and placed that in your $ANT_HOME/lib
 
-Requires JackRabbit Stand Alone jar - http://jackrabbit.apache.org/downloads.html if you are doing development and would like to run the unit tests.
+## AntDav
 
+> Requires JackRabbit Stand Alone jar - http://jackrabbit.apache.org/downloads.html if you are doing development and would like to run the unit tests.
+
+### Getting Started
 In your ant build.xml declare the custom tasks:
 
     <taskdef name="pull" classname="uk.co.firstzero.webdav.Pull" />
     <taskdef name="push" classname="uk.co.firstzero.webdav.Push" />
 
-To use:
-
+### Task Examples
     <!-- Example of pushing file(s) to webdav -->
     <push url="http://localhost:9090/repository/default"
           user="admin"
@@ -40,57 +42,19 @@ To use:
           overwrite="true"/>
     </pull>
 
-If you prefer to use gradle so that dependencies are setup - clone my repository and you can run `gradle push` and `gradle pull` directly. Otherwise - here is a trimmed script - [Gradle Snippet](https://gist.github.com/3306722)
-
-    apply plugin: 'java'
-
-
-    List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:1.2.16", //All
-				    "xmlunit:xmlunit:1.3", "net.sourceforge.jexcelapi:jxl:2.6.12", //uk.co.firstzero.xml.AntXMLUnit
-				    "net.sf.opencsv:opencsv:2.0", //uk.co.firstzero.csv.diff
-				    "net.sourceforge.jexcelapi:jxl:2.6.10", //uk.co.firstzero.csv.AntCsvToExcel
-                    "commons-codec:commons-codec:1.6",
-                    "commons-httpclient:commons-httpclient:3.0",
-                    "commons-logging:commons-logging:1.1.1",
-                    "org.apache.jackrabbit:jackrabbit-webdav:2.1.1",
-                    "org.slf4j:slf4j-api:1.5.8",
-                    "org.slf4j:slf4j-log4j12:1.5.2"  //uk.co.firstzero.AntDav
-				   ]
-     dependencies {
-        compile compileAll
-        runtime fileTree(dir: 'build/libs', include: '*.jar')
-     }
-
-     task push << {
-        ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: configurations.runtime.asPath)
-        ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
-        fileset(dir: 'src/test/resources/webdav', includes: '*.csv')
-        }
-     }
-
-     task pull << {
-          ant.taskdef(name: 'pull', classname: 'uk.co.firstzero.webdav.Pull', classpath: configurations.runtime.asPath)
-          ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
-            file: "output.csv",
-            outFile: "src/test/resources/webdav/output.csv",
-            overwrite: true)
-     }
-
 ## AntCsvToExcel
 
-Ensure you have downloaded the *AntCsvToExcel jar* and placed that in your $ANT_HOME/lib
+> Requires JExcelApi - http://sourceforge.net/projects/jexcelapi/files/jexcelapi/2.6.12/jexcelapi_2_6_12.zip/download
 
-Requires JExcelApi - http://sourceforge.net/projects/jexcelapi/files/jexcelapi/2.6.12/jexcelapi_2_6_12.zip/download
-
+### Getting Started
     <target name="declare-tasks">		
         <!-- Dependency on JExcelApi - 
          http://sourceforge.net/projects/jexcelapi/files/jexcelapi/2.6.12/jexcelapi_2_6_12.zip/download
-	-->
+	    -->
 		<taskdef name="csvToexcel" classname="uk.co.firstzero.csv.AntCsvToExcel" />
     </target>
 
-To use:
-
+### Task Examples
 	<!-- Example of combining csv files to an excel file -->
 	<target name="csvToexcel" depends="declare-tasks">
 		<csvToexcel outputFile="report.xls" separator=",">
@@ -102,13 +66,14 @@ To use:
 
 Ensure you have downloaded the *AntCsvToExcel jar* and placed that in your $ANT_HOME/lib
 
-Requires XMLUnit (xmlunit-bin) - http://sourceforge.net/projects/xmlunit/files/xmlunit%20for%20Java/XMLUnit%20for%20Java%201.3/
+> Requires XMLUnit (xmlunit-bin) - http://sourceforge.net/projects/xmlunit/files/xmlunit%20for%20Java/XMLUnit%20for%20Java%201.3/
 
+### Getting Started
     <target name="declare-tasks">
         <taskdef name="diffxml" classname="uk.co.firstzero.xml.AntXMLUnit"/>
     </target>
 
-To use: 
+### Task Examples
 
     <target name="diff" depends="jar, declare-tasks">
         <diffxml testDirectory="2" resultDirectory="." verbose="True">
@@ -118,16 +83,15 @@ To use:
 
 ## AntXPath
 
-Ensure you have downloaded the *AntXPath jar* and placed that in your $ANT_HOME/lib
+> Requires XALAN (for JAVA 1.4 and below, JAVA 1.5 and above nothing is required) - http://xml.apache.org/xalan-j/downloads.html#latest-release
 
-Requires XALAN (for JAVA 1.4 and below, JAVA 1.5 and above nothing is required) - http://xml.apache.org/xalan-j/downloads.html#latest-release
-
+### Getting Started
     <target name="declare-tasks">
         <taskdef name="xpath" classname="uk.co.firstzero.xml.AntXPath"/>
         <taskdef name="modifyPath" classname="uk.co.firstzero.xml.ModifyPath"/>
     </target>
 
-To use: 
+### Task Examples
 Rename Pattern - Is the pattern in which the files you should be renamed - The value is picked up from the xml using xpaths. This makes sense, when you remove/change values, rename the files and then do a comparison
 
 
@@ -140,3 +104,104 @@ Rename Pattern - Is the pattern in which the files you should be renamed - The v
 	        <modifyPath path="//author" value="ToTo"/>
        </xpath>
     </target>
+
+## AntReadBlob
+
+> Requires the dependencies jar of the Database you are connecting to
+
+### Getting Started
+    <target name="declare-tasks">
+        <taskdef name="readBlob" classname="uk.co.firstzero.sql.AntReadBlob"/>
+    </target>
+
+### Task Examples
+Rename Pattern - Is the pattern in which the files you should be renamed - The value is picked up from the xml using xpaths. This makes sense, when you remove/change values, rename the files and then do a comparison
+
+    <target name="readBlob" depends="jar, declare-tasks">
+       <readBlob className="out"
+	      jdbcUrl="jdbc:h2:src/test/resources/sql/test;IFEXISTS=TRUE"
+	      user="sa" password="" extension=".jpg"
+          sql="SELECT name, blob from TEST"
+          outputDirectory="build/tmp" unzip="True">
+       </readBlob>
+    </target>
+
+
+# Using AddOnJavaTasks on Gradle
+
+## Getting started
+
+Declare the dependency
+
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+        dependencies {
+            classpath group: 'uk.co.firstzero', name: 'anttasks', version: '2.4'
+        }
+    }
+
+
+## AntDav
+    task push << {
+        ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: configurations.runtime.asPath)
+        ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
+            fileset(dir: 'src/test/resources/webdav', includes: '*.csv')
+        }
+    }
+
+    task pull << {
+        ant.taskdef(name: 'pull', classname: 'uk.co.firstzero.webdav.Pull', classpath: configurations.runtime.asPath)
+        ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
+                file: "output.csv",
+                outFile: "src/test/resources/webdav/output.csv",
+                overwrite: true)
+    }
+
+## AntCsvtoExcel
+    task csvToExcel << {
+        ant.taskdef(name: 'csvToExcel', classname: 'uk.co.firstzero.csv.AntCsvToExcel', classpath: configurations.runtime.asPath)
+
+        ant.csvToExcel(outputFile: "build/tmp/report.xls", separator: "^") {
+            fileset(dir: "src/test/resources/csv/CsvToExcel", includes: "*.csv")
+        }
+    }
+
+## AntXMLUnit
+    task diffxml << {
+        ant.taskdef(name: 'diffxml', classname: 'uk.co.firstzero.xml.AntXMLUnit', classpath: configurations.runtime.asPath)
+
+        ant.diffxml(testDirectory: "src/test/resources/xml/AntXMLUnitTest/test", resultDirectory: "out") {
+            fileset(dir: "src/test/resources/xml/AntXMLUnitTest/control", includes: "*.xml")
+        }
+    }
+
+## AntXPath
+    task modifyPath << {
+        ant.taskdef(name: 'xPath', classname: 'uk.co.firstzero.xml.AntXPath', classpath: configurations.runtime.asPath)
+        ant.taskdef(name: 'modifyPath', classname: 'uk.co.firstzero.xml.ModifyPath', classpath: configurations.runtime.asPath)
+
+        //Rename Pattern is the file rename pattern, takes as input as xpaths separated by #
+        ant.xPath(outputDirectory: "out", renamePattern: "//publish_date[position() = 1]#_#//price[position() = 1]" ) {
+            fileset(dir: "src/test/resources/xml/AntXPathTest", includes: "*.xml")
+            modifyPath(path: "//title", delete:"True")
+            modifyPath(path: "//author", value:"ToDo")
+        }
+    }
+
+## AntReadBlob
+    task readBlob << {
+        ant.taskdef(name: "readBlob", classname: "uk.co.firstzero.sql.AntReadBlob", classpath: configurations.runtime.asPath)
+
+        String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
+        println ("Database = " + databaseLocation)
+
+        //SQL should contain a string name and then blob - example
+        //SELECT name, blob_data from test_db where condition_1=1234
+        ant.readBlob(className: "org.h2.Driver", jdbcUrl: "jdbc:h2:" + databaseLocation + ";IFEXISTS=TRUE",
+                     user: "sa", password: "", extension: ".jpg",
+                     sql: "SELECT name, blob from TEST",
+                     outputDirectory: "build/tmp",
+                     unzip: "True")
+    }
