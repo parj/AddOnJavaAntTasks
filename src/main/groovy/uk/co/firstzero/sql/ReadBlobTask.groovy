@@ -6,15 +6,16 @@ import org.gradle.api.tasks.TaskAction
 class ReadBlobTask extends DefaultTask  {
     @TaskAction
     def read() {
-        antReadBlob = new AntReadBlob(
-                (String) ${project.readBlobPluginArgs.className},
-                (String) ${project.readBlobPluginArgs.jdbcUrl},
-                (String) ${project.readBlobPluginArgs.user},
-                (String) ${project.readBlobPluginArgs.password},
-                (String) ${project.readBlobPluginArgs.extension},
-                (String) ${project.readBlobPluginArgs.sql},
-                (String) ${project.readBlobPluginArgs.outputDirectory},
-                (boolean)${project.readBlobPluginArgs.unzip})
+        def antReadBlob = new AntReadBlob()
+
+        antReadBlob.setClassName((String)${project.readBlobPluginArgs.className})
+        antReadBlob.setJdbcUrl((String)${project.readBlobPluginArgs.jdbcUrl})
+        antReadBlob.setUser((String)${project.readBlobPluginArgs.user})
+        antReadBlob.setPassword((String)${project.readBlobPluginArgs.password})
+        antReadBlob.setExtension((String)${project.readBlobPluginArgs.extension})
+        antReadBlob.setSql((String)${project.readBlobPluginArgs.sql})
+        antReadBlob.setOutputDirectory((String)${project.readBlobPluginArgs.outputDirectory})
+        antReadBlob.setUnzip((boolean)${project.readBlobPluginArgs.unzip})
 
         antReadBlob.execute()
     }

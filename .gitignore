@@ -37,3 +37,6 @@ src/test/resources/sql/temp.trace.db
 src/test/resources/report.xls
 src/test/resources/sql/blob.zip.jpg
 
+#Repository
+repo/
+
