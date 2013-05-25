@@ -180,7 +180,7 @@ buildscript {
 // To run the plugin gradle readBlob
 apply plugin: 'readblob'
 
-readBlobPluginArgs {
+readBlob {
     className = "org.h2.Driver"
     String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
     jdbcUrl = "jdbc:h2:" + databaseLocation + ";IFEXISTS=TRUE"

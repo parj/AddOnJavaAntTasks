@@ -16,7 +16,7 @@ class ReadBlobPluginExtension {
 
 class ReadBlobPlugin implements Plugin<Project> {
     void apply(Project target) {
-        target.extensions.create('readBlobPluginArgs', ReadBlobPluginExtension)
+        target.extensions.create('readBlob', ReadBlobPluginExtension)
         target.task('readBlobTask', type: ReadBlobTask)
     }
 }

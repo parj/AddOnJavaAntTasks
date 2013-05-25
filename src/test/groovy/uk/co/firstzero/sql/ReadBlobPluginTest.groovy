@@ -12,4 +12,11 @@ class ReadBlobPluginTest {
         project.apply plugin: 'readblob'
         assertTrue(project.tasks.readBlobTask instanceof ReadBlobTask)
     }
+
+    @Test
+    public void readBlobPluginAddsReadBlobArgsToProject() {
+        Project project = ProjectBuilder.builder().build()
+        project.apply plugin: 'readblob'
+        assertTrue(project.extensions.readBlob instanceof ReadBlobPluginExtension)
+    }
 }

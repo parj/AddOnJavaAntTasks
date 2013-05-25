@@ -8,14 +8,14 @@ class ReadBlobTask extends DefaultTask  {
     def read() {
         def antReadBlob = new AntReadBlob()
 
-        antReadBlob.setClassName((String)${project.readBlobPluginArgs.className})
-        antReadBlob.setJdbcUrl((String)${project.readBlobPluginArgs.jdbcUrl})
-        antReadBlob.setUser((String)${project.readBlobPluginArgs.user})
-        antReadBlob.setPassword((String)${project.readBlobPluginArgs.password})
-        antReadBlob.setExtension((String)${project.readBlobPluginArgs.extension})
-        antReadBlob.setSql((String)${project.readBlobPluginArgs.sql})
-        antReadBlob.setOutputDirectory((String)${project.readBlobPluginArgs.outputDirectory})
-        antReadBlob.setUnzip((boolean)${project.readBlobPluginArgs.unzip})
+        antReadBlob.setClassName((String)${project.readBlob.className})
+        antReadBlob.setJdbcUrl((String)${project.readBlob.jdbcUrl})
+        antReadBlob.setUser((String)${project.readBlob.user})
+        antReadBlob.setPassword((String)${project.readBlob.password})
+        antReadBlob.setExtension((String)${project.readBlob.extension})
+        antReadBlob.setSql((String)${project.readBlob.sql})
+        antReadBlob.setOutputDirectory((String)${project.readBlob.outputDirectory})
+        antReadBlob.setUnzip((boolean)${project.readBlob.unzip})
 
         antReadBlob.execute()
     }
