@@ -2,31 +2,36 @@ package uk.co.firstzero.webdav
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
-import uk.co.firstzero.webdav.Pull
+import org.apache.log4j.Logger;
 
 class PullTask extends DefaultTask  {
+    static Logger log = Logger.getLogger(PullTask.class)
+
     @TaskAction
     def pullAction() {
-        def pull = new Pull()
+        def antPull = new uk.co.firstzero.webdav.Pull()
 
-        pull.setUser((String)${project.pull.user})
-        pull.setPassword((String)${project.pull.password})
-        pull.setUrl((String)${project.pull.url})
-        pull.setFile((String)${project.pull.file})
-        pull.setOutFile((String)${project.pull.outFile})
+        antPull.setUser((String)project.pullArgs.user)
+        antPull.setPassword((String)project.pullArgs.password)
+        antPull.setUrl((String)project.pullArgs.url)
+        antPull.setFile((String)project.pullArgs.file)
+        antPull.setOutFile((String)project.pullArgs.outFile)
+        antPull.setOverwrite((boolean)project.pullArgs.overwrite)
 
-        if (${project.pull.proxyUser} != null)
-            pull.setProxyUser((String)${project.pull.proxyUser})
+        if (project.pullArgs.proxyUser != null)
+            antPull.setProxyUser((String)project.pullArgs.proxyUser)
 
-        if (${project.pull.proxyPassword} != null)
-            pull.setProxyPassword((String)${project.pull.proxyPassword})
+        if (project.pullArgs.proxyPassword != null)
+            antPull.setProxyPassword((String)project.pullArgs.proxyPassword)
 
-        if (${project.pull.proxyHost} != null)
-            pull.setProxyHost((String)${project.pull.proxyHost})
+        if (project.pullArgs.proxyHost != null)
+            antPull.setProxyHost((String)project.pullArgs.proxyHost)
 
-        if (${project.pull.proxyPort} != null)
-            pull.setProxyPort((String)${project.pull.proxyPort})
+        if (project.pullArgs.proxyPort != null)
+            antPull.setProxyPort((int)project.pullArgs.proxyPort)
 
-        pull.execute()
+        antPull.execute()
     }
 }
+    
+

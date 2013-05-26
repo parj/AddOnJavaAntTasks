@@ -97,7 +97,7 @@ tasks.withType(Compile) {
 //** SAMPLE Tasks **//
 
 // Push file to a WebDav Server
-task push << {
+task pushAnt << {
     ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: configurations.runtime.asPath)
     ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
         fileset(dir: 'src/test/resources/webdav', includes: '*.csv')
@@ -105,7 +105,7 @@ task push << {
 }
 
 // Pull file from a webdav server
-task pull << {
+task pullAnt << {
     ant.taskdef(name: 'pull', classname: 'uk.co.firstzero.webdav.Pull', classpath: configurations.runtime.asPath)
     ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
             file: "output.csv",
@@ -114,7 +114,7 @@ task pull << {
 }
 
 // Converts csv to Excel
-task csvToExcel << {
+task csvToExcelAnt << {
     ant.taskdef(name: 'csvToExcel', classname: 'uk.co.firstzero.csv.AntCsvToExcel', classpath: configurations.runtime.asPath)
 
     ant.csvToExcel(outputFile: "build/tmp/report.xls", separator: "^") {
@@ -123,7 +123,7 @@ task csvToExcel << {
 }
 
 // Diffs two directories containing xml files with the same name
-task diffxml << {
+task diffxmlAnt << {
     ant.taskdef(name: 'diffxml', classname: 'uk.co.firstzero.xml.AntXMLUnit', classpath: configurations.runtime.asPath)
 
     ant.diffxml(testDirectory: "src/test/resources/xml/AntXMLUnitTest/test", resultDirectory: "out") {
@@ -132,7 +132,7 @@ task diffxml << {
 }
 
 // Strips out and modifies tags in xmls and renames them using a naming convention
-task modifyPath << {
+task modifyPathAnt << {
     ant.taskdef(name: 'xPath', classname: 'uk.co.firstzero.xml.AntXPath', classpath: configurations.runtime.asPath)
     ant.taskdef(name: 'modifyPath', classname: 'uk.co.firstzero.xml.ModifyPath', classpath: configurations.runtime.asPath)
 
@@ -145,7 +145,7 @@ task modifyPath << {
 }
 
 // Reads blob data from the database
-task readBlob << {
+task readBlobAnt << {
     ant.taskdef(name: "readBlob", classname: "uk.co.firstzero.sql.AntReadBlob", classpath: configurations.runtime.asPath)
 
     String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
@@ -177,7 +177,7 @@ buildscript {
 }
 
 
-// To run the plugin gradle readBlob
+// To run the plugin gradle readBlobTask
 apply plugin: 'readblob'
 
 readBlob {
@@ -191,8 +191,10 @@ readBlob {
     outputDirectory = "build/tmp"
     unzip = true
 }
+
+// To run the plugin gradle pullTask
 apply plugin: 'pull'
-pull {
+pullArgs {
     user = 'admin'
     password = "admin"
     url = "http://localhost:8080/repository/default"

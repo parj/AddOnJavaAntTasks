@@ -20,6 +20,6 @@ class PullPluginTest {
     public void readBlobPluginAddsReadBlobArgsToProject() {
         Project project = ProjectBuilder.builder().build()
         project.apply plugin: 'pull'
-        assertTrue(project.extensions.pull instanceof PullPluginExtension)
+        assertTrue(project.extensions.pullArgs instanceof PullPluginExtension)
     }
 }

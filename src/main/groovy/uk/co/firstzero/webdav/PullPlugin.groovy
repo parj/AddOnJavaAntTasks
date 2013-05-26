@@ -18,7 +18,8 @@ class PullPluginExtension {
 
 class PullPlugin implements Plugin<Project> {
     void apply(Project target) {
-        target.extensions.create('pull', PullPluginExtension)
+        println("Applying args")
+        target.extensions.create('pullArgs', PullPluginExtension)
         target.task('pullTask', type: PullTask)
     }
 }
