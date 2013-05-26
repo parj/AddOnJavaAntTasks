@@ -191,5 +191,13 @@ readBlob {
     outputDirectory = "build/tmp"
     unzip = true
 }
-
- **/
+apply plugin: 'pull'
+pull {
+    user = 'admin'
+    password = "admin"
+    url = "http://localhost:8080/repository/default"
+    file = "output.csv"
+    outFile = "src/test/resources/webdav/output.csv"
+    overwrite = true
+}
+**/
