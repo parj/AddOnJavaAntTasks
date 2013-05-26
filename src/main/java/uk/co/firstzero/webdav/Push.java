@@ -56,6 +56,10 @@ public class Push extends Task{
     private int proxyPort = Integer.MIN_VALUE;
     private HttpClient httpClient;
 
+    public Push() {
+
+    }
+
     public Push(String user, String password, String url) throws MalformedURLException {
         setUser(user);
         setPassword(password);

@@ -201,4 +201,15 @@ pullArgs {
     file = "output.csv"
     outFile = "src/test/resources/webdav/output.csv"
     overwrite = true
-} **/
+}
+
+// To run the plugin gradle pushTask
+apply plugin: 'push'
+pushArgs {
+ user = 'admin'
+ password = "admin"
+ url = "http://localhost:8080/repository/default"
+ overwrite = true
+ tree = fileTree(dir: 'src/test/resources/sql', include: '*.zip')
+}
+**/
