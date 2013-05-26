@@ -163,7 +163,7 @@ task readBlobAnt << {
 //** GRADLE Plugins - for the following to work run gradle uploadArchives and then uncomment to run **//
 
 /**
- * Uncomment after running gradle uploadArchives
+ * Uncomment all below after running gradle uploadArchives
 buildscript {
     repositories {
         maven {
@@ -180,7 +180,7 @@ buildscript {
 // To run the plugin gradle readBlobTask
 apply plugin: 'readblob'
 
-readBlob {
+readBlobArgs {
     className = "org.h2.Driver"
     String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
     jdbcUrl = "jdbc:h2:" + databaseLocation + ";IFEXISTS=TRUE"
@@ -201,5 +201,4 @@ pullArgs {
     file = "output.csv"
     outFile = "src/test/resources/webdav/output.csv"
     overwrite = true
-}
-**/
+} **/
