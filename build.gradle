@@ -207,10 +207,10 @@ pullArgs {
 // To run the plugin gradle pushTask
 apply plugin: 'push'
 pushArgs {
- user = 'admin'
- password = "admin"
- url = "http://localhost:8080/repository/default"
- overwrite = true
- tree = fileTree(dir: 'src/test/resources/sql', include: '*.zip')
- createDirectoryStructure = false
+    user = 'admin'
+    password = "admin"
+    url = "http://localhost:8080/repository/default"
+    overwrite = true
+    tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
+    createDirectoryStructure = false
 }
