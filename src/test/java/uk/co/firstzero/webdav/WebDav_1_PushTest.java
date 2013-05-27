@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,6 +43,8 @@ public class WebDav_1_PushTest {
     @Before
     public void setUp() throws IOException {
         push = new Push("admin", "admin", "http://localhost:8080/repository/default");
+        push.setUser("admin");
+        push.setPassword("admin");
         push.setOverwrite(true);
 
         iFile = new File(_iFile);
@@ -51,7 +54,7 @@ public class WebDav_1_PushTest {
     }
 
     @Ignore
-	public void testDownload() throws IOException {
+	public void testUpload() throws IOException {
         boolean upload = push.uploadFile(iFile, "output.csv");
         logger.debug("upload - " + upload);
         assertTrue(upload);

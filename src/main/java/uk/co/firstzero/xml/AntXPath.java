@@ -49,7 +49,7 @@ public class AntXPath extends Task {
     Logger logger = Logger.getLogger(AntXPath.class);
     
 	private Vector<FileSet> fileSets = new Vector<FileSet>();
-	private List/*<Property>*/ modifyPaths = new ArrayList();
+	private List<ModifyPath> modifyPaths = new ArrayList<ModifyPath>();
 	private String outputDirectory;
 	private String renamePattern;
 	private String patternSplitter = "#";

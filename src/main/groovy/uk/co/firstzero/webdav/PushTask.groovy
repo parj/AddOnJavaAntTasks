@@ -26,10 +26,14 @@ class PushTask extends DefaultTask  {
         if (project.pushArgs.proxyPort != null)
             antPush.setProxyPort((int)project.pushArgs.proxyPort)
 
+        println("Project path - " + project.getPath())
+
         antPush.setUp()
 
         project.pushArgs.tree.each {File file ->
-            antPush.createDirectory(file.getPath(), file.getName());
+            if (project.pushArgs.createDirectoryStructure)
+                antPush.createDirectory(file.getPath(), file.getName());
+
             boolean result = antPush.uploadFile(file)
             logger.info("Upload status of " + file.getName() + " - " + result);
         }

@@ -13,12 +13,12 @@ class PushPluginExtension {
     String proxyHost
     int proxyPort
     boolean overwrite
+    boolean createDirectoryStructure
     FileTree tree
 }
 
 class PushPlugin implements Plugin<Project> {
     void apply(Project target) {
-        println("Applying args")
         target.extensions.create('pushArgs', PushPluginExtension)
         target.task('pushTask', type: PushTask)
     }

@@ -46,7 +46,7 @@ public class AntXMLUnit extends Task {
 	
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
-	private static List ignoreIds = new ArrayList();
+	private static List<Integer> ignoreIds = new ArrayList<Integer>();
 	
 	public AntXMLUnit() { } 
 	
@@ -159,8 +159,7 @@ public class AntXMLUnit extends Task {
         XMLUnit.setIgnoreAttributeOrder(true);
         XMLUnit.setIgnoreWhitespace(true);
 
-        ignoreIds.add(DifferenceConstants.CHILD_NODELIST_SEQUENCE);
-        ignoreIds.add(DifferenceConstants.CHILD_NODELIST_SEQUENCE_ID);
+        ignoreIds.add(new Integer(DifferenceConstants.CHILD_NODELIST_SEQUENCE_ID));
 	}
 
     /**
@@ -195,7 +194,7 @@ public class AntXMLUnit extends Task {
         for (Object differenceObject : differences) {
             Difference difference = (Difference)differenceObject;
 
-            if (ignoreIds.contains(difference.getId())) {
+            if (ignoreIds.contains(new Integer(difference.getId()))) {
                 logger.trace("SKIP - "
                         + difference.getId() + this.separator
                         + difference.getDescription() + this.separator
