@@ -164,7 +164,7 @@ task readBlobAnt << {
 //** GRADLE Plugins - for the following to work run gradle uploadArchives and then uncomment to run **//
 
 /**
- * Uncomment all below after running gradle uploadArchives **/
+ * Uncomment all below after running gradle uploadArchives
 buildscript {
     repositories {
         maven {
@@ -213,4 +213,4 @@ pushArgs {
     overwrite = true
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
-}
+} **/
