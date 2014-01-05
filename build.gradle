@@ -1,5 +1,5 @@
 /**
-Copyright (c) 2011-2013 Parjanya Mudunuri
+Copyright (c) 2011-2014 Parjanya Mudunuri
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -29,7 +29,7 @@ apply plugin: 'groovy'
 
 //** CONFIGURATION **//
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.6'
+    gradleVersion = '1.10'
 }
 
 repositories {
@@ -77,9 +77,9 @@ List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:
 
 dependencies {
     compile compileAll
-    compile gradleApi()
-    compile localGroovy()
-    runtime fileTree(dir: 'build/libs', include: '*.jar')
+    compile gradleApi()		//For gradle custom tasks
+    compile localGroovy()   //For gradle custom tasks
+    runtime fileTree(dir: 'build/libs', include: '*.jar')	//For running the custom tasks locally
 }
 
 configurations {
@@ -91,7 +91,8 @@ configurations {
 
 tasks.withType(Compile) {
     options.encoding = 'UTF-8'
-    options.compilerArgs << "-Xlint:unchecked"
+    options.compilerArgs << "-Xlint:unchecked" 
+    options.compilerArgs << "-Xlint:deprecation"
 }
 
 

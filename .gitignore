@@ -23,6 +23,7 @@ src/test/resources/csv/CsvToExcel/Excel.xls
 #Eclipse
 .project
 .classpath
+.settings
 
 #Idea
 .idea/
