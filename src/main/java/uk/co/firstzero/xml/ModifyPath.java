@@ -29,6 +29,16 @@ public class ModifyPath extends Task {
 	private boolean delete;
 	
 	public ModifyPath() {}
+	
+	public ModifyPath(String path, String value) {
+		this.path = path;
+		this.value = value;
+	}
+	
+	public ModifyPath(String path, boolean delete) {
+		this.path = path;
+		this.delete = delete;
+	}
 
 	public void setPath(String path) {
 		this.path = path;

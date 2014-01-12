@@ -167,7 +167,7 @@ task readBlobAnt << {
 
 /**
  * Uncomment all below after running gradle uploadArchives
- *
+ */
 buildscript {
     repositories {
         maven {
@@ -178,6 +178,16 @@ buildscript {
     dependencies {
         classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.5-SNAPSHOT'
     }
+}
+
+apply plugin : 'antxpath'
+
+antXPathArgs {
+	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
+	outputDirectory = 'src/test/resources/xml/AntXPathTest'
+	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
+	modifyPaths = [ new uk.co.firstzero.xml.ModifyPath(path: "//title", delete:"True"), 
+					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
 }
 
 //Performing a xml diff
@@ -227,4 +237,4 @@ pushArgs {
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
 }
-**/
+/**/

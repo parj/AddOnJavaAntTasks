@@ -77,6 +77,10 @@ public class AntXPath extends Task {
         modifyPaths.add(path);
     }
 	
+	public void setModifyPaths(List<ModifyPath> modifyPaths) {
+		this.modifyPaths = modifyPaths;
+	}
+	
 	/**
 	 * Directory to write out processed file
 	 * @param outputDirectory
@@ -132,7 +136,7 @@ public class AntXPath extends Task {
         xFormer = TransformerFactory.newInstance().newTransformer();
 	}
 	
-	private void processFile(File iFile) {
+	public void processFile(File iFile) {
 		try {
 			Document doc = builder.parse(iFile);
 			

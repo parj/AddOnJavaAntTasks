@@ -38,6 +38,7 @@ src/test/resources/sql/temp.trace.db
 src/test/resources/report.xls
 src/test/resources/sql/blob.zip.jpg
 src/test/resources/xml/AntXMLUnitTest/diffxml.xml.csv
+src/test/resources/xml/AntXPathTest/2000-10-01_44.95.xml
 
 #Repository
 repo/
