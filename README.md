@@ -5,7 +5,7 @@ Tools and utilities written in Java to help in day-to-day work.
 # Gradle method
 
     dependencies {
-        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.6-SNAPSHOT'
+        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.5'
     }
 
 ## CSV To Excel - To convert a set of csv files into 1 Excel file. Each csv file is a sheet within excel
