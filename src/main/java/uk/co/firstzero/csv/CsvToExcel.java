@@ -27,11 +27,13 @@ import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
 import jxl.write.WriteException;
+
 import org.apache.log4j.Logger;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 
 public class CsvToExcel {
 	private String outputFile;
@@ -53,6 +55,12 @@ public class CsvToExcel {
 		setInputFile(inputFile);
 		setOutputFile(outputFile);
         setBaseDir(baseDir);
+		setSeparator(separator);
+	}
+	
+	public CsvToExcel(String[] inputFile, String outputFile, char separator) {
+		setInputFile(inputFile);
+		setOutputFile(outputFile);
 		setSeparator(separator);
 	}
 
@@ -106,7 +114,12 @@ public class CsvToExcel {
             if (name.length() > MAX_FILE_LENGTH)
                 name = name.substring(0, MAX_FILE_LENGTH);
 
-            CSVReader reader = new CSVReader(new FileReader(this.baseDir + File.separator + filename), separator);
+            CSVReader reader;
+            
+            if (this.baseDir != null)
+            	reader = new CSVReader(new FileReader(this.baseDir + File.separator + filename), separator);
+            else
+            	reader = new CSVReader(new FileReader(filename), separator);
 
             WritableSheet s = workbook.createSheet(name, 0);
 
@@ -137,7 +150,9 @@ public class CsvToExcel {
                     s = workbook.createSheet(name + "_sheet" + count++, 0);
                 }
             }
+            reader.close();
         }
+
         workbook.write();
         workbook.close();
 	}

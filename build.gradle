@@ -180,6 +180,14 @@ buildscript {
     }
 }
 
+apply plugin: 'csvtoexcel'
+
+csvToExcelArgs {
+	inputFiles = fileTree(dir: 'src/test/resources/csv/CsvToExcel', include: 'output.csv')
+	outputFile = 'src/test/resources/csv/CsvToExcel/report.xls'
+	separator = ','
+}
+
 apply plugin: 'csvdiff'
 
 csvDiffArgs {
