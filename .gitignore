@@ -37,6 +37,7 @@ src/test/resources/sql/temp.h2.db
 src/test/resources/sql/temp.trace.db
 src/test/resources/report.xls
 src/test/resources/sql/blob.zip.jpg
+src/test/resources/xml/AntXMLUnitTest/diffxml.xml.csv
 
 #Repository
 repo/

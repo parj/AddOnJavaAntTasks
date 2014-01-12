@@ -1,3 +1,5 @@
+import org.gradle.api.file.FileTree;
+
 /**
 Copyright (c) 2011-2014 Parjanya Mudunuri
 
@@ -91,8 +93,7 @@ configurations {
 
 tasks.withType(Compile) {
     options.encoding = 'UTF-8'
-    options.compilerArgs << "-Xlint:unchecked" 
-    options.compilerArgs << "-Xlint:deprecation"
+    options.compilerArgs << "-Xlint:unchecked"
 }
 
 
@@ -166,6 +167,7 @@ task readBlobAnt << {
 
 /**
  * Uncomment all below after running gradle uploadArchives
+ *
 buildscript {
     repositories {
         maven {
@@ -176,6 +178,16 @@ buildscript {
     dependencies {
         classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.5-SNAPSHOT'
     }
+}
+
+//Performing a xml diff
+apply plugin: 'xmlunit'
+
+xmlUnitArgs {
+	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
+	separator = ","
+	controlDirectory = fileTree(dir: 'src/test/resources/xml/AntXMLUnitTest/control', include: '*.xml')
+	testDirectory = 'src/test/resources/xml/AntXMLUnitTest/test'
 }
 
 
@@ -214,4 +226,5 @@ pushArgs {
     overwrite = true
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
-} **/
+}
+**/
