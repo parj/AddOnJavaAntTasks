@@ -7,7 +7,7 @@ build/
 
 #Compiled classes and jar files
 *.class
-*.jar
+
 
 #Mac OS 
 .DS_Store
