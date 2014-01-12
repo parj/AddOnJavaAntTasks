@@ -21,8 +21,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 http://opensource.org/licenses/mit-license.php
 **/
 
+import org.gradle.api.XmlProvider
+import org.gradle.api.artifacts.maven.MavenDeployment
+
+
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'signing'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'sonar'
@@ -39,28 +44,32 @@ repositories {
 }
 
 group='uk.co.firstzero'
-version='2.6-SNAPSHOT'
+version='2.6'
+ext.packaging = 'jar'
 
-uploadArchives {
-    repositories {
-        if (hasProperty('nexusUrlSnapshot')) {
-            mavenDeployer {
-                repository(url: nexusUrlSnapshot) {
-                    authentication(userName: nexusUsername, password: nexusPassword)
-                }
+def isDevBuild
+def isCiBuild
+def isReleaseBuild
 
-                pom.version = '2.6-SNAPSHOT'
-                pom.groupId = 'uk.co.firstzero'
-                pom.artifactId = 'anttasks'
-            }
-        } else {
-            mavenDeployer {
-                repository(url: uri('repo'))
-            }
+def sonatypeRepositoryUrl
 
-        }
+//set build variables based on build type (release, continuous integration, development)
+if(hasProperty("release")) {
+	println "Release build"
+    isReleaseBuild = true
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+} else if (hasProperty("ci")) {
+	println "CI build"
+    isCiBuild = true
+    version += "-SNAPSHOT"
+    sonatypeRepositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+} else {
+	println "DEV build"
+    isDevBuild = true
+}
 
-    }
+repositories {
+    mavenCentral()
 }
 
 //** DEPENDENCIES **//
@@ -95,6 +104,81 @@ tasks.withType(Compile) {
     options.encoding = 'UTF-8'
     options.compilerArgs << "-Xlint:unchecked"
 }
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+	classifier = 'javadoc'
+	from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+	from sourceSets.main.allSource
+	classifier = 'sources'
+}
+
+artifacts {
+	archives jar
+	archives javadocJar
+	archives sourcesJar
+}
+
+//** Artifact Signing **//
+if(isReleaseBuild) {
+    signing {
+        sign configurations.archives
+    }
+} else {
+    task signArchives {
+        // do nothing
+    }
+}
+
+uploadArchives {
+	repositories {
+		if (isDevBuild) {
+            mavenLocal()
+        }
+		else {    
+			mavenDeployer {
+				if(isReleaseBuild) {
+					beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+				}
+				
+				repository(url: sonatypeRepositoryUrl) {
+				  authentication(userName: sonatypeUsername, password: sonatypePassword)
+				}
+	
+				pom.project {
+				   name 'anttasks'
+				   packaging 'jar'
+				   description 'Addon Ant Tasks'
+				   url 'https://github.com/parj/AddOnJavaAntTasks'
+	
+				   scm {
+					   url 'git@github.com:parj/AddOnJavaAntTasks'
+					   connection 'scm:git:git@github.com:parj/AddOnJavaAntTasks.git'
+					   developerConnection 'scm:git:git@github.com:parj/AddOnJavaAntTasks.git'
+				   }
+	
+				   licenses {
+					   license {
+						   name 'MIT Licence'
+						   url 'http://opensource.org/licenses/mit-license.php'
+						   distribution 'repo'
+					   }
+				   }
+	
+				   developers {
+					   developer {
+						   id 'parj'
+						   name 'Parj M'
+					   }
+				   }
+				}	   
+		   }
+		}
+	}
+}
+
 
 
 //** SAMPLE Tasks **//
