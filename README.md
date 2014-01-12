@@ -1,19 +1,129 @@
 ![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
 
+Tools and utilities written in Java to help in day-to-day work.
+
+# Gradle method
+
+    dependencies {
+        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.6-SNAPSHOT'
+    }
+
+## CSV To Excel - To convert a set of csv files into 1 Excel file. Each csv file is a sheet within excel
+
+    apply plugin: 'csvtoexcel'
+
+    csvToExcelArgs {
+    	inputFiles = fileTree(dir: 'src/test/resources/csv/CsvToExcel', include: 'output.csv')
+    	outputFile = 'src/test/resources/csv/CsvToExcel/report.xls'
+    	separator = ','
+    }
+
+Run `gradle csvToExcelTask`
+ 
+## CSV Diff - Diff two directories containing csv files. Each directory must have the same name and number of files as the other   
+
+    apply plugin: 'csvdiff'
+    
+    csvDiffArgs {
+    	resultDirectory = projectDir.toString() + "/src/test/resources/csv/CsvDiff";
+    	separator = ","
+    	controlDirectory = fileTree(dir: 'src/test/resources/csv/CsvDiff/control', include: '*.csv')
+    	testDirectory = 'src/test/resources/csv/CsvDiff/test'
+    	keyColumns = 'Header_1;Header_3'
+    }
+
+Run `gradle csvDiffTask`
+
+## XPATH - Stripping out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed  
+
+    apply plugin : 'antxpath'
+    
+    antXPathArgs {
+    	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
+    	outputDirectory = 'src/test/resources/xml/AntXPathTest'
+    	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
+    	modifyPaths = [ new uk.co.firstzero.xml.ModifyPath(path: "//title", delete:"True"), 
+    					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
+    }
+
+Run `antXPathTask`
+
+## XML DIFF - Diff two directories containing xml files. Each directory must have the same name and number of files as the other   
+
+    apply plugin: 'xmlunit'
+    
+    xmlUnitArgs {
+    	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
+    	separator = ","
+    	controlDirectory = fileTree(dir: 'src/test/resources/xml/AntXMLUnitTest/control', include: '*.xml')
+    	testDirectory = 'src/test/resources/xml/AntXMLUnitTest/test'
+    }
+    
+Run `xmlUnitTask`
+    
+## READ BLOB - Extracting Blobs from Database
+
+    apply plugin: 'readblob'
+    
+    readBlobArgs {
+        className = "org.h2.Driver"
+        String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
+        jdbcUrl = "jdbc:h2:" + databaseLocation + ";IFEXISTS=TRUE"
+        user = "sa"
+        password = ""
+        extension = ".jpg"
+        sql = "SELECT name, blob from TEST"
+        outputDirectory = "build/tmp"
+        unzip = true
+    }
+
+Run `readBlobTask`
+
+## WEBDAV PULL - Downloading from WEBDAV site, proxy configuration is supported
+
+    apply plugin: 'pull'
+    pullArgs {
+        user = 'admin'
+        password = "admin"
+        url = "http://localhost:8080/repository/default"
+        file = "output.csv"
+        outFile = "src/test/resources/webdav/output.csv"
+        overwrite = true
+        //proxyUser = user
+        //proxyPassword = password
+        //proxyHost = abcd.test
+        //proxyPort = 1234
+    }
+        
+Run `gradle pullTask`
+    
+## WEBDAV PUSH - Pushing WEBDAV site, proxy configuration is supported
+
+    apply plugin: 'push'
+    pushArgs {
+        user = 'admin'
+        password = "admin"
+        url = "http://localhost:8080/repository/default"
+        overwrite = true
+        tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
+        createDirectoryStructure = false
+    	//proxyUser = user
+        //proxyPassword = password
+        //proxyHost = abcd.test
+        //proxyPort = 1234
+    }
+
+Run `gradle pushTask`
+
+# Using AddOnJavaAntTasks on ANT
+Ensure you have downloaded the *anttasks jar* and placed that in your $ANT_HOME/lib. The jar is available from http://goo.gl/CWv92n
+
 # Addon Ant Tasks
 * AntDav - To upload and download from WebDav Servers
 * AntCsvtoExcel - To convert a set of csv files into 1 Excel file. Each csv file is a sheet within
 * AntXMLUnit - To compare two directory of xml files using XMLUnit and produce a csv file report for each
 * AntXPath - For modifying xml files using xpaths, sometimes for comparison you want to physically strip out timestamp elements, etc. AntXPath is capable of doing that.
 * AntReadBlob - For bulk reading and downloading files from the database
-
-## Easy way using gradle
-
-Sample gradle build script can be viewed here - 
-https://gist.github.com/parj/5474558
-
-# Using AddOnJavaAntTasks on ANT
-Ensure you have downloaded the *AntDav jar* and placed that in your $ANT_HOME/lib
 
 ## AntDav
 

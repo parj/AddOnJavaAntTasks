@@ -39,7 +39,7 @@ repositories {
 }
 
 group='uk.co.firstzero'
-version='2.5-SNAPSHOT'
+version='2.6-SNAPSHOT'
 
 uploadArchives {
     repositories {
@@ -49,7 +49,7 @@ uploadArchives {
                     authentication(userName: nexusUsername, password: nexusPassword)
                 }
 
-                pom.version = '2.5-SNAPSHOT'
+                pom.version = '2.6-SNAPSHOT'
                 pom.groupId = 'uk.co.firstzero'
                 pom.artifactId = 'anttasks'
             }
@@ -163,7 +163,7 @@ task readBlobAnt << {
                  unzip: "True")
 }
 
-//** GRADLE Plugins - for the following to work run gradle uploadArchives and then uncomment to run **//
+//** GRADLE Plugins - for the following to work run 'gradle uploadArchives' and then uncomment to run **//
 
 /**
  * Uncomment all below after running gradle uploadArchives
@@ -176,7 +176,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.5-SNAPSHOT'
+        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.6-SNAPSHOT'
     }
 }
 
@@ -255,4 +255,4 @@ pushArgs {
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
 }
-**/
+*/
