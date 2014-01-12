@@ -167,7 +167,7 @@ task readBlobAnt << {
 
 /**
  * Uncomment all below after running gradle uploadArchives
- *
+ */
 buildscript {
     repositories {
         maven {
@@ -178,6 +178,16 @@ buildscript {
     dependencies {
         classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.5-SNAPSHOT'
     }
+}
+
+apply plugin: 'csvdiff'
+
+csvDiffArgs {
+	resultDirectory = projectDir.toString() + "/src/test/resources/csv/CsvDiff";
+	separator = ","
+	controlDirectory = fileTree(dir: 'src/test/resources/csv/CsvDiff/control', include: '*.csv')
+	testDirectory = 'src/test/resources/csv/CsvDiff/test'
+	keyColumns = 'Header_1;Header_3'
 }
 
 apply plugin : 'antxpath'
@@ -237,4 +247,3 @@ pushArgs {
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
 }
-**/

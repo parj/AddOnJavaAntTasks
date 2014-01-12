@@ -21,13 +21,15 @@ http://opensource.org/licenses/mit-license.php
 
 package uk.co.firstzero.csv;
 
+import java.io.IOException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import uk.co.firstzero.diff.MinimalReport;
 import uk.co.firstzero.diff.exception.HeaderColumnsDoNotMatchException;
 import uk.co.firstzero.diff.exception.KeyColumnsMissingException;
-
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
@@ -53,7 +55,7 @@ public class CsvDiffTest {
 	}
 
     @Test
-	public void testMissingKeyColumns() throws HeaderColumnsDoNotMatchException {
+	public void testMissingKeyColumns() throws HeaderColumnsDoNotMatchException, IOException {
 		try {
 			csv.diff();
 		} catch(KeyColumnsMissingException e) {
@@ -62,7 +64,7 @@ public class CsvDiffTest {
 	}
 
     @Test
-	public void testDiff() throws KeyColumnsMissingException, HeaderColumnsDoNotMatchException {
+	public void testDiff() throws KeyColumnsMissingException, HeaderColumnsDoNotMatchException, IOException {
 		csv.setKeyColumns(keyColumns);
 		csv.diff();
 		assertEquals(report.getNumberOfDifferences(), 3);
