@@ -42,8 +42,22 @@ public class AntReadBlob extends Task {
     private static final int BLOB = 2;
     private static final int KBYTES = 1024;
 
-
 	private static Logger logger = Logger.getLogger(AntReadBlob.class);
+
+    public AntReadBlob() {
+
+    }
+
+    public AntReadBlob(String className, String jdbcUrl, String user, String password, String extension, String sql, String outputDirectory, boolean unzip) {
+        setClassName(className);
+        setJdbcUrl(jdbcUrl);
+        setUser(user);
+        setPassword(password);
+        setExtension(extension);
+        setSql(sql);
+        setOutputDirectory(outputDirectory);
+        setUnzip(unzip);
+    }
 
     /**
      * Get the driver class to use - example oracle.jdbc.driver.OracleDriver

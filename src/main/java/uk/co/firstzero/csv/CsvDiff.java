@@ -124,7 +124,7 @@ public class CsvDiff {
 		return keyColumns;
 	}
 
-	public void diff() throws KeyColumnsMissingException, HeaderColumnsDoNotMatchException {
+	public void diff() throws KeyColumnsMissingException, HeaderColumnsDoNotMatchException, IOException {
 		logger.debug("START diff");
 		
 		CSVReader fileE; CSVReader fileR;
@@ -261,7 +261,7 @@ public class CsvDiff {
 			
 		} catch(java.io.IOException e) {
 			System.out.println("Unable to read expected or reached file");
-
+			throw e;
 		}
 	}
 	

@@ -56,6 +56,10 @@ public class Push extends Task{
     private int proxyPort = Integer.MIN_VALUE;
     private HttpClient httpClient;
 
+    public Push() {
+
+    }
+
     public Push(String user, String password, String url) throws MalformedURLException {
         setUser(user);
         setPassword(password);
@@ -226,6 +230,8 @@ public class Push extends Task{
         deleteFile(uploadUrl);
         PutMethod putMethod = new PutMethod(uploadUrl);
 
+        logger.debug("Check if file exists - " + fileExists(uploadUrl));
+
         if (!fileExists(uploadUrl))  {
             RequestEntity requestEntity = new InputStreamRequestEntity(new FileInputStream(f));
 
@@ -265,6 +271,7 @@ public class Push extends Task{
         boolean deleted = true;
 
         try {
+            logger.debug("Check if fileExists - " + fileExists(url));
             if (fileExists(url) && overwrite) {
                 deleted = Common.executeMethod(httpClient, new DeleteMethod(url));
             }

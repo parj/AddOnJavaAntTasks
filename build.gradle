@@ -1,5 +1,7 @@
-/*
-Copyright (c) 2011-2013 Parjanya Mudunuri
+import org.gradle.api.file.FileTree;
+
+/**
+Copyright (c) 2011-2014 Parjanya Mudunuri
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -17,19 +19,52 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 http://opensource.org/licenses/mit-license.php
- */
+**/
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'sonar'
+apply plugin: 'groovy'
+
+
+//** CONFIGURATION **//
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.10'
+}
 
 repositories {
     mavenCentral()
 }
 
-List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:1.2.16", //All
+group='uk.co.firstzero'
+version='2.5-SNAPSHOT'
+
+uploadArchives {
+    repositories {
+        if (hasProperty('nexusUrlSnapshot')) {
+            mavenDeployer {
+                repository(url: nexusUrlSnapshot) {
+                    authentication(userName: nexusUsername, password: nexusPassword)
+                }
+
+                pom.version = '2.5-SNAPSHOT'
+                pom.groupId = 'uk.co.firstzero'
+                pom.artifactId = 'anttasks'
+            }
+        } else {
+            mavenDeployer {
+                repository(url: uri('repo'))
+            }
+
+        }
+
+    }
+}
+
+//** DEPENDENCIES **//
+List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:1.2.17", //All
 				    "xmlunit:xmlunit:1.3", "net.sourceforge.jexcelapi:jxl:2.6.12", //uk.co.firstzero.xml.AntXMLUnit
 				    "net.sf.opencsv:opencsv:2.0", //uk.co.firstzero.csv.diff
 				    "net.sourceforge.jexcelapi:jxl:2.6.10", //uk.co.firstzero.csv.AntCsvToExcel
@@ -37,14 +72,16 @@ List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:
                     "commons-httpclient:commons-httpclient:3.0",
                     "commons-logging:commons-logging:1.1.1",
                     "org.apache.jackrabbit:jackrabbit-webdav:2.1.1",
-                    "org.slf4j:slf4j-api:1.5.8",
-                    "org.slf4j:slf4j-log4j12:1.5.2",  //uk.co.firstzero.AntDav
+                    "org.slf4j:slf4j-api:1.5.6",
+                    //"org.slf4j:slf4j-log4j12:1.7.2",  //uk.co.firstzero.AntDav
                     "com.h2database:h2:1.3.170"       //uk.co.firstzero.sql - required for junit
                     ]
 
 dependencies {
     compile compileAll
-    runtime fileTree(dir: 'build/libs', include: '*.jar')
+    compile gradleApi()		//For gradle custom tasks
+    compile localGroovy()   //For gradle custom tasks
+    runtime fileTree(dir: 'build/libs', include: '*.jar')	//For running the custom tasks locally
 }
 
 configurations {
@@ -56,31 +93,14 @@ configurations {
 
 tasks.withType(Compile) {
     options.encoding = 'UTF-8'
+    options.compilerArgs << "-Xlint:unchecked"
 }
 
-uploadArchives {
-    repositories {
-        if (hasProperty('nexusUrlSnapshot')) {
-            mavenDeployer {
-                repository(url: nexusUrlSnapshot) {
-                    authentication(userName: nexusUsername, password: nexusPassword)
-                }
 
-			    pom.version = '2.5-SNAPSHOT'
-        	    pom.groupId = 'uk.co.firstzero'
-        	    pom.artifactId = 'anttasks'
-            }
-        }
-
-    }
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.6'
-}
+//** SAMPLE Tasks **//
 
 // Push file to a WebDav Server
-task push << {
+task pushAnt << {
     ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: configurations.runtime.asPath)
     ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
         fileset(dir: 'src/test/resources/webdav', includes: '*.csv')
@@ -88,7 +108,7 @@ task push << {
 }
 
 // Pull file from a webdav server
-task pull << {
+task pullAnt << {
     ant.taskdef(name: 'pull', classname: 'uk.co.firstzero.webdav.Pull', classpath: configurations.runtime.asPath)
     ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
             file: "output.csv",
@@ -97,7 +117,7 @@ task pull << {
 }
 
 // Converts csv to Excel
-task csvToExcel << {
+task csvToExcelAnt << {
     ant.taskdef(name: 'csvToExcel', classname: 'uk.co.firstzero.csv.AntCsvToExcel', classpath: configurations.runtime.asPath)
 
     ant.csvToExcel(outputFile: "build/tmp/report.xls", separator: "^") {
@@ -106,7 +126,7 @@ task csvToExcel << {
 }
 
 // Diffs two directories containing xml files with the same name
-task diffxml << {
+task diffxmlAnt << {
     ant.taskdef(name: 'diffxml', classname: 'uk.co.firstzero.xml.AntXMLUnit', classpath: configurations.runtime.asPath)
 
     ant.diffxml(testDirectory: "src/test/resources/xml/AntXMLUnitTest/test", resultDirectory: "out") {
@@ -115,7 +135,7 @@ task diffxml << {
 }
 
 // Strips out and modifies tags in xmls and renames them using a naming convention
-task modifyPath << {
+task modifyPathAnt << {
     ant.taskdef(name: 'xPath', classname: 'uk.co.firstzero.xml.AntXPath', classpath: configurations.runtime.asPath)
     ant.taskdef(name: 'modifyPath', classname: 'uk.co.firstzero.xml.ModifyPath', classpath: configurations.runtime.asPath)
 
@@ -128,7 +148,7 @@ task modifyPath << {
 }
 
 // Reads blob data from the database
-task readBlob << {
+task readBlobAnt << {
     ant.taskdef(name: "readBlob", classname: "uk.co.firstzero.sql.AntReadBlob", classpath: configurations.runtime.asPath)
 
     String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
@@ -142,3 +162,97 @@ task readBlob << {
                  outputDirectory: "build/tmp",
                  unzip: "True")
 }
+
+//** GRADLE Plugins - for the following to work run gradle uploadArchives and then uncomment to run **//
+
+/**
+ * Uncomment all below after running gradle uploadArchives
+ *
+buildscript {
+    repositories {
+        maven {
+            url uri('repo')
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.5-SNAPSHOT'
+    }
+}
+
+apply plugin: 'csvtoexcel'
+
+csvToExcelArgs {
+	inputFiles = fileTree(dir: 'src/test/resources/csv/CsvToExcel', include: 'output.csv')
+	outputFile = 'src/test/resources/csv/CsvToExcel/report.xls'
+	separator = ','
+}
+
+apply plugin: 'csvdiff'
+
+csvDiffArgs {
+	resultDirectory = projectDir.toString() + "/src/test/resources/csv/CsvDiff";
+	separator = ","
+	controlDirectory = fileTree(dir: 'src/test/resources/csv/CsvDiff/control', include: '*.csv')
+	testDirectory = 'src/test/resources/csv/CsvDiff/test'
+	keyColumns = 'Header_1;Header_3'
+}
+
+apply plugin : 'antxpath'
+
+antXPathArgs {
+	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
+	outputDirectory = 'src/test/resources/xml/AntXPathTest'
+	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
+	modifyPaths = [ new uk.co.firstzero.xml.ModifyPath(path: "//title", delete:"True"), 
+					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
+}
+
+//Performing a xml diff
+apply plugin: 'xmlunit'
+
+xmlUnitArgs {
+	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
+	separator = ","
+	controlDirectory = fileTree(dir: 'src/test/resources/xml/AntXMLUnitTest/control', include: '*.xml')
+	testDirectory = 'src/test/resources/xml/AntXMLUnitTest/test'
+}
+
+
+// To run the plugin gradle readBlobTask
+apply plugin: 'readblob'
+
+readBlobArgs {
+    className = "org.h2.Driver"
+    String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
+    jdbcUrl = "jdbc:h2:" + databaseLocation + ";IFEXISTS=TRUE"
+    user = "sa"
+    password = ""
+    extension = ".jpg"
+    sql = "SELECT name, blob from TEST"
+    outputDirectory = "build/tmp"
+    unzip = true
+}
+
+// To run the plugin gradle pullTask
+apply plugin: 'pull'
+pullArgs {
+    user = 'admin'
+    password = "admin"
+    url = "http://localhost:8080/repository/default"
+    file = "output.csv"
+    outFile = "src/test/resources/webdav/output.csv"
+    overwrite = true
+}
+
+// To run the plugin gradle pushTask
+apply plugin: 'push'
+pushArgs {
+    user = 'admin'
+    password = "admin"
+    url = "http://localhost:8080/repository/default"
+    overwrite = true
+    tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
+    createDirectoryStructure = false
+}
+**/

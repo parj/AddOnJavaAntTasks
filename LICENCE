@@ -1,5 +1,4 @@
-/*
-Copyright (c) 2011, 2012 Parjanya Mudunuri
+Copyright (c) 2011-2014 Parjanya Mudunuri
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 associated documentation files (the "Software"), to deal in the Software without restriction, including
@@ -17,52 +16,3 @@ WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 http://opensource.org/licenses/mit-license.php
- */
-
-package uk.co.firstzero.xml;
-
-import org.apache.tools.ant.Task;
-
-public class ModifyPath extends Task {
-	private String path;
-	private String value;
-	private boolean delete;
-	
-	public ModifyPath() {}
-	
-	public ModifyPath(String path, String value) {
-		this.path = path;
-		this.value = value;
-	}
-	
-	public ModifyPath(String path, boolean delete) {
-		this.path = path;
-		this.delete = delete;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setDelete(boolean delete) {
-		this.delete = delete;
-	}
-
-	public boolean isDelete() {
-		return delete;
-	}
-	
-	public void execute() {}
-}

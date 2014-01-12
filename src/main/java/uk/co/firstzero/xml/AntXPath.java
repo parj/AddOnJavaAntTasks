@@ -49,7 +49,7 @@ public class AntXPath extends Task {
     Logger logger = Logger.getLogger(AntXPath.class);
     
 	private Vector<FileSet> fileSets = new Vector<FileSet>();
-	private List/*<Property>*/ modifyPaths = new ArrayList();
+	private List<ModifyPath> modifyPaths = new ArrayList<ModifyPath>();
 	private String outputDirectory;
 	private String renamePattern;
 	private String patternSplitter = "#";
@@ -76,6 +76,10 @@ public class AntXPath extends Task {
 	public void addModifyPath(ModifyPath path) {
         modifyPaths.add(path);
     }
+	
+	public void setModifyPaths(List<ModifyPath> modifyPaths) {
+		this.modifyPaths = modifyPaths;
+	}
 	
 	/**
 	 * Directory to write out processed file
@@ -132,7 +136,7 @@ public class AntXPath extends Task {
         xFormer = TransformerFactory.newInstance().newTransformer();
 	}
 	
-	private void processFile(File iFile) {
+	public void processFile(File iFile) {
 		try {
 			Document doc = builder.parse(iFile);
 			

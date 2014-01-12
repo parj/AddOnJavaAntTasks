@@ -46,7 +46,7 @@ public class AntXMLUnit extends Task {
 	
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
-	private static List ignoreIds = new ArrayList();
+	private static List<Integer> ignoreIds = new ArrayList<Integer>();
 	
 	public AntXMLUnit() { } 
 	
@@ -155,12 +155,11 @@ public class AntXMLUnit extends Task {
 	/**
 	 * Sets up xmlunit constants
 	 */
-	private void preSetup() {
+	public void preSetup() {
         XMLUnit.setIgnoreAttributeOrder(true);
         XMLUnit.setIgnoreWhitespace(true);
 
-        ignoreIds.add(DifferenceConstants.CHILD_NODELIST_SEQUENCE);
-        ignoreIds.add(DifferenceConstants.CHILD_NODELIST_SEQUENCE_ID);
+        ignoreIds.add(new Integer(DifferenceConstants.CHILD_NODELIST_SEQUENCE_ID));
 	}
 
     /**
@@ -180,10 +179,10 @@ public class AntXMLUnit extends Task {
 
         Diff diff = new Diff(control, test);
         DetailedDiff dd = new DetailedDiff(diff);
-        return dd.getAllDifferences();
+        return (List<Difference>)dd.getAllDifferences();
 	}
 
-    private void writeReport(List<Difference> differences, File controlFile) throws IOException {
+    public void writeReport(List<Difference> differences, File controlFile) throws IOException {
         Writer report = new BufferedWriter(new FileWriter(resultDirectory + "/" + controlFile.getName() + ".csv"));
 
         String header = "Diff ID" + this.separator + "Description" + this.separator
@@ -195,8 +194,8 @@ public class AntXMLUnit extends Task {
         for (Object differenceObject : differences) {
             Difference difference = (Difference)differenceObject;
 
-            if (ignoreIds.contains(difference.getId())) {
-                logger.trace("SKIP - "
+            if (ignoreIds.contains(new Integer(difference.getId()))) {
+                logger.debug("SKIP - "
                         + difference.getId() + this.separator
                         + difference.getDescription() + this.separator
                         + difference.getControlNodeDetail().getXpathLocation());
