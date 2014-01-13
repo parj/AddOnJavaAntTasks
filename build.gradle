@@ -304,8 +304,8 @@ antXPathArgs {
 					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
 }
 
-// gradle xmlUnitTask
-xmlUnitArgs {
+// gradle xmlDiffTask
+xmlDiffArgs {
 	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
 	separator = ","
 	controlDirectory = fileTree(dir: 'src/test/resources/xml/AntXMLUnitTest/control', include: '*.xml')
@@ -344,4 +344,4 @@ pushArgs {
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
 }
-*/
+**/

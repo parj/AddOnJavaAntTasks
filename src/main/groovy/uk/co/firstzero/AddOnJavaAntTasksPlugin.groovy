@@ -8,7 +8,7 @@ import org.gradle.api.file.FileTree
 
 import uk.co.firstzero.xml.ModifyPath
 import uk.co.firstzero.xml.AntXPathTask
-import uk.co.firstzero.xml.XMLUnitTask
+import uk.co.firstzero.xml.XMLDiffTask
 
 import uk.co.firstzero.csv.CsvDiffTask
 import uk.co.firstzero.csv.CsvToExcelTask
@@ -76,7 +76,7 @@ class AntXPathPluginExtension {
 	List<ModifyPath> modifyPaths
 }
 
-class XMLUnitPluginExtension {
+class XMLDiffPluginExtension {
 	String resultDirectory;
 	String separator = ","
 	FileTree controlDirectory
@@ -103,8 +103,8 @@ class AddOnJavaAntTasksPlugin implements Plugin<Project> {
 		target.extensions.create('antXPathArgs', AntXPathPluginExtension)
 		target.task('antXPathTask', group:'AddOnJavaAntTasks', description:'Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.', type: AntXPathTask)
 
-		target.extensions.create('xmlUnitArgs', XMLUnitPluginExtension)
-		target.task('xmlUnitTask', group:'AddOnJavaAntTasks', description:'Diffs two directories containing xml files. Each directory must have the same name and number of files as the other', type: XMLUnitTask)
+		target.extensions.create('xmlDiffArgs', XMLDiffPluginExtension)
+		target.task('xmlDiffTask', group:'AddOnJavaAntTasks', description:'Diffs two directories containing xml files. Each directory must have the same name and number of files as the other', type: XMLDiffTask)
 
 	}
 }

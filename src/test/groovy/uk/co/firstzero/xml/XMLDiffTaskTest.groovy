@@ -8,12 +8,12 @@ import static org.junit.Assert.*
 import org.gradle.api.Project
 import org.junit.Test;
 
-class XMLUnitTaskTest {
+class XMLDiffTaskTest {
 
 	@Test
     public void canAddXMLUnitTaskToProject() {
         Project project = ProjectBuilder.builder().build()
-        def task = project.task('xmlUnitTaskTest', type: XMLUnitTask)
-        assertTrue(task instanceof XMLUnitTask)
+        def task = project.task('xmlDiffTaskTest', type: XMLDiffTask)
+        assertTrue(task instanceof XMLDiffTask)
     }
 }
