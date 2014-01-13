@@ -15,6 +15,6 @@ class CsvDiffPluginExtension {
 class CsvDiffPlugin implements Plugin<Project> {
     void apply(Project target) {
         target.extensions.create('csvDiffArgs', CsvDiffPluginExtension)
-        target.task('csvDiffTask', type: CsvDiffTask)
+        target.task('csvDiffTask', description: 'Diffs two directories containing csv files. Each directory must have the same name and number of files as the other', type: CsvDiffTask)
     }
 }

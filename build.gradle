@@ -21,16 +21,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 http://opensource.org/licenses/mit-license.php
 **/
 
-import org.gradle.api.XmlProvider
-import org.gradle.api.artifacts.maven.MavenDeployment
-
 
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'signing'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
-apply plugin: 'sonar'
 apply plugin: 'groovy'
 
 
@@ -39,23 +35,28 @@ task wrapper(type: Wrapper) {
     gradleVersion = '1.10'
 }
 
+//** MAVEN CONFIGURATION **//
 repositories {
     mavenCentral()
 }
 
 group='uk.co.firstzero'
-version='2.6'
+version='2.7'
 ext.packaging = 'jar'
 
+/* To signal type of build which in turn sets the repository URL
+ * gradle -Pdev 	//DEV BUILD
+ * gradle -Pci  	//SNAPSHOT BUILD
+ * gradle -Prelease //RELEASE BUILD
+ */
 def isDevBuild
 def isCiBuild
 def isReleaseBuild
 
 def sonatypeRepositoryUrl
 
-//set build variables based on build type (release, continuous integration, development)
 if(hasProperty("release")) {
-	println "Release build"
+	println "RELEASE build"
     isReleaseBuild = true
     sonatypeRepositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 } else if (hasProperty("ci")) {
@@ -82,7 +83,6 @@ List compileAll = [ "org.apache.ant:ant:1.8.1", "junit:junit:4.0", "log4j:log4j:
                     "commons-logging:commons-logging:1.1.1",
                     "org.apache.jackrabbit:jackrabbit-webdav:2.1.1",
                     "org.slf4j:slf4j-api:1.5.6",
-                    //"org.slf4j:slf4j-log4j12:1.7.2",  //uk.co.firstzero.AntDav
                     "com.h2database:h2:1.3.170"       //uk.co.firstzero.sql - required for junit
                     ]
 
@@ -100,11 +100,13 @@ configurations {
     }
 }
 
+//** COMPILATION OPTIONS **//
 tasks.withType(Compile) {
     options.encoding = 'UTF-8'
     options.compilerArgs << "-Xlint:unchecked"
 }
 
+//** ARTIFACTS TO BE INCLUDED - REQUIRED FOR OSS MAVEN REPOSITORY **//
 task javadocJar(type: Jar, dependsOn: javadoc) {
 	classifier = 'javadoc'
 	from 'build/docs/javadoc'
@@ -121,21 +123,24 @@ artifacts {
 	archives sourcesJar
 }
 
-//** Artifact Signing **//
+//** ARTIFACT SIGNING - REQUIRED FOR OSS MAVEN REPOSITORY **//
 if(isReleaseBuild) {
     signing {
         sign configurations.archives
     }
 } else {
     task signArchives {
-        // do nothing
+        //Do nothing
     }
 }
 
+//** ARTIFACT UPLOADING - REQUIRED FOR OSS MAVEN REPOSITORY **//
 uploadArchives {
 	repositories {
 		if (isDevBuild) {
-            mavenLocal()
+            mavenDeployer {
+                repository(url: uri('repo'))
+            }
         }
 		else {    
 			mavenDeployer {
@@ -148,7 +153,7 @@ uploadArchives {
 				}
 	
 				pom.project {
-				   name 'anttasks'
+				   name 'AddOnJavaAntTasks'
 				   packaging 'jar'
 				   description 'Addon Ant Tasks'
 				   url 'https://github.com/parj/AddOnJavaAntTasks'
@@ -180,8 +185,15 @@ uploadArchives {
 }
 
 
-
-//** SAMPLE Tasks **//
+//** ANT TASKS, Gradle examples are below **//
+/* SAMPLE Ant Tasks 
+ * pushAnt - Push file to a WebDav Server
+ * pullAnt - Pull file from a webdav server
+ * csvToExcelAnt - Converts csv to Excel
+ * diffxmlAnt - Diffs two directories containing xml files with the same name
+ * modifyPathAnt - Strips out and modifies tags in xmls and renames them using a naming convention
+ * readBlobAnt - Reads blob data from the database
+ */
 
 // Push file to a WebDav Server
 task pushAnt << {
@@ -251,7 +263,7 @@ task readBlobAnt << {
 
 /**
  * Uncomment all below after running gradle uploadArchives
- *
+ */
 buildscript {
     repositories {
         maven {
@@ -260,7 +272,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.6-SNAPSHOT'
+        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.7'
     }
 }
 
@@ -320,6 +332,7 @@ readBlobArgs {
 
 // To run the plugin gradle pullTask
 apply plugin: 'pull'
+
 pullArgs {
     user = 'admin'
     password = "admin"
@@ -331,6 +344,7 @@ pullArgs {
 
 // To run the plugin gradle pushTask
 apply plugin: 'push'
+
 pushArgs {
     user = 'admin'
     password = "admin"
@@ -339,4 +353,3 @@ pushArgs {
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
 }
-*/

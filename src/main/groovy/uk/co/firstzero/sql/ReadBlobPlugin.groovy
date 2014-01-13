@@ -17,6 +17,6 @@ class ReadBlobPluginExtension {
 class ReadBlobPlugin implements Plugin<Project> {
     void apply(Project target) {
         target.extensions.create('readBlobArgs', ReadBlobPluginExtension)
-        target.task('readBlobTask', type: ReadBlobTask)
+        target.task('readBlobTask', description: 'Extracts Blobs from Database.SQL should contain a string name and then blob', type: ReadBlobTask)
     }
 }

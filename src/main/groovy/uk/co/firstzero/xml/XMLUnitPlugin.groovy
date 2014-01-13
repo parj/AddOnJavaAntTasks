@@ -14,6 +14,6 @@ class XMLUnitPluginExtension {
 class XMLUnitPlugin implements Plugin<Project> {
     void apply(Project target) {
         target.extensions.create('xmlUnitArgs', XMLUnitPluginExtension)
-        target.task('xmlUnitTask', type: XMLUnitTask)
+        target.task('xmlUnitTask', description:'Diffs two directories containing xml files. Each directory must have the same name and number of files as the other', type: XMLUnitTask)
     }
 }

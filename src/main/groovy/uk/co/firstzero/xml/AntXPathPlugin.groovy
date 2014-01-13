@@ -16,6 +16,6 @@ class AntXPathPluginExtension {
 class AntXPathPlugin implements Plugin<Project> {
     void apply(Project target) {
         target.extensions.create('antXPathArgs', AntXPathPluginExtension)
-        target.task('antXPathTask', type: AntXPathTask)
+        target.task('antXPathTask', description:'Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.', type: AntXPathTask)
     }
 }

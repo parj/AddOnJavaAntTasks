@@ -8,7 +8,7 @@ Tools and utilities written in Java to help in day-to-day work.
         classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.6'
     }
 
-## CSV To Excel - To convert a set of csv files into 1 Excel file. Each csv file is a sheet within excel
+## CSV To Excel -Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel
 
     apply plugin: 'csvtoexcel'
 
@@ -20,7 +20,7 @@ Tools and utilities written in Java to help in day-to-day work.
 
 Run `gradle csvToExcelTask`
  
-## CSV Diff - Diff two directories containing csv files. Each directory must have the same name and number of files as the other   
+## CSV Diff - Diffs two directories containing csv files. Each directory must have the same name and number of files as the other
 
     apply plugin: 'csvdiff'
     
@@ -34,7 +34,7 @@ Run `gradle csvToExcelTask`
 
 Run `gradle csvDiffTask`
 
-## XPATH - Stripping out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed  
+## XPATH - Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.
 
     apply plugin : 'antxpath'
     
@@ -48,7 +48,7 @@ Run `gradle csvDiffTask`
 
 Run `antXPathTask`
 
-## XML DIFF - Diff two directories containing xml files. Each directory must have the same name and number of files as the other   
+## XML DIFF - Diffs two directories containing xml files. Each directory must have the same name and number of files as the other
 
     apply plugin: 'xmlunit'
     
@@ -61,7 +61,7 @@ Run `antXPathTask`
     
 Run `xmlUnitTask`
     
-## READ BLOB - Extracting Blobs from Database
+## READ BLOB - Extracts Blobs from Database.SQL should contain a string name and then blob
 
     apply plugin: 'readblob'
     
@@ -79,7 +79,7 @@ Run `xmlUnitTask`
 
 Run `readBlobTask`
 
-## WEBDAV PULL - Downloading from WEBDAV site, proxy configuration is supported
+## WEBDAV PULL - Downloads files from a WEBDAV site, proxy configuration is supported
 
     apply plugin: 'pull'
     pullArgs {
@@ -97,7 +97,7 @@ Run `readBlobTask`
         
 Run `gradle pullTask`
     
-## WEBDAV PUSH - Pushing WEBDAV site, proxy configuration is supported
+## WEBDAV PUSH - Pushes files to a WEBDAV site, proxy configuration is supported
 
     apply plugin: 'push'
     pushArgs {

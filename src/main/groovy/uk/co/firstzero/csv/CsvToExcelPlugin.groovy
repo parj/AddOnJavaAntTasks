@@ -13,6 +13,6 @@ class CsvToExcelPluginExtension {
 class CsvToExcelPlugin implements Plugin<Project> {
     void apply(Project target) {
         target.extensions.create('csvToExcelArgs', CsvToExcelPluginExtension)
-        target.task('csvToExcelTask', type: CsvToExcelTask)
+        target.task('csvToExcelTask', description:'Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel', type: CsvToExcelTask)
     }
 }

@@ -20,6 +20,6 @@ class PushPluginExtension {
 class PushPlugin implements Plugin<Project> {
     void apply(Project target) {
         target.extensions.create('pushArgs', PushPluginExtension)
-        target.task('pushTask', type: PushTask)
+        target.task('pushTask', description:'Pushes files to a WEBDAV site, proxy configuration is supported', type: PushTask)
     }
 }
