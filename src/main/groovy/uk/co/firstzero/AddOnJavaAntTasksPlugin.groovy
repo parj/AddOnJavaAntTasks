@@ -86,25 +86,25 @@ class XMLUnitPluginExtension {
 class AddOnJavaAntTasksPlugin implements Plugin<Project> {
 	void apply(Project target) {
 		target.extensions.create('csvDiffArgs', CsvDiffPluginExtension)
-		target.task('csvDiffTask', description: 'Diffs two directories containing csv files. Each directory must have the same name and number of files as the other', type: CsvDiffTask)
+		target.task('csvDiffTask', group:'AddOnJavaAntTasks', description: 'Diffs two directories containing csv files. Each directory must have the same name and number of files as the other', type: CsvDiffTask)
 		
 		target.extensions.create('csvToExcelArgs', CsvToExcelPluginExtension)
-		target.task('csvToExcelTask', description:'Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel', type: CsvToExcelTask)
+		target.task('csvToExcelTask', group:'AddOnJavaAntTasks', description:'Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel', type: CsvToExcelTask)
 
 		target.extensions.create('readBlobArgs', ReadBlobPluginExtension)
-		target.task('readBlobTask', description: 'Extracts Blobs from Database.SQL should contain a string name and then blob', type: ReadBlobTask)
+		target.task('readBlobTask', group:'AddOnJavaAntTasks', description: 'Extracts Blobs from Database.SQL should contain a string name and then blob', type: ReadBlobTask)
 
 		target.extensions.create('pullArgs', PullPluginExtension)
-		target.task('pullTask', description:'Downloads files from a WEBDAV site, proxy configuration is supported', type: PullTask)
+		target.task('pullTask', group:'AddOnJavaAntTasks', description:'Downloads files from a WEBDAV site, proxy configuration is supported', type: PullTask)
 
 		target.extensions.create('pushArgs', PushPluginExtension)
-		target.task('pushTask', description:'Pushes files to a WEBDAV site, proxy configuration is supported', type: PushTask)
+		target.task('pushTask', group:'AddOnJavaAntTasks', description:'Pushes files to a WEBDAV site, proxy configuration is supported', type: PushTask)
 
 		target.extensions.create('antXPathArgs', AntXPathPluginExtension)
-		target.task('antXPathTask', description:'Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.', type: AntXPathTask)
+		target.task('antXPathTask', group:'AddOnJavaAntTasks', description:'Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.', type: AntXPathTask)
 
 		target.extensions.create('xmlUnitArgs', XMLUnitPluginExtension)
-		target.task('xmlUnitTask', description:'Diffs two directories containing xml files. Each directory must have the same name and number of files as the other', type: XMLUnitTask)
+		target.task('xmlUnitTask', group:'AddOnJavaAntTasks', description:'Diffs two directories containing xml files. Each directory must have the same name and number of files as the other', type: XMLUnitTask)
 
 	}
 }

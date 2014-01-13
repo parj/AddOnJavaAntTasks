@@ -305,7 +305,6 @@ antXPathArgs {
 }
 
 // gradle xmlUnitTask
-
 xmlUnitArgs {
 	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
 	separator = ","
@@ -313,10 +312,7 @@ xmlUnitArgs {
 	testDirectory = 'src/test/resources/xml/AntXMLUnitTest/test'
 }
 
-
 // gradle readBlobTask
-apply plugin: 'readblob'
-
 readBlobArgs {
     className = "org.h2.Driver"
     String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
@@ -330,8 +326,6 @@ readBlobArgs {
 }
 
 // gradle pullTask
-apply plugin: 'pull'
-
 pullArgs {
     user = 'admin'
     password = "admin"
@@ -342,8 +336,6 @@ pullArgs {
 }
 
 // gradle pushTask
-apply plugin: 'push'
-
 pushArgs {
     user = 'admin'
     password = "admin"
@@ -352,4 +344,4 @@ pushArgs {
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
 }
-**/
+*/
