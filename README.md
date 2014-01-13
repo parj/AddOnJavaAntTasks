@@ -7,10 +7,10 @@ Tools and utilities written in Java to help in day-to-day work.
     dependencies {
         classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.6'
     }
+    
+    apply plugin: 'addonjavaanttasks'
 
 ## CSV To Excel -Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel
-
-    apply plugin: 'csvtoexcel'
 
     csvToExcelArgs {
     	inputFiles = fileTree(dir: 'src/test/resources/csv/CsvToExcel', include: 'output.csv')
@@ -21,8 +21,6 @@ Tools and utilities written in Java to help in day-to-day work.
 Run `gradle csvToExcelTask`
  
 ## CSV Diff - Diffs two directories containing csv files. Each directory must have the same name and number of files as the other
-
-    apply plugin: 'csvdiff'
     
     csvDiffArgs {
     	resultDirectory = projectDir.toString() + "/src/test/resources/csv/CsvDiff";
@@ -35,8 +33,6 @@ Run `gradle csvToExcelTask`
 Run `gradle csvDiffTask`
 
 ## XPATH - Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.
-
-    apply plugin : 'antxpath'
     
     antXPathArgs {
     	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
@@ -49,8 +45,6 @@ Run `gradle csvDiffTask`
 Run `antXPathTask`
 
 ## XML DIFF - Diffs two directories containing xml files. Each directory must have the same name and number of files as the other
-
-    apply plugin: 'xmlunit'
     
     xmlUnitArgs {
     	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
@@ -62,8 +56,6 @@ Run `antXPathTask`
 Run `xmlUnitTask`
     
 ## READ BLOB - Extracts Blobs from Database.SQL should contain a string name and then blob
-
-    apply plugin: 'readblob'
     
     readBlobArgs {
         className = "org.h2.Driver"
@@ -81,7 +73,6 @@ Run `readBlobTask`
 
 ## WEBDAV PULL - Downloads files from a WEBDAV site, proxy configuration is supported
 
-    apply plugin: 'pull'
     pullArgs {
         user = 'admin'
         password = "admin"
@@ -99,7 +90,6 @@ Run `gradle pullTask`
     
 ## WEBDAV PUSH - Pushes files to a WEBDAV site, proxy configuration is supported
 
-    apply plugin: 'push'
     pushArgs {
         user = 'admin'
         password = "admin"
