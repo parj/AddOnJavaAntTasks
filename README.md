@@ -1,16 +1,23 @@
 ![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
 
-Tools and utilities written in Java to help in day-to-day work.
+## Tools and utilities written in Java to help in day-to-day work.
 
 # Gradle method
 
-    dependencies {
-        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.7'
-    }
+    apply plugin : 'addonjavaanttasks'
     
-    apply plugin: 'addonjavaanttasks'
+    buildscript {
+       repositories {
+          mavenCentral()
+       }
+       dependencies {
+          classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.7'
+       }
+    }
 
-## CSV To Excel -Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel
+
+## CSV To Excel 
+Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel
 
     csvToExcelArgs {
     	inputFiles = fileTree(dir: 'src/test/resources/csv/CsvToExcel', include: 'output.csv')
@@ -20,7 +27,8 @@ Tools and utilities written in Java to help in day-to-day work.
 
 Run `gradle csvToExcelTask`
  
-## CSV Diff - Diffs two directories containing csv files. Each directory must have the same name and number of files as the other
+## CSV Diff
+Diffs two directories containing csv files. Each directory must have the same name and number of files as the other
     
     csvDiffArgs {
     	resultDirectory = projectDir.toString() + "/src/test/resources/csv/CsvDiff";
@@ -32,7 +40,8 @@ Run `gradle csvToExcelTask`
 
 Run `gradle csvDiffTask`
 
-## XPATH - Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.
+## XPATH
+Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.
     
     antXPathArgs {
     	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
@@ -42,9 +51,10 @@ Run `gradle csvDiffTask`
     					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
     }
 
-Run `antXPathTask`
+Run `gradle antXPathTask`
 
-## XML DIFF - Diffs two directories containing xml files. Each directory must have the same name and number of files as the other
+## XML DIFF
+Diffs two directories containing xml files. Each directory must have the same name and number of files as the other
     
     xmlUnitArgs {
     	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
@@ -53,9 +63,10 @@ Run `antXPathTask`
     	testDirectory = 'src/test/resources/xml/AntXMLUnitTest/test'
     }
     
-Run `xmlUnitTask`
+Run `gradle xmlUnitTask`
     
-## READ BLOB - Extracts Blobs from Database.SQL should contain a string name and then blob
+## READ BLOB
+Extracts Blobs from Database.SQL should contain a string name and then blob
     
     readBlobArgs {
         className = "org.h2.Driver"
@@ -69,9 +80,10 @@ Run `xmlUnitTask`
         unzip = true
     }
 
-Run `readBlobTask`
+Run `gradle readBlobTask`
 
-## WEBDAV PULL - Downloads files from a WEBDAV site, proxy configuration is supported
+## WEBDAV PULL
+Downloads files from a WEBDAV site, proxy configuration is supported
 
     pullArgs {
         user = 'admin'
@@ -88,7 +100,8 @@ Run `readBlobTask`
         
 Run `gradle pullTask`
     
-## WEBDAV PUSH - Pushes files to a WEBDAV site, proxy configuration is supported
+## WEBDAV PUSH
+Pushes files to a WEBDAV site, proxy configuration is supported
 
     pushArgs {
         user = 'admin'
