@@ -186,14 +186,15 @@ uploadArchives {
 
 
 //** ANT TASKS, Gradle examples are below **//
-/* SAMPLE Ant Tasks 
+/**
+ * SAMPLE Ant Tasks - Uncomment to run 
  * pushAnt - Push file to a WebDav Server
  * pullAnt - Pull file from a webdav server
  * csvToExcelAnt - Converts csv to Excel
  * diffxmlAnt - Diffs two directories containing xml files with the same name
  * modifyPathAnt - Strips out and modifies tags in xmls and renames them using a naming convention
  * readBlobAnt - Reads blob data from the database
- */
+ *
 
 // Push file to a WebDav Server
 task pushAnt << {
@@ -258,12 +259,13 @@ task readBlobAnt << {
                  outputDirectory: "build/tmp",
                  unzip: "True")
 }
+**/
 
 //** GRADLE Plugins - for the following to work run 'gradle uploadArchives' and then uncomment to run **//
 
 /**
  * Uncomment all below after running gradle uploadArchives
- */
+ *
 buildscript {
     repositories {
         maven {
@@ -276,16 +278,16 @@ buildscript {
     }
 }
 
-apply plugin: 'csvtoexcel'
+apply plugin: 'addonjavaanttasks'
 
+// gradle csvToExcel Task
 csvToExcelArgs {
 	inputFiles = fileTree(dir: 'src/test/resources/csv/CsvToExcel', include: 'output.csv')
 	outputFile = 'src/test/resources/csv/CsvToExcel/report.xls'
 	separator = ','
 }
 
-apply plugin: 'csvdiff'
-
+// gradle csvDiffTask
 csvDiffArgs {
 	resultDirectory = projectDir.toString() + "/src/test/resources/csv/CsvDiff";
 	separator = ","
@@ -294,8 +296,7 @@ csvDiffArgs {
 	keyColumns = 'Header_1;Header_3'
 }
 
-apply plugin : 'antxpath'
-
+// gradle antXPathTask
 antXPathArgs {
 	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
 	outputDirectory = 'src/test/resources/xml/AntXPathTest'
@@ -304,8 +305,7 @@ antXPathArgs {
 					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
 }
 
-//Performing a xml diff
-apply plugin: 'xmlunit'
+// gradle xmlUnitTask
 
 xmlUnitArgs {
 	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
@@ -315,7 +315,7 @@ xmlUnitArgs {
 }
 
 
-// To run the plugin gradle readBlobTask
+// gradle readBlobTask
 apply plugin: 'readblob'
 
 readBlobArgs {
@@ -330,7 +330,7 @@ readBlobArgs {
     unzip = true
 }
 
-// To run the plugin gradle pullTask
+// gradle pullTask
 apply plugin: 'pull'
 
 pullArgs {
@@ -342,7 +342,7 @@ pullArgs {
     overwrite = true
 }
 
-// To run the plugin gradle pushTask
+// gradle pushTask
 apply plugin: 'push'
 
 pushArgs {
@@ -353,3 +353,4 @@ pushArgs {
     tree = fileTree(dir: 'src/test/resources/webdav', include: '*.csv')
     createDirectoryStructure = false
 }
+**/
