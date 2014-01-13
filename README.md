@@ -5,7 +5,7 @@ Tools and utilities written in Java to help in day-to-day work.
 # Gradle method
 
     dependencies {
-        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.6'
+        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.7'
     }
     
     apply plugin: 'addonjavaanttasks'
