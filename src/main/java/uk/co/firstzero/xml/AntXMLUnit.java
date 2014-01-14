@@ -176,10 +176,12 @@ public class AntXMLUnit extends Task {
         Document control = builder.parse(controlFile);
         Document test = builder.parse(testFile);
 
-
         Diff diff = new Diff(control, test);
         DetailedDiff dd = new DetailedDiff(diff);
-        return (List<Difference>)dd.getAllDifferences();
+
+        @SuppressWarnings("unchecked")
+        List<Difference> differences = (List<Difference>)dd.getAllDifferences();
+        return differences;
 	}
 
     public void writeReport(List<Difference> differences, File controlFile) throws IOException {
