@@ -37,8 +37,8 @@ import static org.junit.Assert.assertTrue;
 
 
 public class AntXMLUnitTest {
-    private String _cFile = "src/test/resources/xml/AntXMLUnitTest/controlFile.xml";
-    private String _tFile = "src/test/resources/xml/AntXMLUnitTest/testFile.xml";
+    public String _cFile = "src/test/resources/xml/AntXMLUnitTest/controlFile.xml";
+    public String _tFile = "src/test/resources/xml/AntXMLUnitTest/testFile.xml";
     File cFile; File tFile;
 
     private AntXMLUnit antXMLUnit;

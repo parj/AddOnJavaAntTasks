@@ -16,8 +16,8 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class AntCsvToExcelTest {
-    private static Logger logger = Logger.getLogger(AntCsvToExcel.class);
-    private final String OUT_FILE = System.getProperty("user.dir") + File.separator + "src/test/resources/report.xls";
+    private static Logger logger = Logger.getLogger(AntCsvToExcelTest.class);
+    private final String OUT_FILE = System.getProperty("user.dir") + File.separator + "src/test/resources/csv/CsvToExcel/report.xls";
     private Workbook workbook;
 
     AntCsvToExcel antCsvToExcel;
