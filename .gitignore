@@ -37,6 +37,7 @@ src/test/resources/sql/blob.zip.jpg
 src/test/resources/sql/blob.zip.groovy.jpg
 src/test/resources/xml/AntXMLUnitTest/diffxml.xml.csv
 src/test/resources/xml/AntXPathTest/2000-10-01_44.95.xml
+src/test/resources/xml/AntXPathTest/2000-12-16_5.95.xml
 src/test/resources/csv/CsvDiff/report_csvDiffTask.csv
 src/test/resources/csv/CsvToExcel/report.xls
 

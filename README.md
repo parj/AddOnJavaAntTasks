@@ -40,10 +40,10 @@ Diffs two directories containing csv files. Each directory must have the same na
 
 Run `gradle csvDiffTask`
 
-## XPATH
+## XML Clean
 Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.
     
-    antXPathArgs {
+    xmlCleanArgs {
     	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
     	outputDirectory = 'src/test/resources/xml/AntXPathTest'
     	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
@@ -51,7 +51,7 @@ Strips out fluff from the XML and manipulating the XML. The use case for this is
     					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
     }
 
-Run `gradle antXPathTask`
+Run `gradle xmlCleanTask`
 
 ## XML DIFF
 Diffs two directories containing xml files. Each directory must have the same name and number of files as the other

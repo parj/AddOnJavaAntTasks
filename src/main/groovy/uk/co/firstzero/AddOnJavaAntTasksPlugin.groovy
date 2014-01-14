@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.file.FileTree
 
 import uk.co.firstzero.xml.ModifyPath
-import uk.co.firstzero.xml.AntXPathTask
+import uk.co.firstzero.xml.XMLCleanTask
 import uk.co.firstzero.xml.XMLDiffTask
 
 import uk.co.firstzero.csv.CsvDiffTask
@@ -83,9 +83,9 @@ class PushPluginExtension {
 }
 
 /**
- * Plugin for AntXPathTask
+ * Plugin for XMLCleanTask
  */
-class AntXPathPluginExtension {
+class XMLCleanPluginExtension {
 	String renamePattern	//Example //date or //date#_#//price
 	FileTree inputDirectory
 	String outputDirectory
@@ -126,8 +126,8 @@ class AddOnJavaAntTasksPlugin implements Plugin<Project> {
 		target.extensions.create('pushArgs', PushPluginExtension)
 		target.task('pushTask', group:'AddOnJavaAntTasks', description:'Pushes files to a WEBDAV site, proxy configuration is supported', type: PushTask)
 
-		target.extensions.create('antXPathArgs', AntXPathPluginExtension)
-		target.task('antXPathTask', group:'AddOnJavaAntTasks', description:'Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.', type: AntXPathTask)
+		target.extensions.create('xmlCleanArgs', XMLCleanPluginExtension)
+		target.task('xmlCleanTask', group:'AddOnJavaAntTasks', description:'Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.', type: XMLCleanTask)
 
 		target.extensions.create('xmlDiffArgs', XMLDiffPluginExtension)
 		target.task('xmlDiffTask', group:'AddOnJavaAntTasks', description:'Diffs two directories containing xml files. Each directory must have the same name and number of files as the other', type: XMLDiffTask)

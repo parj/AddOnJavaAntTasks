@@ -293,8 +293,8 @@ csvDiffArgs {
 	keyColumns = 'Header_1;Header_3'
 }
 
-// gradle antXPathTask
-antXPathArgs {
+// gradle xmlCleanTask
+xmlClean {
 	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
 	outputDirectory = 'src/test/resources/xml/AntXPathTest'
 	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
