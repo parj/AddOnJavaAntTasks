@@ -36,7 +36,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.IOException;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class AntXPathTest {
     private String iFile = "src/test/resources/xml/AntXPathTest/controlFile.xml";

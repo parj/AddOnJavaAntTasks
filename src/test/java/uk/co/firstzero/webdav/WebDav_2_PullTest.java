@@ -33,7 +33,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 
 /** Force this to run after WebDav_1_PushTest - The file needs to be pushed before being downloaded **/
