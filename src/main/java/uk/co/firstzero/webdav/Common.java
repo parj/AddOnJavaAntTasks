@@ -34,9 +34,21 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 
+/**
+ * Common webdav utility class
+ */
 class Common {
     private static Logger logger = Logger.getLogger(Common.class);
 
+    /**
+     * Sets the proxy params
+     * @param httpClient The HTTP Client transport to use
+     * @param proxyHost Proxy host
+     * @param proxyPort Proxy port
+     * @param proxyUser Proxy user
+     * @param proxyPassword Proxy password
+     * @return
+     */
     public static HttpClient setProxy(HttpClient httpClient, String proxyHost, int proxyPort, String proxyUser, String proxyPassword) {
         logger.trace("proxyHost is " + proxyHost);
         logger.trace("proxyPort is " + proxyPort);
@@ -65,6 +77,15 @@ class Common {
         return httpClient;
     }
 
+    /**
+     * Sets the WEBDAV credentials
+     * @param httpClient The HTTP Client transport to use
+     * @param strUrl Webdav URL
+     * @param user Webdav user
+     * @param password Webdav password
+     * @return The configured httpClient
+     * @throws MalformedURLException
+     */
     public static HttpClient setCredentials(HttpClient httpClient, String strUrl, String user, String password) throws MalformedURLException{
         logger.trace("strUrl is " + strUrl);
         logger.trace("user is " + user);
@@ -79,6 +100,13 @@ class Common {
         return  httpClient;
     }
 
+    /**
+     * Runs a WEBDAV command
+     * @param client The HTTP client transport to use
+     * @param method The method to be executed
+     * @return True/False based on execution
+     * @throws IOException
+     */
     public static boolean executeMethod(HttpClient client, HttpMethod method) throws IOException {
         client.executeMethod(method);
         int statusCode = method.getStatusCode();
@@ -95,7 +123,7 @@ class Common {
      * Used for checking if a file exists
      * @param client    The client to execute the method
      * @param method    The method to be executed
-     * @param ignoreHTTP_NOT_FOUND  Used to flag if the HTTP_NOT_FOUND error has to be ignored, if not the IOException raised will be thrown
+     * @param ignoreHTTPNOTFOUND  Used to flag if the HTTP_NOT_FOUND error has to be ignored, if not the IOException raised will be thrown
      * @return  Returns if the execution has been successful
      * @throws IOException
      */

@@ -23,27 +23,49 @@ package uk.co.firstzero.diff;
 
 import java.io.IOException;
 
+/**
+ * A minimal report which is printed to the std out
+ */
 public class MinimalReport implements Report {
 	private int numberOfDifferences = 0;
-	
+
+    /**
+     * Empty constructor
+     * @throws IOException
+     */
 	public MinimalReport() throws IOException {
 	}
-	
+
+    /**
+     * Writes differences as those are found
+     * @param difference The difference found
+     */
 	public void write(Difference difference) {
 		++numberOfDifferences;
 		System.out.println(difference.toString());
 	}
-	
-	public void close() throws IOException {
 
+    /**
+     * Does nothing
+     * @throws IOException
+     */
+	public void close() throws IOException {
+        //Do nothing
 	}
 
+    /**
+     * Does nothing
+     * @throws IOException
+     */
 	@Override
 	public void open(String fileName) throws IOException {
-		// TODO Auto-generated method stub
-		
+		//Do nothing
 	}
 
+    /**
+     * Gets the number of differences
+     * @return Gets the number of differences
+     */
 	public int getNumberOfDifferences() {
 		return numberOfDifferences;
 	}

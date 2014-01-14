@@ -23,17 +23,35 @@ package uk.co.firstzero.diff;
 
 import java.util.List;
 
+/**
+ * The columns to be igored during diff
+ */
 public class DiffListenerIgnoreColumn implements DiffListener {
 	private List<String> columns;
-	
+
+    /**
+     * Default constructor
+     * @param columns The list of columns
+     */
 	public DiffListenerIgnoreColumn(List<String> columns) {
 		this.columns = columns;
 	}
-	
+
+    /**
+     * Adds the column to be ignored
+     * @param column Adds the column name specified
+     */
 	public void add(String column) {
 		this.add(column);
 	}
-	
+
+    /**
+     * Returns true if the column name to be ignored is found
+     * @param column The column name to be checked
+     * @param expected The expected value
+     * @param reached The reached value
+     * @return True/False based on whether the column is contained in the list
+     */
 	public boolean ignore(String column, String expected, String reached) {
 		return columns.contains(column);
 	}

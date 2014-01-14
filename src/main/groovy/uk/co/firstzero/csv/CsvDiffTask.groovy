@@ -7,9 +7,11 @@ import uk.co.firstzero.diff.CsvReport;
 import uk.co.firstzero.diff.Report;
 
 class CsvDiffTask extends DefaultTask  {
+    /**
+     * Diffs two directories containing csv files. Each directory must have the same name and number of files as the other
+     */
     @TaskAction
-    def diff() {
-        def antCsv = new AntCsvDiff()
+    void diff() {
 		def args = project.csvDiffArgs
 		
 		File testDir = new File(args.testDirectory)

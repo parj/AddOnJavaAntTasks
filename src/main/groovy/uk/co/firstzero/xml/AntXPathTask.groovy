@@ -6,8 +6,12 @@ import org.gradle.api.tasks.TaskAction
 
 class AntXPathTask extends DefaultTask  {
 
+    /**
+     * Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.
+     * @return Nothing
+     */
     @TaskAction
-    def diffXMLAction() {
+    void diffXMLAction() {
 		//Setup
         def antXPathObject = new AntXPath();
 		antXPathObject.setOutputDirectory((String)project.antXPathArgs.outputDirectory)

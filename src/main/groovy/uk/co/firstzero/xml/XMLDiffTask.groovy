@@ -6,8 +6,12 @@ import org.gradle.api.tasks.TaskAction
 
 class XMLDiffTask extends DefaultTask  {
 
+    /**
+     * Diffs two directories containing xml files. Each directory must have the same name and number of files as the other
+     * @return Nothing
+     */
     @TaskAction
-    def diffXMLAction() {
+    void diffXMLAction() {
 		def args = project.xmlDiffArgs
 		
 		//Setup

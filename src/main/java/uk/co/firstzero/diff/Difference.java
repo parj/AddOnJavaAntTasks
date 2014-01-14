@@ -21,6 +21,9 @@ http://opensource.org/licenses/mit-license.php
 
 package uk.co.firstzero.diff;
 
+/**
+ * Difference found as part of CsvDiff
+ */
 public class Difference {
 	private Integer lineNumber;
     private String expected;
@@ -28,7 +31,16 @@ public class Difference {
     private String key;
 	private String mismatchType;
     private String column;
-	
+
+    /**
+     * Default constructor
+     * @param lineNumber The line number on which difference was found
+     * @param column The column against which difference found
+     * @param mismatchType The type of mismatch - Difference, Missing
+     * @param expected The value in the expected file
+     * @param reached The value in the reached file
+     * @param key The key used in both files to locate the lines to be diffed
+     */
 	public Difference(Integer lineNumber, String column, String mismatchType, String expected, String reached, String key) {
 		this.setLineNumber(lineNumber);
 		this.setMismatchType(mismatchType);
@@ -38,22 +50,42 @@ public class Difference {
         this.setColumn(column);
 	}
 
+    /**
+     * Sets the expected value
+     * @param expected Expected value
+     */
 	public void setExpected(String expected) {
 		this.expected = expected;
 	}
 
+    /**
+     * Gets the expected value
+     * @return The expected value
+     */
 	public String getExpected() {
 		return expected;
 	}
 
+    /**
+     * Sets the reached value
+     * @param reached Reached value
+     */
 	public void setReached(String reached) {
 		this.reached = reached;
 	}
 
+    /**
+     * Gets the reached value
+     * @return The reached value
+     */
 	public String getReached() {
 		return reached;
 	}
 
+    /**
+     * Sets the line number on which the mismatch was found
+     * @param lineNumber The line number on which the mismatch was found
+     */
 	public void setLineNumber(Integer lineNumber) {
 		this.lineNumber = lineNumber;
 	}

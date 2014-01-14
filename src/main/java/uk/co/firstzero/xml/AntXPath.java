@@ -48,8 +48,8 @@ import java.util.Vector;
 public class AntXPath extends Task {
     Logger logger = Logger.getLogger(AntXPath.class);
     
-	private Vector<FileSet> fileSets = new Vector<FileSet>();
-	private List<ModifyPath> modifyPaths = new ArrayList<ModifyPath>();
+	private Vector<FileSet> fileSets = new Vector<>();
+	private List<ModifyPath> modifyPaths = new ArrayList<>();
 	private String outputDirectory;
 	private String renamePattern;
 	private String patternSplitter = "#";
@@ -57,33 +57,52 @@ public class AntXPath extends Task {
 	private Transformer xFormer;
     private XPathFactory xPathFactory;
 
+    /**
+     * Empty constructor
+     */
     public AntXPath() {
         
     }
 
+    /**
+     * Singleton to create XPathFactory
+     * @return XPathFactory
+     */
     public XPathFactory getXPathFactory() {
         if(xPathFactory == null)
             xPathFactory = XPathFactory.newInstance();
         return xPathFactory;
     }
-	
+
+    /**
+     * The files to be worked on
+     * @param fileset The files to be worked on
+     */
 	public void addFileSet(FileSet fileset) {
 		if (!fileSets.contains(fileset)) {
     	  fileSets.add(fileset);
       	}
 	}
-	
+
+    /**
+     * Adds the XPATH to be updated
+     * @param path The XPATH to be updated and the operation that needs to be performed on the node
+     */
 	public void addModifyPath(ModifyPath path) {
         modifyPaths.add(path);
     }
-	
+
+    /**
+     * List of ModifyPaths
+     * @param modifyPaths List of ModifyPaths
+     */
 	public void setModifyPaths(List<ModifyPath> modifyPaths) {
 		this.modifyPaths = modifyPaths;
 	}
 	
 	/**
 	 * Directory to write out processed file
-	 * @param outputDirectory
+	 * @param outputDirectory The directory to be written out to
 	 */
 	public void setOutputDirectory(String outputDirectory) {
 		this.outputDirectory = outputDirectory;
@@ -92,7 +111,7 @@ public class AntXPath extends Task {
 	/**
 	 * Use xpaths to extract values from xml and rename file.
 	 * Example //date or //date#_#//price
-	 * @param renamePattern
+	 * @param renamePattern Use xpaths to extract values from xml and rename file.
 	 */
 	public void setRenamePattern(String renamePattern) {
 		this.renamePattern = renamePattern;
@@ -128,14 +147,23 @@ public class AntXPath extends Task {
 			 
 		 }
 	}
-	
+
+    /**
+     * Sets up DocumentBuilderFactory and TransformerFactory
+     * @throws ParserConfigurationException
+     * @throws TransformerConfigurationException
+     */
 	private void preSetup() throws ParserConfigurationException, TransformerConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         builder = factory.newDocumentBuilder();
         xFormer = TransformerFactory.newInstance().newTransformer();
 	}
-	
+
+    /**
+     * Process the file based on the ModifyPaths provided
+     * @param iFile The file to be processed
+     */
 	public void processFile(File iFile) {
 		try {
 			Document doc = builder.parse(iFile);
@@ -169,7 +197,14 @@ public class AntXPath extends Task {
 
         }
 	}
-	
+
+    /**
+     * The node to be updated
+     * @param path The ModifyPath that provides the information
+     * @param doc The xmldocument
+     * @return
+     * @throws XPathExpressionException
+     */
 	public Document processNode(ModifyPath path, Document doc) throws XPathExpressionException {
         XPath xPath = getXPathFactory().newXPath();
 
@@ -192,7 +227,11 @@ public class AntXPath extends Task {
 		
 		return doc;
 	}
-	
+
+    /**
+     * Deletes a node from the xml
+     * @param node The node to be deleted
+     */
 	private void delete(org.w3c.dom.Node node) {
 		if(node != null) {
 			if(node.getNodeType() == Node.ELEMENT_NODE) {
@@ -206,7 +245,13 @@ public class AntXPath extends Task {
 			}
 		}
 	}
-	
+
+    /**
+     * Creates a filename based on the xpath pattern
+     * @param doc The xml document against which the xpath is to be run
+     * @param fileName Default filename if operation fails, the same filename is returned
+     * @return The new name of the file
+     */
 	private String getNewFileName(Document doc, String fileName) {
 
         XPath xPath = xPathFactory.newXPath();
@@ -249,6 +294,12 @@ public class AntXPath extends Task {
 		}
 	}
 
+    /**
+     * Write out the document
+     * @param doc The XML Document
+     * @param fileName The name of the file
+     * @throws TransformerException
+     */
     private void writeDocument(Document doc, String fileName) throws TransformerException {
         Source source = new DOMSource(doc);
 

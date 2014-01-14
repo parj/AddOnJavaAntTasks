@@ -39,20 +39,20 @@ import java.util.Vector;
 
 public class AntXMLUnit extends Task {
     Logger logger = Logger.getLogger(AntXMLUnit.class);
-	private Vector<FileSet> fileSets = new Vector<FileSet>();
+	private Vector<FileSet> fileSets = new Vector<>();
 	private String testDirectory;
 	private String resultDirectory;
 	private String separator = ",";
 	
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
-	private static List<Integer> ignoreIds = new ArrayList<Integer>();
+	private static List<Integer> ignoreIds = new ArrayList<>();
 	
 	public AntXMLUnit() { } 
 	
 	/**
 	 * Input file set
-	 * @param fileset
+	 * @param fileset Input fileset
 	 */
 	public void addFileSet(FileSet fileset) {
 		if (!fileSets.contains(fileset)) {
@@ -62,7 +62,7 @@ public class AntXMLUnit extends Task {
 	
 	/**
 	 * The directory from which to read the test xml files
-	 * @param testDirectory
+	 * @param testDirectory The directory to be compared against
 	 */
 	public void setTestDirectory(String testDirectory) {
 		this.testDirectory = testDirectory;
@@ -70,7 +70,7 @@ public class AntXMLUnit extends Task {
 	
 	/**
 	 * The directory to which to publish the csv report
-	 * @param resultDirectory
+	 * @param resultDirectory The result directory
 	 */
 	public void setResultDirectory(String resultDirectory) {
 		this.resultDirectory = resultDirectory;
@@ -82,7 +82,7 @@ public class AntXMLUnit extends Task {
 
     /**
      * Singleton to return DocumentBuilderFactory
-     * @return
+     * @return DocumentBuilderFactory Factory for Document Builder
      */
     private DocumentBuilderFactory getDocumentBuilderFactory() {
         if (factory == null) {
@@ -95,7 +95,7 @@ public class AntXMLUnit extends Task {
 
     /**
      * Singleton to return a builder
-     * @return
+     * @return DocumentBuilder
      * @throws ParserConfigurationException
      */
     private DocumentBuilder getBuilder() throws ParserConfigurationException {
@@ -159,14 +159,14 @@ public class AntXMLUnit extends Task {
         XMLUnit.setIgnoreAttributeOrder(true);
         XMLUnit.setIgnoreWhitespace(true);
 
-        ignoreIds.add(new Integer(DifferenceConstants.CHILD_NODELIST_SEQUENCE_ID));
+        ignoreIds.add(DifferenceConstants.CHILD_NODELIST_SEQUENCE_ID);
 	}
 
     /**
      * Builds up the list of differences
      * @param controlFile The original file
      * @param testFile  The new file to be compared agains
-     * @return
+     * @return Differences found as a list
      * @throws IOException
      * @throws SAXException
      * @throws ParserConfigurationException
@@ -184,6 +184,12 @@ public class AntXMLUnit extends Task {
         return differences;
 	}
 
+    /**
+     * Writes a report
+     * @param differences The list of differences
+     * @param controlFile The file against which difference was found
+     * @throws IOException
+     */
     public void writeReport(List<Difference> differences, File controlFile) throws IOException {
         Writer report = new BufferedWriter(new FileWriter(resultDirectory + "/" + controlFile.getName() + ".csv"));
 

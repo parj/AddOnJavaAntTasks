@@ -48,7 +48,7 @@ public class Push extends Task{
 	private String user;
 	private String password;
 	private String url;
-	Vector<FileSet> fileSets = new Vector<FileSet>();
+	Vector<FileSet> fileSets = new Vector<>();
     private boolean overwrite;
     private String proxyUser;
     private String proxyPassword;
@@ -56,10 +56,20 @@ public class Push extends Task{
     private int proxyPort = Integer.MIN_VALUE;
     private HttpClient httpClient;
 
+    /**
+     * Empty constructor
+     */
     public Push() {
 
     }
 
+    /**
+     * Intiliasing constructor
+     * @param user WebDAV user
+     * @param password WebDAV password
+     * @param url WebDAV URL
+     * @throws MalformedURLException
+     */
     public Push(String user, String password, String url) throws MalformedURLException {
         setUser(user);
         setPassword(password);
@@ -67,21 +77,37 @@ public class Push extends Task{
         setUp();
     }
 
+    /**
+     * Sets the Proxy Host
+     * @param proxyHost Proxy Host
+     */
     public void setProxyHost(String proxyHost) {
         this.proxyHost = proxyHost;
         logger.trace("proxyHost is " + proxyHost);
     }
 
+    /**
+     * Sets the Proxy Port
+     * @param proxyPort Proxy Port
+     */
     public void setProxyPort(int proxyPort) {
         this.proxyPort = proxyPort;
         logger.trace("proxyHost is " + proxyPort);
     }
 
+    /**
+     * Sets the Proxy User
+     * @param proxyUser Proxy user
+     */
     public void setProxyUser(String proxyUser) {
         this.proxyUser = proxyUser;
         logger.trace("proxyHost is " + proxyUser);
     }
 
+    /**
+     * Sets the proxy password
+     * @param proxyPassword Proxy password
+     */
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
         logger.trace("proxyHost is " + proxyPassword);
@@ -89,7 +115,7 @@ public class Push extends Task{
 
 	/**
 	 * Set webdav user name
-	 * @param user
+	 * @param user WebDAV user
 	 */
 	public void setUser(String user) {
 		this.user = user;
@@ -97,7 +123,7 @@ public class Push extends Task{
 	
 	/**
 	 * Set webdav password
-	 * @param password
+	 * @param password WebDAV password
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -106,7 +132,7 @@ public class Push extends Task{
 	/**
 	 * Set the path of the webdav to which the files are to be uploaded to <br>
 	 * Example: http://localhost:8080/repository/default
-	 * @param url
+	 * @param url WebDAV URL
 	 */
 	public void setUrl(String url) {
 		this.url = url;
@@ -118,7 +144,7 @@ public class Push extends Task{
 	
 	/**
 	 * For providing a set of input files using Ant's fileset
-	 * @param fileSet
+	 * @param fileSet Files to be uploaded
 	 */
 	public void addFileSet(FileSet fileSet) {
 		if (!fileSets.contains(fileSet)) {
@@ -174,8 +200,8 @@ public class Push extends Task{
 	
 	/**
 	 * Creates a directory on the webdav server
-	 * @param path
-	 * @param fileName
+	 * @param path The directory path to be created
+	 * @param fileName The filename to be uploaded
 	 */
 	private void createDirectory(String path, String fileName) {
 		try {

@@ -5,10 +5,11 @@ import org.gradle.api.tasks.TaskAction
 import org.apache.log4j.Logger;
 
 class PullTask extends DefaultTask  {
-    static Logger log = Logger.getLogger(PullTask.class)
-
+    /**
+     * Downloads files from a WEBDAV site, proxy configuration is supported
+     */
     @TaskAction
-    def pullAction() {
+    void pullAction() {
         def antPull = new uk.co.firstzero.webdav.Pull()
 
         antPull.setUser((String)project.pullArgs.user)

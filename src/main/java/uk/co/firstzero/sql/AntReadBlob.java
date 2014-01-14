@@ -48,6 +48,17 @@ public class AntReadBlob extends Task {
 
     }
 
+    /**
+     * Constructor
+     * @param className The driver class to use - example oracle.jdbc.driver.OracleDriver
+     * @param jdbcUrl The JDBC url to connect to - example - jdbc:oracle:thin:@localhost:1521:xe
+     * @param user The JDBC user
+     * @param password The JDBC password
+     * @param extension The extension to give to the written filename
+     * @param sql The sql to run
+     * @param outputDirectory The directory to write the files to
+     * @param unzip True/False to unzip the written file
+     */
     public AntReadBlob(String className, String jdbcUrl, String user, String password, String extension, String sql, String outputDirectory, boolean unzip) {
         setClassName(className);
         setJdbcUrl(jdbcUrl);
@@ -61,7 +72,7 @@ public class AntReadBlob extends Task {
 
     /**
      * Get the driver class to use - example oracle.jdbc.driver.OracleDriver
-     * @return
+     * @return The driver class name
      */
     public String getClassName() {
         return className;
@@ -77,14 +88,14 @@ public class AntReadBlob extends Task {
 
     /**
      * The JDBC url to connect to - example - jdbc:oracle:thin:@localhost:1521:xe
-     * @return
+     * @return The JDBC URL
      */
     public String getJdbcUrl() {
         return jdbcUrl;
     }
 
     /**
-     *
+     *The JDBC url to connect to - example - jdbc:oracle:thin:@localhost:1521:xe
      * @param jdbcUrl
      */
     public void setJdbcUrl(String jdbcUrl) {
@@ -92,33 +103,32 @@ public class AntReadBlob extends Task {
     }
 
     /**
-     * The JDBC user
-     * @return
+     * The JDBC user to use
+     * @return The JDBC user
      */
     public String getUser() {
         return user;
     }
 
     /**
-     * The JDBC user
-     * @param user
+     * The JDBC user to use
+     * @param user The JDBC user
      */
     public void setUser(String user) {
         this.user = user;
     }
 
     /**
-     * The password
-     * @return
+     * The JDBC password to use
+     * @return JDBC password
      */
     public String getPassword() {
         return password;
     }
 
     /**
-     * The password
-     *
-     * @param password
+     * The JDBC password to use
+     * @param password The JDBC password
      */
     public void setPassword(String password) {
         this.password = password;
@@ -126,7 +136,7 @@ public class AntReadBlob extends Task {
 
     /**
      * The file extension to use - example .zip
-     * @return
+     * @return File Extension
      */
     public String getExtension() {
         return extension;
@@ -134,7 +144,6 @@ public class AntReadBlob extends Task {
 
     /**
      * The file extension to use - example .zip
-     * @return
      */
     public void setExtension(String extension) {
         this.extension = extension;
@@ -144,7 +153,7 @@ public class AntReadBlob extends Task {
      * The sql to run - it should contain a string name and then blob - example
      * SELECT name, blob_data from test_db where condition_1=1234
      *
-     * @return
+     * @return The sql to run
      */
     public String getSql() {
         return sql;
@@ -154,7 +163,7 @@ public class AntReadBlob extends Task {
      * The sql to run - it should contain a string name and then blob - example
      * SELECT name, blob_data from test_db where condition_1=1234
      *
-     * @param sql
+     * @param sql The sql to run
      */
     public void setSql(String sql) {
         this.sql = sql;

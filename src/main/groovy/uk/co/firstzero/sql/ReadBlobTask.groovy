@@ -4,8 +4,11 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
 class ReadBlobTask extends DefaultTask  {
+    /**
+     * Extracts Blobs from Database.SQL should contain a string name and then blob
+     */
     @TaskAction
-    def read() {
+    void read() {
         def antReadBlob = new AntReadBlob()
 
         antReadBlob.setClassName((String)project.readBlobArgs.className)
@@ -18,7 +21,5 @@ class ReadBlobTask extends DefaultTask  {
         antReadBlob.setUnzip((boolean)project.readBlobArgs.unzip)
 
         antReadBlob.execute()
-    
-
     }
 }

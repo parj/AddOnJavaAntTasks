@@ -26,19 +26,35 @@ import au.com.bytecode.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Produces a CSV Report that holds all the differences
+ */
 public class CsvReport implements Report {
 	private CSVWriter writer;
 	private String separator = ",";
-	
+
+    /**
+     * Default constructor
+     * @param fileName  Name & Path of the file to write to
+     * @throws IOException
+     */
 	public CsvReport(String fileName) throws IOException {
 		open(fileName);
 	}
-	
+
+    /**
+     * Opens the file for writing
+     * @param fileName Name & Path of the file to write to
+     * @throws IOException
+     */
 	public void open(String fileName) throws IOException {
 		writer = new CSVWriter(new FileWriter(fileName), separator.charAt(0));
 		writeHeader();
 	}
-	
+
+    /**
+     * Writes header to the file
+     */
 	public void writeHeader() {
 		String[] result = {
 			"Line Number",
@@ -51,7 +67,12 @@ public class CsvReport implements Report {
 		};
 		writer.writeNext(result);
 	}
-	
+
+    /**
+     * Writes difference
+     * @param difference    The difference found
+     * @throws IOException
+     */
 	public void write(Difference difference) throws IOException {
 		float expected;
 		float reached;
@@ -77,7 +98,11 @@ public class CsvReport implements Report {
         			};
 		writer.flush();
 	}
-	
+
+    /**
+     * Closes the file
+     * @throws IOException
+     */
 	public void close() throws IOException {
 		if (writer != null) {
 			writer.flush();

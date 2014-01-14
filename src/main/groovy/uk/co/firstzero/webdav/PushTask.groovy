@@ -5,8 +5,12 @@ import org.gradle.api.tasks.TaskAction
 
 class PushTask extends DefaultTask  {
 
+    /**
+     * Pushes files to a WEBDAV site, proxy configuration is supported
+     * @return Nothing
+     */
     @TaskAction
-    def pushAction() {
+    void pushAction() {
         def antPush = new uk.co.firstzero.webdav.Push()
 
         antPush.setUser((String)project.pushArgs.user)

@@ -1,7 +1,5 @@
 package uk.co.firstzero
 
-import java.util.List
-
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.FileTree
@@ -18,6 +16,9 @@ import uk.co.firstzero.sql.ReadBlobTask
 import uk.co.firstzero.webdav.PullTask
 import uk.co.firstzero.webdav.PushTask
 
+/**
+ * Plugin for CsvDiffTask
+ */
 class CsvDiffPluginExtension {
 	String keyColumns
 	FileTree controlDirectory
@@ -26,12 +27,18 @@ class CsvDiffPluginExtension {
 	String separator = ','
 }
 
+/**
+ * Plugin for CsvToExcelTask
+ */
 class CsvToExcelPluginExtension {
 	String outputFile
 	FileTree inputFiles
 	String separator = ','
 }
 
+/**
+ * Plugin for ReadBlobTask
+ */
 class ReadBlobPluginExtension {
 	String className;
 	String jdbcUrl;
@@ -43,6 +50,9 @@ class ReadBlobPluginExtension {
 	boolean unzip;
 }
 
+/**
+ * Plugin for PullTask
+ */
 class PullPluginExtension {
 	String user;
 	String password;
@@ -56,6 +66,9 @@ class PullPluginExtension {
 	int proxyPort;
 }
 
+/**
+ * Plugin for PushTask
+ */
 class PushPluginExtension {
 	String user
 	String password
@@ -69,6 +82,9 @@ class PushPluginExtension {
 	FileTree tree
 }
 
+/**
+ * Plugin for AntXPathTask
+ */
 class AntXPathPluginExtension {
 	String renamePattern	//Example //date or //date#_#//price
 	FileTree inputDirectory
@@ -76,6 +92,9 @@ class AntXPathPluginExtension {
 	List<ModifyPath> modifyPaths
 }
 
+/**
+ * Plugin for XMLDiffTask
+ */
 class XMLDiffPluginExtension {
 	String resultDirectory;
 	String separator = ","
@@ -83,7 +102,14 @@ class XMLDiffPluginExtension {
 	String testDirectory
 }
 
+/**
+ * Declarative class for Gradle plugin
+ */
 class AddOnJavaAntTasksPlugin implements Plugin<Project> {
+    /**
+     *
+     * @param target
+     */
 	void apply(Project target) {
 		target.extensions.create('csvDiffArgs', CsvDiffPluginExtension)
 		target.task('csvDiffTask', group:'AddOnJavaAntTasks', description: 'Diffs two directories containing csv files. Each directory must have the same name and number of files as the other', type: CsvDiffTask)
