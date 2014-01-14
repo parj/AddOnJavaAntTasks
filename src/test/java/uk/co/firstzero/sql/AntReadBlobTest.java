@@ -17,18 +17,18 @@ public class AntReadBlobTest {
     Connection conn;
     private static final Logger logger = Logger.getLogger(AntReadBlob.class);
 
-    private final String JDBC_URL = "jdbc:h2:" + System.getProperty("user.dir") + "/src/test/resources/sql/temp";
-    private final String USER = "sa";
-    private final String PASSWORD = "";
-    private final String CLASS_NAME = "org.h2.Driver";
-    private final String SQL_EXTRACTION = "SELECT name, blob from TEST";
-    private final String SQL_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS TEST(name VARCHAR(255), blob BLOB)";
-    private final String SQL_INSERT_TABLE = "INSERT INTO TEST(name, blob) VALUES(?, ?)";
-    private final String SQL_DROP_TABLE = "DROP ALL OBJECTS";
-    private final String FILE_ZIP = "src/test/resources/sql/blob.zip";
-    private final String DIRECTORY_OUTPUT = "src/test/resources/sql";
-    private final int COLUMN_NAME = 1;
-    private final int COLUMN_BLOB = 2;
+    public final String JDBC_URL = "jdbc:h2:" + System.getProperty("user.dir") + "/src/test/resources/sql/temp";
+    public final String USER = "sa";
+    public final String PASSWORD = "";
+    public final String CLASS_NAME = "org.h2.Driver";
+    public final String SQL_EXTRACTION = "SELECT name, blob from TEST";
+    public final String SQL_CREATE_TABLE = "CREATE TABLE IF NOT EXISTS TEST(name VARCHAR(255), blob BLOB)";
+    public final String SQL_INSERT_TABLE = "INSERT INTO TEST(name, blob) VALUES(?, ?)";
+    public final String SQL_DROP_TABLE = "DROP ALL OBJECTS";
+    public final String FILE_ZIP = "src/test/resources/sql/blob.zip";
+    public final String DIRECTORY_OUTPUT = "src/test/resources/sql";
+    public final int COLUMN_NAME = 1;
+    public final int COLUMN_BLOB = 2;
 
 
     @Before
