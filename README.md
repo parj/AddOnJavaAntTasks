@@ -11,7 +11,7 @@
           mavenCentral()
        }
        dependencies {
-          classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.7'
+          classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.8'
        }
     }
 
