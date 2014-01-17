@@ -23,7 +23,7 @@ class ReadBlobTaskTest {
     }
 
     @Test
-    public void invokeReadBlob() {
+    public void readBlobTaskTest() {
         Project project = ProjectBuilder.builder().build()
         project.apply plugin: 'addonjavaanttasks'
 
