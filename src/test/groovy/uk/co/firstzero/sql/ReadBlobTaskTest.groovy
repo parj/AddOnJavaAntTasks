@@ -9,9 +9,12 @@ import static org.junit.Assert.*
 
 class ReadBlobTaskTest {
     AntReadBlobTest readBlobTest = new AntReadBlobTest();
+    def FILE_TO_CHECK = readBlobTest.DIRECTORY_OUTPUT + File.separator + "blob.zip.groovy.jpg"
 
     @Before
     void setUp() {
+        if (new File(FILE_TO_CHECK).exists())
+            new File(FILE_TO_CHECK).delete()
         readBlobTest.setUp()
     }
 
@@ -39,7 +42,7 @@ class ReadBlobTaskTest {
         def task = project.task('readBlobTaskTest', type: ReadBlobTask)
         task.execute()
 
-        assertEquals(new File(readBlobTest.DIRECTORY_OUTPUT + File.separator + "blob.zip.groovy.jpg").exists(), true);
+        assertEquals(new File(FILE_TO_CHECK).exists(), true);
     }
 
     @After

@@ -1,6 +1,7 @@
 package uk.co.firstzero.csv
 
 import org.apache.log4j.Logger
+import org.junit.Before
 import org.junit.Test
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.api.Project
@@ -10,6 +11,12 @@ class CsvToExcelTaskTest {
     def logger = Logger.getLogger(CsvToExcelTaskTest.class)
     def DIRECTORY_INPUT  = System.getProperty("user.dir") + '/src/test/resources/csv/CsvToExcel'
     def OUTPUT_FILE = System.getProperty("user.dir") + '/src/test/resources/csv/CsvToExcel/report.xls'
+
+    @Before
+    void preSetup() {
+        if (new File(OUTPUT_FILE).exists())
+            new File(OUTPUT_FILE).delete()
+    }
 
     @Test
     public void canAddTaskToProject() {

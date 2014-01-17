@@ -29,10 +29,14 @@ public class AntReadBlobTest {
     public final String DIRECTORY_OUTPUT = "src/test/resources/sql";
     public final int COLUMN_NAME = 1;
     public final int COLUMN_BLOB = 2;
+    public final String FILE_TO_CHECK = DIRECTORY_OUTPUT + File.separator + "blob.zip.jpg";
 
 
     @Before
     public void setUp() throws ClassNotFoundException, SQLException, FileNotFoundException {
+        if (new File(FILE_TO_CHECK).exists())
+            new File(FILE_TO_CHECK).delete();
+
         logger.debug("Trying to load driver - " + CLASS_NAME);
         Class.forName(CLASS_NAME);
 
@@ -89,7 +93,7 @@ public class AntReadBlobTest {
 
         antReadBlob.execute();
 
-        assertEquals(new File(DIRECTORY_OUTPUT + File.separator + "blob.zip.jpg").exists(), true);
+        assertEquals(new File(FILE_TO_CHECK).exists(), true);
     }
 
     public void createTable() throws SQLException {

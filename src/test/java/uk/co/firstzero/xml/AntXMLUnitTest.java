@@ -40,11 +40,15 @@ public class AntXMLUnitTest {
     public String _cFile = "src/test/resources/xml/AntXMLUnitTest/control/diffxml.xml";
     public String _tFile = "src/test/resources/xml/AntXMLUnitTest/test/diffxml.xml";
     File cFile; File tFile;
+    public final String FILE_TO_CHECK = "src/test/resources/xml/AntXMLUnitTest" + File.separator + "diffxml.xml.csv";
 
     private AntXMLUnit antXMLUnit;
 
     @Before
     public void setUp() throws IOException {
+        if (new File(FILE_TO_CHECK).exists())
+            new File(FILE_TO_CHECK).delete();
+
         antXMLUnit = new AntXMLUnit();
         cFile = new File(_cFile);
         tFile = new File(_tFile);

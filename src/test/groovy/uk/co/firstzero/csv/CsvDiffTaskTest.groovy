@@ -1,6 +1,7 @@
 package uk.co.firstzero.csv
 
 import org.apache.log4j.Logger
+import org.junit.Before
 import org.junit.Test
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.api.Project
@@ -11,6 +12,13 @@ class CsvDiffTaskTest {
     def DIRECTORY_CONTROL  = System.getProperty("user.dir") + '/src/test/resources/csv/CsvDiff/control'
     def DIRECTORY_TEST     = System.getProperty("user.dir") + '/src/test/resources/csv/CsvDiff/test'
     def DIRECTORY_OUTPUT = System.getProperty("user.dir") + '/src/test/resources/csv/CsvDiff'
+    def FILE_TO_CHECK = DIRECTORY_OUTPUT + File.separator + "report_csvDiffTaskTest.csv"
+
+    @Before
+    void preSetup() {
+        if (new File(FILE_TO_CHECK).exists())
+            new File(FILE_TO_CHECK).delete()
+    }
 
     @Test
     public void canAddTaskToProject() {
@@ -37,6 +45,6 @@ class CsvDiffTaskTest {
 
         task.execute()
 
-        assertEquals(new File(DIRECTORY_OUTPUT + "/report_csvDiffTaskTest.csv").exists(), true);
+        assertEquals(new File(FILE_TO_CHECK).exists(), true);
     }
 }

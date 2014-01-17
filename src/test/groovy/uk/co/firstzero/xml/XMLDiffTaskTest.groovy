@@ -2,6 +2,8 @@ package uk.co.firstzero.xml
 
 import org.apache.log4j.Logger
 import org.gradle.testfixtures.ProjectBuilder
+import org.junit.Before
+
 import static org.junit.Assert.*
 
 import org.gradle.api.Project
@@ -12,6 +14,13 @@ class XMLDiffTaskTest {
     def DIRECTORY_OUTPUT = System.getProperty("user.dir") + "/src/test/resources/xml/AntXMLUnitTest"
     def CONTROL = System.getProperty("user.dir") + "/src/test/resources/xml/AntXMLUnitTest/control"
     def TEST = System.getProperty("user.dir") + '/src/test/resources/xml/AntXMLUnitTest/test'
+    def FILE_TO_CHECK = DIRECTORY_OUTPUT + File.separator + "diffxml.xml.csv"
+
+    @Before
+    void preSetup() {
+        if (new File(FILE_TO_CHECK).exists())
+            new File(FILE_TO_CHECK).delete()
+    }
 
 	@Test
     public void canAddXMLUnitTaskToProject() {
@@ -39,6 +48,6 @@ class XMLDiffTaskTest {
         args.testDirectory = TEST
 
         task.execute()
-        assertEquals(new File(DIRECTORY_OUTPUT + File.separator + "diffxml.xml.csv").exists(), true);
+        assertEquals(new File(FILE_TO_CHECK).exists(), true);
     }
 }

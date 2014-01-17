@@ -27,6 +27,9 @@ public class AntCsvToExcelTest {
     public void setUp() {
         logger.debug("In setUp");
 
+        if (new File(OUT_FILE).exists())
+            new File(OUT_FILE).delete();
+
         antCsvToExcel = new AntCsvToExcel();
         antCsvToExcel.setProject(new Project());
 
