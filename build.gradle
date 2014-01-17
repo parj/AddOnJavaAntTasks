@@ -39,9 +39,8 @@ repositories {
 
 group='uk.co.firstzero'
 version='2.9'
-ext.packaging = 'jar'
 
-/* To signal type of build which in turn sets the repository URL
+/** To signal type of build which in turn sets the repository URL
  * gradle -Pdev 	//DEV BUILD
  * gradle -Pci  	//SNAPSHOT BUILD
  * gradle -Prelease //RELEASE BUILD
@@ -271,7 +270,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'uk.co.firstzero', name: 'AddOnJavaAntTasks', version: '2.9'
+        classpath group: "uk.co.firstzero", name: "AddOnJavaAntTasks", version: "latest.integration"
     }
 }
 
@@ -294,7 +293,7 @@ csvDiffArgs {
 }
 
 // gradle xmlCleanTask
-xmlClean {
+xmlCleanArgs {
 	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
 	outputDirectory = 'src/test/resources/xml/AntXPathTest'
 	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
