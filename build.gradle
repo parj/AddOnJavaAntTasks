@@ -26,7 +26,6 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'groovy'
 
-
 //** CONFIGURATION **//
 task wrapper(type: Wrapper) {
     gradleVersion = '1.10'
@@ -194,7 +193,7 @@ uploadArchives {
 
 // Push file to a WebDav Server
 task pushAnt << {
-    ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: configurations.runtime.asPath)
+    ant.taskdef(name: 'push', classname: 'uk.co.firstzero.webdav.Push', classpath: sourceSets.main.runtimeClasspath.asPath)
     ant.push(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default", overwrite: true) {
         fileset(dir: 'src/test/resources/webdav', includes: '*.csv')
     }
@@ -202,7 +201,7 @@ task pushAnt << {
 
 // Pull file from a webdav server
 task pullAnt << {
-    ant.taskdef(name: 'pull', classname: 'uk.co.firstzero.webdav.Pull', classpath: configurations.runtime.asPath)
+    ant.taskdef(name: 'pull', classname: 'uk.co.firstzero.webdav.Pull', classpath: sourceSets.main.runtimeClasspath.asPath)
     ant.pull(user: 'admin', password: "admin", url: "http://localhost:8080/repository/default",
             file: "output.csv",
             outFile: "src/test/resources/webdav/output.csv",
@@ -211,7 +210,7 @@ task pullAnt << {
 
 // Converts csv to Excel
 task csvToExcelAnt << {
-    ant.taskdef(name: 'csvToExcel', classname: 'uk.co.firstzero.csv.AntCsvToExcel', classpath: configurations.runtime.asPath)
+    ant.taskdef(name: 'csvToExcel', classname: 'uk.co.firstzero.csv.AntCsvToExcel', classpath: sourceSets.main.runtimeClasspath.asPath)
 
     ant.csvToExcel(outputFile: "build/tmp/report.xls", separator: "^") {
         fileset(dir: "src/test/resources/csv/CsvToExcel", includes: "*.csv")
@@ -220,7 +219,7 @@ task csvToExcelAnt << {
 
 // Diffs two directories containing xml files with the same name
 task diffxmlAnt << {
-    ant.taskdef(name: 'diffxml', classname: 'uk.co.firstzero.xml.AntXMLUnit', classpath: configurations.runtime.asPath)
+    ant.taskdef(name: 'diffxml', classname: 'uk.co.firstzero.xml.AntXMLUnit', classpath: sourceSets.main.runtimeClasspath.asPath)
 
     ant.diffxml(testDirectory: "src/test/resources/xml/AntXMLUnitTest/test", resultDirectory: "out") {
         fileset(dir: "src/test/resources/xml/AntXMLUnitTest/control", includes: "*.xml")
@@ -229,8 +228,8 @@ task diffxmlAnt << {
 
 // Strips out and modifies tags in xmls and renames them using a naming convention
 task modifyPathAnt << {
-    ant.taskdef(name: 'xPath', classname: 'uk.co.firstzero.xml.AntXPath', classpath: configurations.runtime.asPath)
-    ant.taskdef(name: 'modifyPath', classname: 'uk.co.firstzero.xml.ModifyPath', classpath: configurations.runtime.asPath)
+    ant.taskdef(name: 'xPath', classname: 'uk.co.firstzero.xml.AntXPath', classpath: sourceSets.main.runtimeClasspath.asPath)
+    ant.taskdef(name: 'modifyPath', classname: 'uk.co.firstzero.xml.ModifyPath', classpath: sourceSets.main.runtimeClasspath.asPath)
 
     //Rename Pattern is the file rename pattern, takes as input as xpaths separated by #
     ant.xPath(outputDirectory: "out", renamePattern: "//publish_date[position() = 1]#_#//price[position() = 1]" ) {
@@ -242,7 +241,7 @@ task modifyPathAnt << {
 
 // Reads blob data from the database
 task readBlobAnt << {
-    ant.taskdef(name: "readBlob", classname: "uk.co.firstzero.sql.AntReadBlob", classpath: configurations.runtime.asPath)
+    ant.taskdef(name: "readBlob", classname: "uk.co.firstzero.sql.AntReadBlob", classpath: sourceSets.main.runtimeClasspath.asPath)
 
     String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
     println ("Database = " + databaseLocation)
