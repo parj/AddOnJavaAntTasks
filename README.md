@@ -2,7 +2,7 @@
 
 ## Tools and utilities written in Java to help in day-to-day work.
 
-Thanks to ![Jet Brains](http://www.jetbrains.com/img/logos/logo_intellij_idea.gif =16x0x) for their support
+Thanks to ![Jet Brains](http://www.jetbrains.com/img/logos/logo_intellij_idea.gif =160x) for their support
 
 # Gradle method
 
