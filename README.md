@@ -2,6 +2,8 @@
 
 ## Tools and utilities written in Java to help in day-to-day work.
 
+Thanks to ![Jet Brains](http://www.jetbrains.com/img/logos/logo_intellij_idea.gif) for their support
+
 # Gradle method
 
     apply plugin : 'addonjavaanttasks'
