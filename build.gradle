@@ -31,6 +31,9 @@ task wrapper(type: Wrapper) {
     gradleVersion = '1.10'
 }
 
+//** REDIRECTION OF LOGGING **//
+logging.captureStandardOutput LogLevel.INFO
+
 //** MAVEN CONFIGURATION **//
 repositories {
     mavenCentral()
