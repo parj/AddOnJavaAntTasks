@@ -29,7 +29,7 @@ apply plugin: 'groovy'
 
 //** CONFIGURATION **//
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.10'
+    gradleVersion = '2.0'
 }
 
 //** MAVEN CONFIGURATION **//
@@ -98,7 +98,7 @@ configurations {
 }
 
 //** COMPILATION OPTIONS **//
-tasks.withType(Compile) {
+tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     options.compilerArgs << "-Xlint:unchecked"
 }
