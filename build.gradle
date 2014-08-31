@@ -38,7 +38,7 @@ repositories {
 }
 
 group='uk.co.firstzero'
-version='2.8'
+version='2.10'
 ext.packaging = 'jar'
 
 /* To signal type of build which in turn sets the repository URL
