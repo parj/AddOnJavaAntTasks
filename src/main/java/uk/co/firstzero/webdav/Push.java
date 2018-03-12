@@ -68,7 +68,7 @@ public class Push extends Task{
      * @param user WebDAV user
      * @param password WebDAV password
      * @param url WebDAV URL
-     * @throws MalformedURLException
+     * @throws MalformedURLException Throws MalformedURLException
      */
     public Push(String user, String password, String url) throws MalformedURLException {
         setUser(user);
@@ -120,7 +120,7 @@ public class Push extends Task{
 	public void setUser(String user) {
 		this.user = user;
 	}
-	
+
 	/**
 	 * Set webdav password
 	 * @param password WebDAV password
@@ -128,7 +128,7 @@ public class Push extends Task{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	/**
 	 * Set the path of the webdav to which the files are to be uploaded to <br>
 	 * Example: http://localhost:8080/repository/default
@@ -141,7 +141,7 @@ public class Push extends Task{
     public void setOverwrite(boolean overwrite) {
         this.overwrite = overwrite;
     }
-	
+
 	/**
 	 * For providing a set of input files using Ant's fileset
 	 * @param fileSet Files to be uploaded
@@ -154,7 +154,7 @@ public class Push extends Task{
 
     /**
      * Setups credentials and proxies
-     * @throws MalformedURLException
+     * @throws MalformedURLException Throws MalformedURLException
      */
     public void setUp() throws MalformedURLException {
         //Setup
@@ -164,28 +164,28 @@ public class Push extends Task{
     }
 
 	/**
-	 * The execute function is called by Ant. 
+	 * The execute function is called by Ant.
 	 */
 	public void execute() {
 		try {
 			setUp();
             DirectoryScanner ds;
-            
+
             for (FileSet fileset : fileSets) {
             	ds = fileset.getDirectoryScanner(getProject());
             	File dir = ds.getBasedir();
             	String[] filesInSet = ds.getIncludedFiles();
-            	
+
             	 for (String filename : filesInSet) {
             		 logger.info("Uploading " + filename);
-            		 
+
             		 File f = new File(dir, filename);
             		 createDirectory(filename, f.getName());
             		 boolean result = uploadFile(f, filename);
                      logger.info("Upload status of " + filename + " - " + result);
             	 }
             }
-    		
+
     	} catch(HttpException e) {
             logger.error(e);
 
@@ -197,7 +197,7 @@ public class Push extends Task{
 
 	    }
 	}
-	
+
 	/**
 	 * Creates a directory on the webdav server
 	 * @param path The directory path to be created
@@ -210,16 +210,16 @@ public class Push extends Task{
 			//Build the upload URL
 			String uploadUrl = url;
 			String[] directories = directoryPath.split(File.separator);
-			
+
 			//If a directory needs to be created
 			if (directoryPath.length() > 0) {
 				//Recursively create the directory structure
 				for (String directoryName:directories) {
 					uploadUrl = uploadUrl + "/" + directoryName;
-					
+
 					MkColMethod mkdir = new MkColMethod(uploadUrl);
 					int status = httpClient.executeMethod(mkdir);
-					
+
 					if (status == HttpStatus.SC_METHOD_NOT_ALLOWED)	{
                         // Directory exists. Do Nothing
                         logger.trace("Directory exists");
@@ -242,12 +242,14 @@ public class Push extends Task{
     public void uploadFile(File f) throws IOException {
         uploadFile(f, f.getName());
     }
-	
+
 	/**
 	 * Uploads the file. The File object (f) is used for creating a FileInputStream for uploading
 	 * files to webdav
 	 * @param f	The File object of the file to be uploaded
 	 * @param filename	The relatvie path of the file
+   * @return Indication if the file upload was successful
+   * @throws IOException IO Exception if there is a problem with upload
 	 */
 	public boolean uploadFile(File f, String filename) throws IOException {
         String uploadUrl = url + "/" + filename;

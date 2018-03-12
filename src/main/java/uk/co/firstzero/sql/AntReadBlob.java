@@ -50,8 +50,8 @@ public class AntReadBlob extends Task {
 
     /**
      * Constructor
-     * @param className The driver class to use - example oracle.jdbc.driver.OracleDriver
-     * @param jdbcUrl The JDBC url to connect to - example - jdbc:oracle:thin:@localhost:1521:xe
+     * @param className The driver class to use - example {@code oracle.jdbc.driver.OracleDriver}
+     * @param jdbcUrl The JDBC url to connect to - example - {@code jdbc:oracle:thin:@localhost:1521:xe}
      * @param user The JDBC user
      * @param password The JDBC password
      * @param extension The extension to give to the written filename
@@ -71,7 +71,7 @@ public class AntReadBlob extends Task {
     }
 
     /**
-     * Get the driver class to use - example oracle.jdbc.driver.OracleDriver
+     * Get the driver class to use - example {@code oracle.jdbc.driver.OracleDriver}
      * @return The driver class name
      */
     public String getClassName() {
@@ -79,15 +79,15 @@ public class AntReadBlob extends Task {
     }
 
     /**
-     * Sets the driver class to use - example oracle.jdbc.driver.OracleDriver
-     * @param className
+     * Sets the driver class to use - example {@code oracle.jdbc.driver.OracleDriver}
+     * @param className Name of driver class to use
      */
     public void setClassName(String className) {
         this.className = className;
     }
 
     /**
-     * The JDBC url to connect to - example - jdbc:oracle:thin:@localhost:1521:xe
+     * The JDBC url to connect to - example - {@code jdbc:oracle:thin:@localhost:1521:xe}
      * @return The JDBC URL
      */
     public String getJdbcUrl() {
@@ -95,8 +95,8 @@ public class AntReadBlob extends Task {
     }
 
     /**
-     *The JDBC url to connect to - example - jdbc:oracle:thin:@localhost:1521:xe
-     * @param jdbcUrl
+     *The JDBC url to connect to - example - {@code jdbc:oracle:thin:@localhost:1521:xe}
+     * @param jdbcUrl JDBC Connection url to use {@code jdbc:oracle:thin:@localhost:1521:xe}
      */
     public void setJdbcUrl(String jdbcUrl) {
         this.jdbcUrl = jdbcUrl;
@@ -144,6 +144,7 @@ public class AntReadBlob extends Task {
 
     /**
      * The file extension to use - example .zip
+		 * @param extension The file extension to use
      */
     public void setExtension(String extension) {
         this.extension = extension;
@@ -151,7 +152,7 @@ public class AntReadBlob extends Task {
 
     /**
      * The sql to run - it should contain a string name and then blob - example
-     * SELECT name, blob_data from test_db where condition_1=1234
+     * {@code SELECT name, blob_data from test_db where condition_1=1234}
      *
      * @return The sql to run
      */
@@ -161,7 +162,7 @@ public class AntReadBlob extends Task {
 
     /**
      * The sql to run - it should contain a string name and then blob - example
-     * SELECT name, blob_data from test_db where condition_1=1234
+     * {@code SELECT name, blob_data from test_db where condition_1=1234}
      *
      * @param sql The sql to run
      */
@@ -180,7 +181,7 @@ public class AntReadBlob extends Task {
 
     /**
      * The output directory to output the zip files
-     * @param outputDirectory
+     * @param outputDirectory The output directory to output the zip files
      */
     public void setOutputDirectory(String outputDirectory) {
         this.outputDirectory = outputDirectory;
@@ -196,7 +197,7 @@ public class AntReadBlob extends Task {
 
     /**
      * Unzip the input stream
-     * @param unzip
+     * @param unzip Indicate if the blob extracted should be unzipped
      */
     public void setUnzip(boolean unzip) {
         this.unzip = unzip;
@@ -280,4 +281,3 @@ public class AntReadBlob extends Task {
         }
     }
 }
-

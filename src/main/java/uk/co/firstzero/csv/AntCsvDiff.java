@@ -38,7 +38,7 @@ public class AntCsvDiff extends Task {
 	private String resultDirectory;
 	private char separator = ',';
 	private static Logger logger = Logger.getLogger(AntCsvDiff.class);
-	
+
 	public Vector<FileSet> getFileSets() {
 		return fileSets;
 	}
@@ -50,14 +50,14 @@ public class AntCsvDiff extends Task {
 	public String getTestDirectory() {
 		return testDirectory;
 	}
-	
+
 	public void setTestDirectory(String testDirectory) {
 		this.testDirectory = testDirectory;
 	}
 
 	/**
 	 * Input file set
-	 * @param fileset
+	 * @param fileset Set of files
 	 */
 	public void addFileSet(FileSet fileset) {
 		if (!fileSets.contains(fileset)) {
@@ -67,16 +67,16 @@ public class AntCsvDiff extends Task {
 
 	/**
 	 * CSV separator
-	 * @param separator
+	 * @param separator CSV separator
 	 */
 	public void setSeparator(char separator) {
 		this.separator = separator;
 	}
-	
+
 	public char getSeparator() {
 		return this.separator;
 	}
-	
+
 	public void setResultDirectory(String resultDirectory) {
 		this.resultDirectory = resultDirectory;
 	}
@@ -88,34 +88,34 @@ public class AntCsvDiff extends Task {
 
 	public void execute() {
 		DirectoryScanner ds;
-		
+
 		//Check if the test directory exists
 		File testDir = new File(testDirectory);
     	if (!testDir.exists()) {
     		System.err.println(testDirectory + " does not exist");
     		System.exit(1);
     	}
-		
+
 		for (FileSet fileset : fileSets) {
 			//Read in the control files
 			ds = fileset.getDirectoryScanner(getProject());
         	File controlDir = ds.getBasedir();
         	String[] filesInSet = ds.getIncludedFiles();
-    		
+
     		for (String filename : filesInSet) {
     			logger.debug("Processing " + filename);
-    			
+
     			try {
     				logger.trace("Initialising controlFile - " + controlDir + "/" + filename);
     				File controlFile = new File(controlDir, filename);
-    				
+
     				logger.trace("Initialising testFile - " + testDir + "/" + filename);
 	        		File testFile = new File(testDir, filename);
-	        		
+
 	        		logger.trace("Initialising report");
 	        		String name = controlFile.getName();
 	        		Report report = new CsvReport(this.resultDirectory + "/report_" + name + ".csv");
-	        		
+
     				CsvDiff csv = new CsvDiff(controlFile.getCanonicalPath(), testFile.getCanonicalPath(), this.separator);
     				csv.setReport(report);
     				csv.setKeyColumns(keyColumns);
@@ -126,5 +126,5 @@ public class AntCsvDiff extends Task {
     			}
     		}
 		}
-	}	
+	}
 }

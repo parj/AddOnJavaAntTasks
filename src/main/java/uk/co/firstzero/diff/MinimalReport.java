@@ -31,7 +31,7 @@ public class MinimalReport implements Report {
 
     /**
      * Empty constructor
-     * @throws IOException
+     * @throws IOException IO Exception
      */
 	public MinimalReport() throws IOException {
 	}
@@ -47,7 +47,7 @@ public class MinimalReport implements Report {
 
     /**
      * Does nothing
-     * @throws IOException
+     * @throws IOException IO Exception
      */
 	public void close() throws IOException {
         //Do nothing
@@ -55,7 +55,7 @@ public class MinimalReport implements Report {
 
     /**
      * Does nothing
-     * @throws IOException
+     * @throws IOException IO Exception
      */
 	@Override
 	public void open(String fileName) throws IOException {

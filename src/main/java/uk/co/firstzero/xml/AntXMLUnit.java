@@ -167,9 +167,9 @@ public class AntXMLUnit extends Task {
      * @param controlFile The original file
      * @param testFile  The new file to be compared agains
      * @return Differences found as a list
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
+     * @throws IOException IOException if file cannot be loaded or read
+     * @throws SAXException Exception if there is a problem loading the file as a XML document
+     * @throws ParserConfigurationException ParserConfigurationException
      */
 	public List<Difference> processFile(File controlFile, File testFile) throws IOException, SAXException, ParserConfigurationException {
         builder = getBuilder();
@@ -188,7 +188,7 @@ public class AntXMLUnit extends Task {
      * Writes a report
      * @param differences The list of differences
      * @param controlFile The file against which difference was found
-     * @throws IOException
+     * @throws IOException IO Exception if can't read or write to files
      */
     public void writeReport(List<Difference> differences, File controlFile) throws IOException {
         Writer report = new BufferedWriter(new FileWriter(resultDirectory + "/" + controlFile.getName() + ".csv"));

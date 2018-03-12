@@ -36,7 +36,7 @@ public class CsvReport implements Report {
     /**
      * Default constructor
      * @param fileName  Name &amp; Path of the file to write to
-     * @throws IOException
+     * @throws IOException IO Exception
      */
 	public CsvReport(String fileName) throws IOException {
 		open(fileName);
@@ -45,7 +45,7 @@ public class CsvReport implements Report {
     /**
      * Opens the file for writing
      * @param fileName Name &amp; Path of the file to write to
-     * @throws IOException
+     * @throws IOException IO Exception
      */
 	public void open(String fileName) throws IOException {
 		writer = new CSVWriter(new FileWriter(fileName), separator.charAt(0));
@@ -71,7 +71,7 @@ public class CsvReport implements Report {
     /**
      * Writes difference
      * @param difference    The difference found
-     * @throws IOException
+     * @throws IOException IO Exception
      */
 	public void write(Difference difference) throws IOException {
 		float expected;
@@ -101,7 +101,7 @@ public class CsvReport implements Report {
 
     /**
      * Closes the file
-     * @throws IOException
+     * @throws IOException IO Exception
      */
 	public void close() throws IOException {
 		if (writer != null) {

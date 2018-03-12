@@ -42,22 +42,22 @@ public class CsvToExcel {
 	private char separator = ',';
     private static final int MAX_FILE_LENGTH = 12;
     private static final int MAX_EXCEL_ROW = 64000;
-	
+
 	private static Logger logger = Logger.getLogger(CsvToExcel.class);
-	
+
 	public CsvToExcel(String[] inputFile, String outputFile, String baseDir) {
 		setInputFile(inputFile);
 		setOutputFile(outputFile);
         setBaseDir(baseDir);
 	}
-	
+
 	public CsvToExcel(String[] inputFile, String outputFile, String baseDir, char separator) {
 		setInputFile(inputFile);
 		setOutputFile(outputFile);
         setBaseDir(baseDir);
 		setSeparator(separator);
 	}
-	
+
 	public CsvToExcel(String[] inputFile, String outputFile, char separator) {
 		setInputFile(inputFile);
 		setOutputFile(outputFile);
@@ -66,7 +66,7 @@ public class CsvToExcel {
 
 	/**
 	 * CSV separator
-	 * @param separator
+	 * @param separator CSV separator
 	 */
 	public void setSeparator(char separator) {
 		logger.trace("Setting separator to " + separator);
@@ -81,7 +81,7 @@ public class CsvToExcel {
 
 	/**
 	 * Set the output excel file
-	 * @param outputFile
+	 * @param outputFile Output excel file
 	 */
 	public void setOutputFile(String outputFile) {
 		logger.trace("Setting outputFile to " + outputFile);
@@ -115,7 +115,7 @@ public class CsvToExcel {
                 name = name.substring(0, MAX_FILE_LENGTH);
 
             CSVReader reader;
-            
+
             if (this.baseDir != null)
             	reader = new CSVReader(new FileReader(this.baseDir + File.separator + filename), separator);
             else

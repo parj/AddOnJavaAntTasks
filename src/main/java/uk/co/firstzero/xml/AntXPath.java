@@ -47,7 +47,7 @@ import java.util.Vector;
 
 public class AntXPath extends Task {
     Logger logger = Logger.getLogger(AntXPath.class);
-    
+
 	private Vector<FileSet> fileSets = new Vector<>();
 	private List<ModifyPath> modifyPaths = new ArrayList<>();
 	private String outputDirectory;
@@ -61,7 +61,7 @@ public class AntXPath extends Task {
      * Empty constructor
      */
     public AntXPath() {
-        
+
     }
 
     /**
@@ -99,7 +99,7 @@ public class AntXPath extends Task {
 	public void setModifyPaths(List<ModifyPath> modifyPaths) {
 		this.modifyPaths = modifyPaths;
 	}
-	
+
 	/**
 	 * Directory to write out processed file
 	 * @param outputDirectory The directory to be written out to
@@ -131,20 +131,20 @@ public class AntXPath extends Task {
 
             System.exit(1);
         }
-        
+
         DirectoryScanner ds;
 
 		for (FileSet fileset : fileSets) {
 			ds = fileset.getDirectoryScanner(getProject());
         	File dir = ds.getBasedir();
         	String[] filesInSet = ds.getIncludedFiles();
-        	
+
         	 for (String filename : filesInSet) {
                  logger.debug("Processing " + filename);
         		 File f = new File(dir, filename);
         		 processFile(f);
         	 }
-			 
+
 		 }
 	}
 
@@ -167,16 +167,16 @@ public class AntXPath extends Task {
 	public void processFile(File iFile) {
 		try {
 			Document doc = builder.parse(iFile);
-			
+
 			logger.trace("Parsed " + iFile.getAbsolutePath());
-			
+
 			for (Iterator paths = modifyPaths.iterator(); paths.hasNext(); ) {
 				ModifyPath path = (ModifyPath)paths.next();
                 logger.trace("Processing xPath - " + path.getPath());
                 logger.trace("xPath value - " + path.getValue() + " : delete - " + path.isDelete());
 				doc = processNode(path, doc);
 			}
-			
+
             writeDocument(doc, iFile.getName());
 
 		} catch (XPathExpressionException e) {
@@ -202,8 +202,8 @@ public class AntXPath extends Task {
      * The node to be updated
      * @param path The ModifyPath that provides the information
      * @param doc The xmldocument
-     * @return
-     * @throws XPathExpressionException
+     * @return Returns manipulated document
+     * @throws XPathExpressionException If XPath cannot be run
      */
 	public Document processNode(ModifyPath path, Document doc) throws XPathExpressionException {
         XPath xPath = getXPathFactory().newXPath();
@@ -212,7 +212,7 @@ public class AntXPath extends Task {
 		XPathExpression expr = xPath.compile(path.getPath());
 		Object xPathResult = expr.evaluate(doc, XPathConstants.NODESET);
 		NodeList nodes = (NodeList) xPathResult;
-		
+
 		//Process each node
 		for (int index = 0; index < nodes.getLength(); index++) {
 			if (path.isDelete()) {
@@ -224,7 +224,7 @@ public class AntXPath extends Task {
 				logger.trace("Modified node - " + path.getPath() + " with Value - " + path.getValue());
 			}
 		}
-		
+
 		return doc;
 	}
 
@@ -256,7 +256,7 @@ public class AntXPath extends Task {
 
         XPath xPath = xPathFactory.newXPath();
 		StringBuffer sBuffer = new StringBuffer();
-		
+
 		try {
 			//Check if renamePattern has been set
 			if (renamePattern.length() > 0) {
@@ -264,7 +264,7 @@ public class AntXPath extends Task {
 
 				//Split the string
 				String[] patterns = renamePattern.split(patternSplitter);
-				
+
 				for(String pattern : patterns) {
 					//Evaluate XPaths
 					if (pattern.startsWith("/")) {
@@ -276,12 +276,12 @@ public class AntXPath extends Task {
 					}
 					else
 						sBuffer.append(pattern);
-                    
+
                     logger.trace("String buffer - "+ sBuffer.toString());
 				}
-				
+
 				sBuffer.append(".xml");
-			
+
 			    return sBuffer.toString();
 		    }
 			else

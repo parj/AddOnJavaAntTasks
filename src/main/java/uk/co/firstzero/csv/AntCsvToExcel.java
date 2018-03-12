@@ -34,13 +34,13 @@ public class AntCsvToExcel extends Task {
 	private Vector<FileSet> fileSets = new Vector<FileSet>();
 	private String outputFile;
 	private char separator = ',';
-	
+
 	public AntCsvToExcel() { }
-	
+
 
 	/**
 	 * Input file set
-	 * @param fileset
+	 * @param fileset Input set of files
 	 */
 	public void addFileSet(FileSet fileset) {
 		if (!fileSets.contains(fileset)) {
@@ -50,7 +50,7 @@ public class AntCsvToExcel extends Task {
 
 	/**
 	 * CSV separator
-	 * @param separator
+	 * @param separator CSV separator
 	 */
 	public void setSeparator(char separator) {
 		this.separator = separator;
@@ -59,7 +59,7 @@ public class AntCsvToExcel extends Task {
 
 	/**
 	 * Set the output excel file
-	 * @param outputFile
+	 * @param outputFile Output file to be written to
 	 */
 	public void setOutputFile(String outputFile) {
 		this.outputFile = outputFile;
