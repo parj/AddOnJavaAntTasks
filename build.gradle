@@ -29,7 +29,7 @@ apply plugin: 'groovy'
 
 //** CONFIGURATION **//
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.0'
+    gradleVersion = '4.6'
 }
 
 //** MAVEN CONFIGURATION **//
@@ -100,7 +100,8 @@ configurations {
 //** COMPILATION OPTIONS **//
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
-    options.compilerArgs << "-Xlint:unchecked"
+    options.compilerArgs << "-Xlint:deprecation"
+    //options.compilerArgs << "-Xlint:unchecked"
 }
 
 //** ARTIFACTS TO BE INCLUDED - REQUIRED FOR OSS MAVEN REPOSITORY **//
@@ -139,28 +140,28 @@ uploadArchives {
                 repository(url: uri('repo'))
             }
         }
-		else {    
+		else {
 			mavenDeployer {
 				if(isReleaseBuild) {
 					beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
 				}
-				
+
 				repository(url: sonatypeRepositoryUrl) {
 				  authentication(userName: sonatypeUsername, password: sonatypePassword)
 				}
-	
+
 				pom.project {
 				   name 'AddOnJavaAntTasks'
 				   packaging 'jar'
 				   description 'Addon Ant Tasks'
 				   url 'https://github.com/parj/AddOnJavaAntTasks'
-	
+
 				   scm {
 					   url 'git@github.com:parj/AddOnJavaAntTasks'
 					   connection 'scm:git:git@github.com:parj/AddOnJavaAntTasks.git'
 					   developerConnection 'scm:git:git@github.com:parj/AddOnJavaAntTasks.git'
 				   }
-	
+
 				   licenses {
 					   license {
 						   name 'MIT Licence'
@@ -168,14 +169,14 @@ uploadArchives {
 						   distribution 'repo'
 					   }
 				   }
-	
+
 				   developers {
 					   developer {
 						   id 'parj'
 						   name 'Parj M'
 					   }
 				   }
-				}	   
+				}
 		   }
 		}
 	}
@@ -184,7 +185,7 @@ uploadArchives {
 
 //** ANT TASKS, Gradle examples are below **//
 /**
- * SAMPLE Ant Tasks - Uncomment to run 
+ * SAMPLE Ant Tasks - Uncomment to run
  * pushAnt - Push file to a WebDav Server
  * pullAnt - Pull file from a webdav server
  * csvToExcelAnt - Converts csv to Excel
@@ -298,7 +299,7 @@ xmlClean {
 	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
 	outputDirectory = 'src/test/resources/xml/AntXPathTest'
 	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
-	modifyPaths = [ new uk.co.firstzero.xml.ModifyPath(path: "//title", delete:"True"), 
+	modifyPaths = [ new uk.co.firstzero.xml.ModifyPath(path: "//title", delete:"True"),
 					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
 }
 
