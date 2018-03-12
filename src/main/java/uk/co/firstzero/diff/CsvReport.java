@@ -35,7 +35,7 @@ public class CsvReport implements Report {
 
     /**
      * Default constructor
-     * @param fileName  Name & Path of the file to write to
+     * @param fileName  Name &amp; Path of the file to write to
      * @throws IOException
      */
 	public CsvReport(String fileName) throws IOException {
@@ -44,7 +44,7 @@ public class CsvReport implements Report {
 
     /**
      * Opens the file for writing
-     * @param fileName Name & Path of the file to write to
+     * @param fileName Name &amp; Path of the file to write to
      * @throws IOException
      */
 	public void open(String fileName) throws IOException {
@@ -61,8 +61,8 @@ public class CsvReport implements Report {
             "Key",
             "Column",
 			"Mismatch Type",
-			"Expected", 
-			"Reached", 
+			"Expected",
+			"Reached",
 			"Difference"
 		};
 		writer.writeNext(result);
@@ -77,7 +77,7 @@ public class CsvReport implements Report {
 		float expected;
 		float reached;
 		String diff;
-		
+
 		try {
 			expected = new Float((String)difference.getExpected()).floatValue();
 			reached = new Float((String)difference.getExpected()).floatValue();
@@ -110,6 +110,6 @@ public class CsvReport implements Report {
 		}
 	}
 
-	
+
 
 }

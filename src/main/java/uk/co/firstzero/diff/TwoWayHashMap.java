@@ -26,12 +26,12 @@ import org.apache.log4j.Logger;
 import java.util.HashMap;
 
 /**
- * A hashmap that can lookup key & value and lookup key based on value
+ * A hashmap that can lookup key &amp; value and lookup key based on value
  */
 public class TwoWayHashMap {
 	private HashMap<String, Integer> stringIntegerMap;
 	private HashMap<Integer, String> integerStringMap;
-	
+
 	private static Logger logger = Logger.getLogger(TwoWayHashMap.class);
 
     /**
