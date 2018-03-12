@@ -79,8 +79,8 @@ public class CsvReport implements Report {
 		String diff;
 
 		try {
-			expected = new Float((String)difference.getExpected()).floatValue();
-			reached = new Float((String)difference.getExpected()).floatValue();
+			expected = Float.valueOf((String)difference.getExpected());
+			reached = Float.valueOf((String)difference.getExpected());
 			diff = Float.toString(expected - reached);
 		}	catch (Exception e) {
             //If the above is not a number

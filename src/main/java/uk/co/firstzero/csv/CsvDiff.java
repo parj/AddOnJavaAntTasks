@@ -75,7 +75,7 @@ public class CsvDiff {
 	public void setNumberOfHeaders(String numberOfHeaders) {
 		logger.trace("Setting numberOfHeaders to " + numberOfHeaders);
 		try {
-			intNumberOfHeaders = new Integer(numberOfHeaders).intValue();
+			intNumberOfHeaders = Integer.valueOf(numberOfHeaders);
 			this.numberOfHeaders = numberOfHeaders;
 		} catch (Exception e) {
 			System.out.println("Unable to convert to integer");
@@ -241,7 +241,7 @@ public class CsvDiff {
 			}
 
 			for (Iterator<String> i = this.missingExpected.keySet().iterator() ; i.hasNext();) {
-				Difference difference = new Difference(new Integer(rowCount), null, "Missing Expected", i.next(), null, null);
+				Difference difference = new Difference(Integer.valueOf(rowCount), null, "Missing Expected", i.next(), null, null);
 				logger.info(difference.toString());
 
 				if (report != null) report.write(difference);
@@ -249,7 +249,7 @@ public class CsvDiff {
 			}
 
 			for (Iterator<String> i = this.missingReached.keySet().iterator() ; i.hasNext();) {
-				Difference difference = new Difference(new Integer(rowCount), null, "Missing Reached", null,  i.next(), null);
+				Difference difference = new Difference(Integer.valueOf(rowCount), null, "Missing Reached", null,  i.next(), null);
 				logger.info(difference.toString());
 
 				if (report != null) report.write(difference);
@@ -300,7 +300,7 @@ public class CsvDiff {
 			if (!ignore) {
 				totalMismatches += 1;
 				try {
-					Difference difference = new Difference(new Integer(rowCount), headers.get(i), "MISMATCH", control, test, keyExpected);
+					Difference difference = new Difference(Integer.valueOf(rowCount), headers.get(i), "MISMATCH", control, test, keyExpected);
 					logger.info(difference.toString());
 					report.write(difference);
 				} catch (IOException e) {
@@ -335,18 +335,18 @@ public class CsvDiff {
 						logger.trace("Header at line " + i + " column " + j + " " + headerExpected[j]);
 
 						//Add the header to the header hashmap
-						if (!headers.containsKey(new Integer(j))) {
+						if (!headers.containsKey(Integer.valueOf(j))) {
 							logger.trace("Adding header - " + headerExpected[j]);
-							headers.put(new Integer(j), headerExpected[j]);
+							headers.put(Integer.valueOf(j), headerExpected[j]);
 						}
 
 						//If the column number is same and text is different, splice them together
-						else if (headerExpected[j] != headers.get(new Integer(j))) {
-							String header = headers.get(new Integer(j));
-							headers.remove(new Integer(j));
+						else if (headerExpected[j] != headers.get(Integer.valueOf(j))) {
+							String header = headers.get(Integer.valueOf(j));
+							headers.remove(Integer.valueOf(j));
 							header = header + '_' + headerExpected[j];
 							logger.trace("Adding header - " + header);
-							headers.put(new Integer(j), header);
+							headers.put(Integer.valueOf(j), header);
 						}
 					}
 				}

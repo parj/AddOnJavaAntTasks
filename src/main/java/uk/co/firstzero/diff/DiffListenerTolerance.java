@@ -52,8 +52,8 @@ public class DiffListenerTolerance implements DiffListener {
 			String strReplacedR = reached.replaceAll(",", "");
 
 			try {
-				float floatE = new Float(strReplacedE).floatValue();
-				float floatR = new Float(strReplacedR).floatValue();
+				float floatE = Float.valueOf(strReplacedE);
+				float floatR = Float.valueOf(strReplacedR);
 				float diff = Math.abs(floatE - floatR);
 
 				return diff < tolerance.floatValue() ? true : false;

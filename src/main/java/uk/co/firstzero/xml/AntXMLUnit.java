@@ -43,13 +43,13 @@ public class AntXMLUnit extends Task {
 	private String testDirectory;
 	private String resultDirectory;
 	private String separator = ",";
-	
+
 	private DocumentBuilderFactory factory;
 	private DocumentBuilder builder;
 	private static List<Integer> ignoreIds = new ArrayList<>();
-	
-	public AntXMLUnit() { } 
-	
+
+	public AntXMLUnit() { }
+
 	/**
 	 * Input file set
 	 * @param fileset Input fileset
@@ -59,7 +59,7 @@ public class AntXMLUnit extends Task {
     	  fileSets.add(fileset);
       	}
 	}
-	
+
 	/**
 	 * The directory from which to read the test xml files
 	 * @param testDirectory The directory to be compared against
@@ -67,7 +67,7 @@ public class AntXMLUnit extends Task {
 	public void setTestDirectory(String testDirectory) {
 		this.testDirectory = testDirectory;
 	}
-	
+
 	/**
 	 * The directory to which to publish the csv report
 	 * @param resultDirectory The result directory
@@ -75,7 +75,7 @@ public class AntXMLUnit extends Task {
 	public void setResultDirectory(String resultDirectory) {
 		this.resultDirectory = resultDirectory;
 	}
-	
+
 	public void setSeparator(String separator) {
 		this.separator = separator;
 	}
@@ -118,13 +118,13 @@ public class AntXMLUnit extends Task {
 
         DirectoryScanner ds;
 		preSetup();
-		
+
 		for (FileSet fileset : fileSets) {
 			//Read in the control files
 			ds = fileset.getDirectoryScanner(getProject());
         	File controlDir = ds.getBasedir();
         	String[] filesInSet = ds.getIncludedFiles();
-        	
+
             for (String fileName : filesInSet) {
         		 log("Processing " + fileName);
 
@@ -148,10 +148,10 @@ public class AntXMLUnit extends Task {
 
                 }
         	}
-			 
+
 		}
 	}
-	
+
 	/**
 	 * Sets up xmlunit constants
 	 */
@@ -202,7 +202,7 @@ public class AntXMLUnit extends Task {
         for (Object differenceObject : differences) {
             Difference difference = (Difference)differenceObject;
 
-            if (ignoreIds.contains(new Integer(difference.getId()))) {
+            if (ignoreIds.contains(Integer.valueOf(difference.getId()))) {
                 logger.debug("SKIP - "
                         + difference.getId() + this.separator
                         + difference.getDescription() + this.separator

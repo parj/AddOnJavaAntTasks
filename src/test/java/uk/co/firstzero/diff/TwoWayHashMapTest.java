@@ -58,7 +58,7 @@ public class TwoWayHashMapTest {
     @Test
 	public void testPutIntegerString() {
 		twoMap.put(5678, "EFGH");
-		assertEquals((Integer)twoMap.get("EFGH"), new Integer(5678));
+		assertEquals((Integer)twoMap.get("EFGH"), Integer.valueOf(5678));
 	}
 
     @Test
