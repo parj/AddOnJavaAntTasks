@@ -1,13 +1,9 @@
 ![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
 
-## Tools and utilities written in Java to help in day-to-day work.
-
-Thanks for your support ![Jet Brains](http://www.jetbrains.com/img/logos/banner_general_120x60.gif)
-
 # Gradle method
 
     apply plugin : 'addonjavaanttasks'
-    
+
     buildscript {
        repositories {
           mavenCentral()
@@ -18,7 +14,7 @@ Thanks for your support ![Jet Brains](http://www.jetbrains.com/img/logos/banner_
     }
 
 
-## CSV To Excel 
+## CSV To Excel
 Converts a set of csv files into 1 Excel file. Each csv file is a sheet within excel
 
     csvToExcelArgs {
@@ -28,10 +24,10 @@ Converts a set of csv files into 1 Excel file. Each csv file is a sheet within e
     }
 
 Run `gradle csvToExcelTask`
- 
+
 ## CSV Diff
 Diffs two directories containing csv files. Each directory must have the same name and number of files as the other
-    
+
     csvDiffArgs {
     	resultDirectory = projectDir.toString() + "/src/test/resources/csv/CsvDiff";
     	separator = ","
@@ -44,12 +40,12 @@ Run `gradle csvDiffTask`
 
 ## XML Clean
 Strips out fluff from the XML and manipulating the XML. The use case for this is, before comparison, sometimes XMLs need to be cleaned and renamed. The cleaned xmls can be diffed using xmlunittask.
-    
+
     xmlCleanArgs {
     	inputDirectory = fileTree(dir: 'src/test/resources/xml/AntXPathTest', include: '*.xml')
     	outputDirectory = 'src/test/resources/xml/AntXPathTest'
     	renamePattern = '//publish_date[position() = 1]#_#//price[position() = 1]'
-    	modifyPaths = [ new uk.co.firstzero.xml.ModifyPath(path: "//title", delete:"True"), 
+    	modifyPaths = [ new uk.co.firstzero.xml.ModifyPath(path: "//title", delete:"True"),
     					new uk.co.firstzero.xml.ModifyPath(path: "//author", value:"ToDo")]
     }
 
@@ -57,19 +53,19 @@ Run `gradle xmlCleanTask`
 
 ## XML DIFF
 Diffs two directories containing xml files. Each directory must have the same name and number of files as the other
-    
+
     xmlUnitArgs {
     	resultDirectory = projectDir.toString() + "/src/test/resources/xml/AntXMLUnitTest";
     	separator = ","
     	controlDirectory = fileTree(dir: 'src/test/resources/xml/AntXMLUnitTest/control', include: '*.xml')
     	testDirectory = 'src/test/resources/xml/AntXMLUnitTest/test'
     }
-    
+
 Run `gradle xmlUnitTask`
-    
+
 ## READ BLOB
 Extracts Blobs from Database.SQL should contain a string name and then blob
-    
+
     readBlobArgs {
         className = "org.h2.Driver"
         String databaseLocation = projectDir.toString() + "/src/test/resources/sql/test"
@@ -99,9 +95,9 @@ Downloads files from a WEBDAV site, proxy configuration is supported
         //proxyHost = abcd.test
         //proxyPort = 1234
     }
-        
+
 Run `gradle pullTask`
-    
+
 ## WEBDAV PUSH
 Pushes files to a WEBDAV site, proxy configuration is supported
 
@@ -148,7 +144,7 @@ In your ant build.xml declare the custom tasks:
           overwrite="true">
           <fileset dir="." includes="README"/>
     </push>
-                
+
     <!-- Example of pulling files from webdav -->
     <pull url="http://localhost:9090/repository/default"
           user="admin"
@@ -163,7 +159,7 @@ In your ant build.xml declare the custom tasks:
 
 ### Getting Started
     <target name="declare-tasks">		
-        <!-- Dependency on JExcelApi - 
+        <!-- Dependency on JExcelApi -
          http://sourceforge.net/projects/jexcelapi/files/jexcelapi/2.6.12/jexcelapi_2_6_12.zip/download
 	    -->
 		<taskdef name="csvToexcel" classname="uk.co.firstzero.csv.AntCsvToExcel" />
@@ -211,8 +207,8 @@ Rename Pattern - Is the pattern in which the files you should be renamed - The v
 
 
     <target name="modify" depends="jar, declare-tasks">
-       <xpath outputDirectory="out" 
-	      renamePattern="//publish_date[position() = 1]#_#//price[position() = 1]" 
+       <xpath outputDirectory="out"
+	      renamePattern="//publish_date[position() = 1]#_#//price[position() = 1]"
 	      verbose="True">
             <fileset dir="." includes="input.xml"/>
 	        <modifyPath path="//title" delete="True"/>
