@@ -27,7 +27,7 @@ import java.util.HashMap;
  * Tolerance for diffs of numbers
  */
 public class DiffListenerTolerance implements DiffListener {
-	HashMap<String, Float> tolerances;
+	 private HashMap<String, Float> tolerances;
 
     /**
      * Default constructor
@@ -46,16 +46,16 @@ public class DiffListenerTolerance implements DiffListener {
      */
 	public boolean ignore(String column, String expected, String reached) {
 		Float tolerance = tolerances.containsKey(column) ? tolerances.get(column) : tolerances.get("*");
-		
+
 		if (tolerance != null) {
 			String strReplacedE = expected.replaceAll(",", "");
 			String strReplacedR = reached.replaceAll(",", "");
-			
+
 			try {
 				float floatE = new Float(strReplacedE).floatValue();
 				float floatR = new Float(strReplacedR).floatValue();
 				float diff = Math.abs(floatE - floatR);
-				
+
 				return diff < tolerance.floatValue() ? true : false;
 			} catch(Exception e) {
 				return false;
