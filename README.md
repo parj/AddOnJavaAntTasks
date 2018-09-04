@@ -1,5 +1,7 @@
 ![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
 
+[![DepShield Badge](https://depshield.sonatype.org/badges/parj/AddOnJavaAntTasks/depshield.svg)](https://depshield.github.io)
+
 # Gradle method
 
     apply plugin : 'addonjavaanttasks'
