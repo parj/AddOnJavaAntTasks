@@ -2,6 +2,8 @@
 
 [![DepShield Badge](https://depshield.sonatype.org/badges/parj/AddOnJavaAntTasks/depshield.svg)](https://depshield.github.io)
 
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fparj%2FAddOnJavaAntTasks.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fparj%2FAddOnJavaAntTasks?ref=badge_large)
+
 # Gradle method
 
     apply plugin : 'addonjavaanttasks'
