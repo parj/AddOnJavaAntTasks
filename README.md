@@ -1,4 +1,5 @@
 ![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fparj%2FAddOnJavaAntTasks.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fparj%2FAddOnJavaAntTasks?ref=badge_shield)
 
 [![DepShield Badge](https://depshield.sonatype.org/badges/parj/AddOnJavaAntTasks/depshield.svg)](https://depshield.github.io)
 
@@ -238,3 +239,7 @@ Rename Pattern - Is the pattern in which the files you should be renamed - The v
           outputDirectory="build/tmp" unzip="True">
        </readBlob>
     </target>
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fparj%2FAddOnJavaAntTasks.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fparj%2FAddOnJavaAntTasks?ref=badge_large)
