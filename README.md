@@ -1,4 +1,4 @@
-![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png)
+![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.png) __ [![CircleCI](https://circleci.com/gh/parj/AddOnJavaAntTasks.svg?style=svg)](https://circleci.com/gh/parj/AddOnJavaAntTasks)
 
 [![DepShield Badge](https://depshield.sonatype.org/badges/parj/AddOnJavaAntTasks/depshield.svg)](https://depshield.github.io)
 
