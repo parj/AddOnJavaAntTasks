@@ -2,8 +2,8 @@ language: java
 jdk:
   - openjdk8
   - openjdk11
-script: "mvn test"
+script: "mvn test jacoco:report"
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - mvn jacoco:report coveralls:report
+  - mvn coveralls:report
