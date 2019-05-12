@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.svg?branch=master)](https://travis-ci.org/parj/AddOnJavaAntTasks) __ [![CircleCI](https://circleci.com/gh/parj/AddOnJavaAntTasks.svg?style=svg)](https://circleci.com/gh/parj/AddOnJavaAntTasks)
+[![Build Status](https://travis-ci.org/parj/AddOnJavaAntTasks.svg?branch=master)](https://travis-ci.org/parj/AddOnJavaAntTasks) __ [![CircleCI](https://circleci.com/gh/parj/AddOnJavaAntTasks.svg?style=svg)](https://circleci.com/gh/parj/AddOnJavaAntTasks) __ [![codecov](https://codecov.io/gh/parj/AddOnJavaAntTasks/branch/master/graph/badge.svg)](https://codecov.io/gh/parj/AddOnJavaAntTasks) __ [![Coverage Status](https://coveralls.io/repos/github/parj/AddOnJavaAntTasks/badge.svg?branch=master)](https://coveralls.io/github/parj/AddOnJavaAntTasks?branch=master)
 
 [![DepShield Badge](https://depshield.sonatype.org/badges/parj/AddOnJavaAntTasks/depshield.svg)](https://depshield.github.io)
 
